@@ -227,16 +227,16 @@ body.envelope-locked {
 }
 
 .btn-burgundy {
-  background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+  background: linear-gradient(135deg, #5C6E4E, #45543A);
   color: #ffffff;
-  border-color: var(--burgundy-medium);
-  box-shadow: 0 6px 20px rgba(91, 14, 45, 0.25);
+  border-color: #6D825E;
+  box-shadow: 0 6px 18px rgba(69, 84, 58, 0.22);
 }
 
 .btn-burgundy:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(91, 14, 45, 0.35);
-  background: linear-gradient(135deg, var(--burgundy-medium), var(--burgundy));
+  box-shadow: 0 10px 24px rgba(69, 84, 58, 0.32);
+  background: linear-gradient(135deg, #687D59, #4D5E41);
 }
 
 .btn-olive {
@@ -263,14 +263,15 @@ body.envelope-locked {
 }
 
 .btn-outline-burgundy {
-  background: transparent;
-  color: var(--burgundy);
-  border-color: var(--burgundy-medium);
+  background: rgba(250, 246, 240, 0.85);
+  color: #45543A;
+  border-color: #C8BDAB;
 }
 
 .btn-outline-burgundy:hover {
-  background: var(--burgundy);
+  background: #5C6E4E;
   color: #ffffff;
+  border-color: #5C6E4E;
   transform: translateY(-2px);
 }
 

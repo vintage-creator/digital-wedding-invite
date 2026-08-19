@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Gift, CreditCard, CheckCircle2, Lock, Copy, X, HeartHandshake, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Gift, CreditCard, CheckCircle2, Copy, X, HeartHandshake, Loader2, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { fetchGiftReservations, createGiftReservation } from '../lib/supabase';
 
 export default function GiftRegistrySection({ onTriggerToast }) {
+  // claimedGifts: { [giftId]: Array<{ giverName: string, date: string }> }
   const [claimedGifts, setClaimedGifts] = useState({});
   const [selectedGift, setSelectedGift] = useState(null);
   const [giverName, setGiverName] = useState('');
@@ -59,10 +60,13 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         const mapped = {};
         if (Array.isArray(data)) {
           data.forEach((row) => {
-            mapped[row.gift_id] = {
+            if (!mapped[row.gift_id]) {
+              mapped[row.gift_id] = [];
+            }
+            mapped[row.gift_id].push({
               giverName: row.giver_name,
               date: row.created_at ? new Date(row.created_at).toLocaleDateString() : ''
-            };
+            });
           });
         }
         setClaimedGifts(mapped);
@@ -72,7 +76,13 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         try {
           const stored = localStorage.getItem('wedding_claimed_gifts');
           if (stored && isMounted) {
-            setClaimedGifts(JSON.parse(stored));
+            const parsed = JSON.parse(stored);
+            // Handle both array format and single object format gracefully
+            const normalized = {};
+            Object.keys(parsed).forEach((key) => {
+              normalized[key] = Array.isArray(parsed[key]) ? parsed[key] : [parsed[key]];
+            });
+            setClaimedGifts(normalized);
           }
         } catch (e) {}
       })
@@ -111,7 +121,9 @@ export default function GiftRegistrySection({ onTriggerToast }) {
       date: new Date().toLocaleDateString()
     };
 
-    const updatedState = { ...claimedGifts, [giftId]: localEntry };
+    const existingList = Array.isArray(claimedGifts[giftId]) ? claimedGifts[giftId] : [];
+    const updatedList = [...existingList, localEntry];
+    const updatedState = { ...claimedGifts, [giftId]: updatedList };
     setClaimedGifts(updatedState);
 
     try {
@@ -132,17 +144,17 @@ export default function GiftRegistrySection({ onTriggerToast }) {
 
     try {
       confetti({
-        particleCount: 40,
-        spread: 60,
+        particleCount: 35,
+        spread: 55,
         origin: { y: 0.75 },
-        colors: ['#5B0E2D', '#7A1C3E', '#C5A059', '#4A583F']
+        colors: ['#5C6E4E', '#8F8D5F', '#C5A059', '#E5D9C3']
       });
     } catch (e) {}
 
     if (onTriggerToast) {
       onTriggerToast({
         type: 'success',
-        message: `Thank you ${nameStr}! You have reserved "${giftTitle}" for Deborah & Tom.`
+        message: `Thank you ${nameStr}! Your gift pledge for "${giftTitle}" has been recorded.`
       });
     }
 
@@ -156,25 +168,25 @@ export default function GiftRegistrySection({ onTriggerToast }) {
     setCopiedBank(true);
 
     try {
-      confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#C5A059', '#E4C889'] });
+      confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#5C6E4E', '#C5A059', '#E4C889'] });
     } catch (e) {}
 
     setTimeout(() => setCopiedBank(false), 3000);
   };
 
   return (
-    <section id="registry" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="registry" className="section-padding" style={{ background: '#FAF6F0' }}>
       <div className="max-w-content text-center">
         
-        <span className="section-eyebrow">
+        <span className="section-eyebrow" style={{ color: 'var(--olive)' }}>
           <Gift size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
           Wedding Gift Registry
         </span>
-        <h2 className="section-title-script">
+        <h2 className="section-title-script" style={{ color: '#4A583F' }}>
           Gift Wishlist & Contributions
         </h2>
         <p className="section-subtitle">
-          Your love and prayers mean everything to us. If you wish to bless us with a gift, please select an available item below to reserve it or send a cash contribution.
+          Your love, presence, and prayers are our greatest gift. If you would like to honor us with a gift or cash contribution, you may select any wishlist item or transfer to the account below.
         </p>
 
         {/* Bank Account Details Card */}
@@ -184,28 +196,29 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             maxWidth: '560px',
             margin: '0 auto 3.5rem',
             padding: '2rem 1.5rem',
-            border: '2px solid var(--gold)',
-            background: 'var(--nude-bg)',
+            border: '1.5px solid var(--nude-border)',
+            background: '#FFFFFF',
             borderRadius: '20px',
-            textAlign: 'center'
+            textAlign: 'center',
+            boxShadow: '0 12px 30px rgba(74, 88, 63, 0.07)'
           }}
         >
-          <CreditCard size={32} style={{ color: 'var(--burgundy)', margin: '0 auto 0.8rem' }} />
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
+          <CreditCard size={30} style={{ color: '#5C6E4E', margin: '0 auto 0.6rem' }} />
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: '#4A583F', margin: '0.2rem 0' }}>
             Cash & Honeymoon Transfer Details
           </h3>
           <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
-            Direct bank transfer details for cash gifts and blessings for the couple.
+            Direct bank transfer details for cash gifts and blessings for Deborah & Tom.
           </p>
 
           <div style={{
-            background: '#FFFFFF',
-            border: '1.5px solid var(--nude-border)',
+            background: '#FAF6F0',
+            border: '1px solid var(--nude-border)',
             borderRadius: '14px',
             padding: '1.2rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.5rem',
+            gap: '0.55rem',
             textAlign: 'left'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
@@ -214,11 +227,11 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
               <span style={{ color: 'var(--text-muted)' }}>Account Name:</span>
-              <strong style={{ color: 'var(--burgundy-dark)' }}>TOM TOY TREATS</strong>
+              <strong style={{ color: '#4A583F' }}>TOM TOY TREATS</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.92rem', paddingTop: '0.4rem', borderTop: '1px dashed var(--nude-border)' }}>
               <span style={{ color: 'var(--text-muted)' }}>Account Number:</span>
-              <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: 'var(--gold-dark)' }}>
+              <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: '#5C6E4E' }}>
                 8670260812
               </span>
             </div>
@@ -235,7 +248,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         </div>
 
         {/* Physical Gift Registry Header */}
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--burgundy)', marginBottom: '1rem' }}>
+        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: '#4A583F', marginBottom: '1rem' }}>
           Physical Gift Wishlist ({registryItems.length} Items)
         </h3>
 
@@ -261,24 +274,24 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 style={{
                   padding: '8px 18px',
                   borderRadius: '30px',
-                  border: isActive ? '1.5px solid var(--gold)' : '1px solid var(--nude-border)',
-                  background: isActive ? 'var(--burgundy)' : 'var(--nude-bg)',
+                  border: isActive ? '1.5px solid #6D825E' : '1px solid var(--nude-border)',
+                  background: isActive ? 'linear-gradient(135deg, #5C6E4E, #45543A)' : '#FFFFFF',
                   color: isActive ? '#FFFFFF' : 'var(--text-dark)',
                   fontSize: '0.82rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.25s ease',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  boxShadow: isActive ? '0 4px 14px rgba(91, 14, 45, 0.25)' : 'none'
+                  boxShadow: isActive ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
                 }}
               >
                 <span>{cat.name}</span>
                 <span style={{
                   fontSize: '0.72rem',
-                  background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.08)',
-                  color: isActive ? '#FFFFFF' : 'var(--burgundy)',
+                  background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(74, 88, 63, 0.1)',
+                  color: isActive ? '#FFFFFF' : '#4A583F',
                   padding: '2px 7px',
                   borderRadius: '10px'
                 }}>
@@ -291,8 +304,8 @@ export default function GiftRegistrySection({ onTriggerToast }) {
 
         {isLoading ? (
           <div style={{ padding: '2rem', color: 'var(--text-muted)' }}>
-            <Loader2 className="animate-spin" size={24} style={{ margin: '0 auto 0.5rem', color: 'var(--burgundy)' }} />
-            <p style={{ fontSize: '0.9rem' }}>Loading live database gift reservations…</p>
+            <Loader2 className="animate-spin" size={24} style={{ margin: '0 auto 0.5rem', color: '#5C6E4E' }} />
+            <p style={{ fontSize: '0.9rem' }}>Loading wishlist items…</p>
           </div>
         ) : (
           <>
@@ -304,8 +317,8 @@ export default function GiftRegistrySection({ onTriggerToast }) {
               textAlign: 'left'
             }}>
               {displayedItems.map((item) => {
-                const isClaimed = !!claimedGifts[item.id];
-                const claimData = claimedGifts[item.id];
+                const reservations = Array.isArray(claimedGifts[item.id]) ? claimedGifts[item.id] : [];
+                const hasReservations = reservations.length > 0;
 
                 return (
                   <div
@@ -314,43 +327,42 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                     style={{
                       borderRadius: '16px',
                       padding: '1.4rem',
-                      border: isClaimed ? '1.5px solid rgba(91, 14, 45, 0.2)' : '1.5px solid var(--nude-border)',
-                      background: isClaimed ? '#F7F4EF' : 'var(--nude-bg)',
-                      opacity: isClaimed ? 0.8 : 1,
+                      border: '1.5px solid var(--nude-border)',
+                      background: '#FFFFFF',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
                       transition: 'all 0.3s ease',
-                      boxShadow: isClaimed ? 'none' : '0 10px 25px rgba(0,0,0,0.04)'
+                      boxShadow: '0 6px 18px rgba(0,0,0,0.03)'
                     }}
                   >
                     <div>
                       {/* Top Badge Row */}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
-                        <span style={{ fontSize: '0.72rem', color: 'var(--gold-dark)', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 600 }}>
+                        <span style={{ fontSize: '0.72rem', color: '#7A896B', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 600 }}>
                           {item.category}
                         </span>
 
-                        {isClaimed ? (
+                        {hasReservations ? (
                           <span style={{
-                            background: 'rgba(91, 14, 45, 0.9)',
-                            color: '#FFFFFF',
+                            background: 'rgba(74, 88, 63, 0.12)',
+                            color: '#4A583F',
                             fontSize: '0.7rem',
                             fontWeight: 600,
                             padding: '3px 8px',
                             borderRadius: '10px',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '3px'
+                            gap: '4px'
                           }}>
-                            <Lock size={11} /> Reserved
+                            <Sparkles size={11} /> {reservations.length} {reservations.length === 1 ? 'Pledge' : 'Pledges'}
                           </span>
                         ) : (
                           <span style={{
-                            background: 'rgba(74, 88, 63, 0.15)',
-                            color: 'var(--olive)',
+                            background: 'rgba(230, 216, 195, 0.4)',
+                            color: '#6B5B63',
                             fontSize: '0.7rem',
-                            fontWeight: 600,
+                            fontWeight: 500,
                             padding: '3px 8px',
                             borderRadius: '10px'
                           }}>
@@ -363,53 +375,33 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                       <h4 style={{
                         fontFamily: 'var(--font-serif)',
                         fontSize: '1.15rem',
-                        color: isClaimed ? 'var(--text-muted)' : 'var(--text-dark)',
+                        color: 'var(--text-dark)',
                         margin: '0 0 0.5rem 0',
                         lineHeight: 1.3
                       }}>
                         {item.title}
                       </h4>
 
-                      {isClaimed && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--burgundy-dark)', fontSize: '0.82rem', marginTop: '0.6rem' }}>
+                      {hasReservations && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#5C6E4E', fontSize: '0.82rem', marginTop: '0.6rem' }}>
                           <HeartHandshake size={14} />
-                          <span>Gifted with love by <strong>{claimData.giverName}</strong></span>
+                          <span>
+                            Gifted with love by <strong>{reservations[reservations.length - 1].giverName}</strong>
+                            {reservations.length > 1 && ` (+${reservations.length - 1} more)`}
+                          </span>
                         </div>
                       )}
                     </div>
 
-                    {/* Claim Button */}
+                    {/* Open Action Button (Always Accessible to All Guests) */}
                     <div style={{ marginTop: '1.2rem' }}>
-                      {isClaimed ? (
-                        <button
-                          disabled
-                          style={{
-                            width: '100%',
-                            padding: '10px',
-                            borderRadius: 'var(--radius-sm)',
-                            border: 'none',
-                            background: '#E5DCCE',
-                            color: 'var(--text-muted)',
-                            fontSize: '0.82rem',
-                            fontWeight: 600,
-                            cursor: 'not-allowed',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '6px'
-                          }}
-                        >
-                          <Lock size={14} /> Reserved by {claimData.giverName}
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => setSelectedGift(item)}
-                          className="btn btn-burgundy"
-                          style={{ width: '100%', padding: '10px', fontSize: '0.85rem' }}
-                        >
-                          <Gift size={15} /> Reserve This Gift
-                        </button>
-                      )}
+                      <button
+                        onClick={() => setSelectedGift(item)}
+                        className="btn btn-burgundy"
+                        style={{ width: '100%', padding: '10px', fontSize: '0.85rem' }}
+                      >
+                        <Gift size={15} /> Reserve / Gift This Item
+                      </button>
                     </div>
                   </div>
                 );
@@ -451,7 +443,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
           position: 'fixed',
           inset: 0,
           zIndex: 10000,
-          background: 'rgba(0, 0, 0, 0.65)',
+          background: 'rgba(42, 29, 36, 0.45)',
           backdropFilter: 'blur(6px)',
           display: 'flex',
           alignItems: 'center',
@@ -466,7 +458,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
               borderRadius: '24px',
               padding: '2rem 1.5rem',
               position: 'relative',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.25)',
               textAlign: 'left'
             }}
           >
@@ -486,21 +478,21 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             </button>
 
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-              <Gift size={40} style={{ color: 'var(--burgundy)', margin: '0 auto 0.5rem' }} />
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: 0 }}>
+              <Gift size={38} style={{ color: '#5C6E4E', margin: '0 auto 0.5rem' }} />
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: '#4A583F', margin: 0 }}>
                 Reserve Gift for Couple
               </h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--gold-dark)', fontWeight: 600, margin: '0.2rem 0' }}>
+              <p style={{ fontSize: '0.88rem', color: '#7A896B', fontWeight: 600, margin: '0.2rem 0' }}>
                 "{selectedGift.title}"
               </p>
               <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Entering your name saves your reservation directly to the database so other guests know it has been chosen.
+                Please enter your name so Deborah & Tom know of your kind gift and blessing.
               </p>
             </div>
 
             <form onSubmit={handleClaimSubmit}>
               <div className="form-group">
-                <label className="form-label" htmlFor="giverName">
+                <label className="form-label" htmlFor="giverName" style={{ color: '#4A583F' }}>
                   Your Full Name *
                 </label>
                 <input
@@ -516,7 +508,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
               </div>
 
               <div className="form-group" style={{ marginTop: '1rem' }}>
-                <label className="form-label" htmlFor="contactNo">
+                <label className="form-label" htmlFor="contactNo" style={{ color: '#4A583F' }}>
                   Phone / WhatsApp (Optional)
                 </label>
                 <input
@@ -550,7 +542,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                       <Loader2 className="animate-spin" size={16} /> Saving…
                     </span>
                   ) : (
-                    'Confirm Reservation'
+                    'Confirm Gift'
                   )}
                 </button>
               </div>

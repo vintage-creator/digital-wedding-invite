@@ -1,65 +1,55 @@
-# Deborah & Tom — Digital Wedding Invitation 💍✨
+# Deborah & Tom - Digital Wedding Invitation
 
-An interactive digital wedding invitation web application for the celebration of **Deborah & Tom** (#DeborahAndTom2026 / #DT2026), taking place in Abuja, Nigeria on **December 17th & 19th, 2026**.
+A web application built for the wedding celebration of Deborah & Tom (#DeborahAndTom2026).
 
-## 🌟 Key Features
+## Overview
 
-- 💌 **Full-Screen 3D Interactive Envelope Cover**: Tapping the custom calligraphic **D & T** burgundy wax seal medallion rotates the seal 360°, unfolds the flap, and reveals the website while playing background music.
-- 🎨 **Interactive Fanned Color Palette**: Vertical rectangular swatch cards (Burgundy, Sage Green, Olive Green, Nude) that rest slanted on one another and straighten up smoothly on hover.
-- 📸 **Live Guest Photo Gallery**: Integrated with Supabase Storage & Database allowing guests to upload and view celebration photos in real-time.
-- 🎁 **Gift Registry & Reservation System**: 22 wishlist items with real-time Supabase Database reservation lock state (prevents duplicate gifting) and progressive "Show More" expansion.
-- 💳 **Cash Contribution Transfer Card**: Direct bank transfer details for **First Bank (8670260812 - TOM TOY TREATS)** with 1-click clipboard copy.
-- 🏰 **Venue Location Showcase**: High-resolution photo cards with hover slow-zoom for **The Nest Gardens, Guzape** (Traditional Marriage) and **Bolton White Hotels** (White Wedding).
-- 📅 **Save-to-Calendar (.ics) & Map Directions**: Direct calendar event download and Google Maps navigation links.
-- 💌 **WhatsApp RSVP System**: Interactive RSVP form that formats and sends confirmed guest responses directly via WhatsApp.
-- 🎵 **Acoustic Background Music**: Ambient playback of *"The Vow"* by RuthAnne with floating audio equalizer controls.
-- ⬆️ **Floating Back-to-Top Navigation**: Smooth scroll-to-top button appearing automatically on scroll down.
+This repository contains the interactive digital wedding invitation for Deborah & Tom's wedding in Abuja, Nigeria (December 17th & 19th, 2026).
 
-## 🎨 Color Code & Palette
+The platform features an interactive envelope cover, event scheduling and venue details, color palette dress code guides, live guest photo sharing, a gift registry with database reservation tracking, bank transfer details, and an integrated WhatsApp RSVP system.
 
-- **Royal Burgundy** (`#5B0E2D`) — Groom's Family & Bridal Train
-- **Earthy Sage Green** (`#8F8D5F`) — Bride's Family & Traditional Maidens
-- **Deep Olive Green** (`#4A583F`) — Cultural Elders & VIP Guests
-- **Warm Nude / Champagne** (`#E5D9C3`) — Honored Friends & Celebrants
+## Tech Stack
 
-## 🛠️ Tech Stack
-
-- **Framework**: React (Vite)
-- **Styling**: Modern Responsive CSS3 (Glassmorphism, 3D Transforms, Custom Variables)
+- **Frontend**: React 18, Vite
+- **Styling**: CSS3 with CSS Variables
 - **Icons**: Lucide React
-- **Animations**: Canvas Confetti, WebAudio API, CSS Animations
-- **Backend / Database**: Supabase REST API & Storage
+- **Backend Services**: Supabase (Database & Storage)
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
+
+- Node.js (v18 or higher)
 - npm or yarn
 
-### Installation
+### Installation & Development
 
-```bash
-# Clone the repository
-git clone git@github.com:vintage-creator/digital-wedding-invite.git
-cd digital-wedding-invite
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:vintage-creator/digital-wedding-invite.git
+   cd digital-wedding-invite
+   ```
 
-# Install dependencies
-npm install
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-# Start local dev server
-npm run dev
-```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Open `http://localhost:3000` to view the application locally.
+### Building for Production
 
-### Production Build
+To create a production build:
 
 ```bash
 npm run build
 ```
 
-The output will be in the `dist/` directory, ready for deployment.
+The compiled output will be generated in the `dist` directory.
 
----
+## License
 
-Crafted with ❤️ for **Deborah & Tom’s Wedding Celebration**.
+Private repository for Deborah & Tom's Wedding Celebration.

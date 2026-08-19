@@ -173,9 +173,9 @@ export default function RsvpSection({ onTriggerToast }) {
                       style={{
                         padding: '12px 10px',
                         borderRadius: 'var(--radius-sm)',
-                        border: formData.attendance === opt.id ? '2px solid var(--burgundy)' : '1px solid var(--nude-border)',
-                        background: formData.attendance === opt.id ? 'var(--burgundy-soft)' : '#FFFFFF',
-                        color: formData.attendance === opt.id ? 'var(--burgundy-dark)' : 'var(--text-dark)',
+                        border: formData.attendance === opt.id ? '2px solid var(--olive)' : '1px solid var(--nude-border)',
+                        background: formData.attendance === opt.id ? 'rgba(74, 88, 63, 0.12)' : '#FFFFFF',
+                        color: formData.attendance === opt.id ? 'var(--olive-dark)' : 'var(--text-dark)',
                         fontWeight: formData.attendance === opt.id ? 600 : 400,
                         fontSize: '0.85rem',
                         cursor: 'pointer',

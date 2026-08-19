@@ -21,7 +21,7 @@ export default function Toast({ toast, onClose }) {
       alignItems: 'center',
       gap: '12px',
       padding: '12px 20px',
-      background: 'rgba(91, 14, 45, 0.95)',
+      background: 'rgba(74, 88, 63, 0.95)',
       backdropFilter: 'blur(16px)',
       border: '1px solid rgba(197, 160, 89, 0.4)',
       color: '#FFFFFF',

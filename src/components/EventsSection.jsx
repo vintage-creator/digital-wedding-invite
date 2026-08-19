@@ -98,9 +98,10 @@ export default function EventsSection() {
         {/* Venue Cards Grid */}
         <div className="events-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
           gap: '2.5rem',
           marginTop: '3rem',
+          width: '100%',
           textAlign: 'left'
         }}>
           {events.map((evt) => {
@@ -120,7 +121,7 @@ export default function EventsSection() {
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   boxShadow: isHovered
-                    ? '0 25px 55px rgba(91, 14, 45, 0.16), 0 0 20px rgba(197, 160, 89, 0.4)'
+                    ? '0 25px 55px rgba(74, 88, 63, 0.14), 0 0 20px rgba(197, 160, 89, 0.4)'
                     : '0 15px 40px rgba(0,0,0,0.06)',
                   transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
                   transition: 'transform 0.4s ease, boxShadow 0.4s ease, border 0.4s ease'
@@ -154,7 +155,7 @@ export default function EventsSection() {
                       position: 'absolute',
                       top: '16px',
                       left: '16px',
-                      background: 'rgba(91, 14, 45, 0.92)',
+                      background: 'rgba(74, 88, 63, 0.90)',
                       color: '#FFFFFF',
                       fontSize: '0.78rem',
                       fontWeight: 700,

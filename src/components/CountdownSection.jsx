@@ -52,26 +52,31 @@ export default function CountdownSection() {
         {/* Event Selection Tabs */}
         <div style={{
           display: 'inline-flex',
-          background: '#FFFFFF',
+          maxWidth: '100%',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '4px',
+          background: 'var(--nude-bg)',
           padding: '6px',
           borderRadius: '40px',
-          border: '1px solid var(--nude-border)',
-          boxShadow: 'var(--shadow-sm)',
+          border: '1.5px solid var(--nude-border)',
+          boxShadow: '0 2px 10px rgba(74, 88, 63, 0.06)',
           marginBottom: '2.5rem'
         }}>
           <button
             onClick={() => setActiveTab('traditional')}
             style={{
-              padding: '10px 24px',
+              padding: '10px 20px',
               borderRadius: '30px',
-              border: 'none',
-              background: activeTab === 'traditional' ? 'linear-gradient(135deg, var(--burgundy), var(--burgundy-dark))' : 'transparent',
-              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--burgundy)',
-              fontWeight: 600,
-              fontSize: '0.88rem',
-              letterSpacing: '0.05em',
+              border: activeTab === 'traditional' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
+              background: activeTab === 'traditional' ? 'var(--olive)' : 'transparent',
+              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--olive-dark)',
+              fontWeight: 500,
+              fontSize: '0.86rem',
+              letterSpacing: '0.04em',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
             }}
           >
             Traditional Wedding (Dec 17)
@@ -80,16 +85,17 @@ export default function CountdownSection() {
           <button
             onClick={() => setActiveTab('white')}
             style={{
-              padding: '10px 24px',
+              padding: '10px 20px',
               borderRadius: '30px',
-              border: 'none',
-              background: activeTab === 'white' ? 'linear-gradient(135deg, var(--olive), var(--olive-dark))' : 'transparent',
-              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive)',
-              fontWeight: 600,
-              fontSize: '0.88rem',
-              letterSpacing: '0.05em',
+              border: activeTab === 'white' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
+              background: activeTab === 'white' ? 'var(--olive)' : 'transparent',
+              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive-dark)',
+              fontWeight: 500,
+              fontSize: '0.86rem',
+              letterSpacing: '0.04em',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
             }}
           >
             White Wedding (Dec 19)
@@ -98,8 +104,8 @@ export default function CountdownSection() {
 
         {/* Selected Event Details Header */}
         <div style={{ marginBottom: '2rem' }}>
-          <span className={activeTab === 'traditional' ? 'badge-burgundy' : 'badge-gold'}>
-            <Calendar size={14} />
+          <span className="badge-gold" style={{ maxWidth: '100%', wordBreak: 'break-word', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <Calendar size={14} style={{ flexShrink: 0 }} />
             {activeTab === 'traditional'
               ? 'Thursday, 17th December 2026 • The Nest Gardens Guzape'
               : 'Saturday, 19th December 2026 • Bolton White Hotels Abuja'}
@@ -109,9 +115,10 @@ export default function CountdownSection() {
         {/* Countdown Digit Boxes Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
-          gap: '1.25rem',
+          gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+          gap: 'clamp(0.4rem, 2vw, 1.25rem)',
           maxWidth: '680px',
+          width: '100%',
           margin: '0 auto'
         }}>
           {[
@@ -124,27 +131,28 @@ export default function CountdownSection() {
               key={item.label}
               className="glass-card"
               style={{
-                padding: '1.5rem 1rem',
+                padding: 'clamp(0.9rem, 2.5vw, 1.5rem) clamp(0.3rem, 1.5vw, 1rem)',
                 textAlign: 'center',
                 border: '1.5px solid var(--nude-border)',
-                background: '#FFFFFF'
+                background: '#FFFFFF',
+                borderRadius: '16px'
               }}
             >
               <div style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2.4rem, 6vw, 3.8rem)',
+                fontSize: 'clamp(1.7rem, 5.5vw, 3.6rem)',
                 fontWeight: 700,
-                color: activeTab === 'traditional' ? 'var(--burgundy)' : 'var(--olive-dark)',
+                color: 'var(--olive-dark)',
                 lineHeight: 1
               }}>
                 {String(item.value).padStart(2, '0')}
               </div>
               <span style={{
                 display: 'block',
-                marginTop: '8px',
-                fontSize: '0.75rem',
+                marginTop: '6px',
+                fontSize: 'clamp(0.62rem, 1.8vw, 0.75rem)',
                 fontWeight: 600,
-                letterSpacing: '0.2em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 color: 'var(--gold-dark)'
               }}>

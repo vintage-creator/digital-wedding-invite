@@ -40,24 +40,30 @@ export default function OrderOfDaySection() {
         {/* Tab Selection */}
         <div className="schedule-tabs" style={{
           display: 'inline-flex',
+          maxWidth: '100%',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '4px',
           background: 'var(--nude-bg)',
           padding: '6px',
           borderRadius: '40px',
-          border: '1px solid var(--nude-border)',
-          marginBottom: '2.5rem'
+          border: '1.5px solid var(--nude-border)',
+          marginBottom: '2.5rem',
+          boxShadow: '0 2px 10px rgba(74, 88, 63, 0.06)'
         }}>
           <button
             onClick={() => setActiveTab('traditional')}
             style={{
-              padding: '10px 20px',
+              padding: '10px 22px',
               borderRadius: '30px',
-              border: 'none',
-              background: activeTab === 'traditional' ? 'var(--burgundy)' : 'transparent',
-              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--burgundy)',
-              fontWeight: 600,
+              border: activeTab === 'traditional' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
+              background: activeTab === 'traditional' ? 'var(--olive)' : 'transparent',
+              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--olive-dark)',
+              fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
             }}
           >
             Traditional Schedule (Dec 17)
@@ -66,15 +72,16 @@ export default function OrderOfDaySection() {
           <button
             onClick={() => setActiveTab('white')}
             style={{
-              padding: '10px 20px',
+              padding: '10px 22px',
               borderRadius: '30px',
-              border: 'none',
+              border: activeTab === 'white' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
               background: activeTab === 'white' ? 'var(--olive)' : 'transparent',
-              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive)',
-              fontWeight: 600,
+              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive-dark)',
+              fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
             }}
           >
             White Wedding Schedule (Dec 19)

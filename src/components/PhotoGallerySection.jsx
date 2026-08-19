@@ -299,7 +299,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
             </div>
 
             {/* Guest Name & Caption */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem', textAlign: 'left' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '1rem', marginBottom: '1rem', width: '100%', textAlign: 'left' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Your Name</label>
                 <input
@@ -349,8 +349,9 @@ export default function PhotoGallerySection({ onTriggerToast }) {
         {/* Live Photo Grid */}
         <div className="photo-grid gallery-mosaic" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))',
           gap: '1.5rem',
+          width: '100%',
           marginTop: '2rem'
         }}>
           {photos.map((photo, index) => (

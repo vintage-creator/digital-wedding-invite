@@ -100,7 +100,7 @@ export default function App() {
             width: '46px',
             height: '46px',
             borderRadius: '50%',
-            background: 'rgba(91, 14, 45, 0.92)',
+            background: 'rgba(74, 88, 63, 0.90)',
             backdropFilter: 'blur(12px)',
             border: '1.5px solid var(--gold)',
             color: '#E4C889',

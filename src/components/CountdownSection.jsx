@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Calendar, Sparkles } from 'lucide-react';
+import { Clock, Calendar } from 'lucide-react';
 
 export default function CountdownSection() {
   const [activeTab, setActiveTab] = useState('traditional'); // 'traditional' | 'white'
@@ -60,7 +60,7 @@ export default function CountdownSection() {
           padding: '6px',
           borderRadius: '40px',
           border: '1.5px solid var(--nude-border)',
-          boxShadow: '0 2px 10px rgba(74, 88, 63, 0.06)',
+          boxShadow: '0 2px 10px rgba(38, 54, 34, 0.06)',
           marginBottom: '2.5rem'
         }}>
           <button
@@ -68,15 +68,15 @@ export default function CountdownSection() {
             style={{
               padding: '10px 20px',
               borderRadius: '30px',
-              border: activeTab === 'traditional' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
-              background: activeTab === 'traditional' ? 'var(--olive)' : 'transparent',
-              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--olive-dark)',
+              border: activeTab === 'traditional' ? '1.5px solid #C5A059' : '1px solid transparent',
+              background: activeTab === 'traditional' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
+              color: activeTab === 'traditional' ? '#2B2318' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.86rem',
               letterSpacing: '0.04em',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
+              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
             }}
           >
             Traditional Wedding (Dec 17)
@@ -87,15 +87,15 @@ export default function CountdownSection() {
             style={{
               padding: '10px 20px',
               borderRadius: '30px',
-              border: activeTab === 'white' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
-              background: activeTab === 'white' ? 'var(--olive)' : 'transparent',
-              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive-dark)',
+              border: activeTab === 'white' ? '1.5px solid #C5A059' : '1px solid transparent',
+              background: activeTab === 'white' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
+              color: activeTab === 'white' ? '#2B2318' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.86rem',
               letterSpacing: '0.04em',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
             }}
           >
             White Wedding (Dec 19)
@@ -108,7 +108,7 @@ export default function CountdownSection() {
             <Calendar size={14} style={{ flexShrink: 0 }} />
             {activeTab === 'traditional'
               ? 'Thursday, 17th December 2026 • The Nest Gardens Guzape'
-              : 'Saturday, 19th December 2026 • Bolton White Hotels Abuja'}
+              : 'Saturday, 19th December 2026 • Bolton White Event Centre, Wuse'}
           </span>
         </div>
 
@@ -134,7 +134,7 @@ export default function CountdownSection() {
                 padding: 'clamp(0.9rem, 2.5vw, 1.5rem) clamp(0.3rem, 1.5vw, 1rem)',
                 textAlign: 'center',
                 border: '1.5px solid var(--nude-border)',
-                background: '#FFFFFF',
+                background: 'var(--nude-card)',
                 borderRadius: '16px'
               }}
             >
@@ -142,7 +142,7 @@ export default function CountdownSection() {
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.7rem, 5.5vw, 3.6rem)',
                 fontWeight: 700,
-                color: 'var(--olive-dark)',
+                color: 'var(--burgundy-dark)',
                 lineHeight: 1
               }}>
                 {String(item.value).padStart(2, '0')}

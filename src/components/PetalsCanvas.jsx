@@ -26,7 +26,7 @@ export default function PetalsCanvas({ active = false }) {
     const colors = [
       'rgba(122, 28, 62, 0.45)',  // Burgundy
       'rgba(91, 14, 45, 0.4)',    // Dark Burgundy
-      'rgba(107, 122, 93, 0.4)',  // Sage/Olive Green
+      'rgba(139, 158, 123, 0.38)', // Sage Green
       'rgba(197, 160, 89, 0.5)',  // Gold Sparkle
       'rgba(244, 236, 225, 0.6)'  // Champagne / Nude
     ];

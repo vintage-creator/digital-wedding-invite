@@ -145,7 +145,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         particleCount: 40,
         spread: 60,
         origin: { y: 0.75 },
-        colors: ['#5B0E2D', '#4A583F', '#C5A059', '#E5D9C3']
+        colors: ['#5B0E2D', '#4A583F', '#8EA682', '#E5D9C3']
       });
     } catch (e) {}
 
@@ -245,7 +245,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         </div>
 
         {/* Physical Gift Registry Header */}
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--olive-dark)', marginBottom: '1.2rem' }}>
+        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--burgundy-dark)', marginBottom: '1.2rem' }}>
           Physical Gift Wishlist ({registryItems.length} Items)
         </h3>
 
@@ -271,9 +271,9 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 style={{
                   padding: '8px 18px',
                   borderRadius: '30px',
-                  border: isActive ? '1.5px solid rgba(228, 200, 137, 0.6)' : '1px solid var(--nude-border)',
-                  background: isActive ? 'var(--olive)' : 'var(--nude-bg)',
-                  color: isActive ? '#FFFFFF' : 'var(--text-dark)',
+                  border: isActive ? '1.5px solid #C5A059' : '1px solid var(--nude-border)',
+                  background: isActive ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'var(--nude-bg)',
+                  color: isActive ? '#2B2318' : 'var(--text-dark)',
                   fontSize: '0.82rem',
                   fontWeight: 500,
                   cursor: 'pointer',
@@ -281,14 +281,14 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  boxShadow: isActive ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
+                  boxShadow: isActive ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
                 }}
               >
                 <span>{cat.name}</span>
                 <span style={{
                   fontSize: '0.72rem',
                   background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.06)',
-                  color: isActive ? '#FFFFFF' : 'var(--olive)',
+                  color: isActive ? 'var(--burgundy-dark)' : 'var(--olive)',
                   padding: '2px 7px',
                   borderRadius: '10px'
                 }}>
@@ -358,7 +358,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                         ) : (
                           <span style={{
                             background: 'var(--nude-bg)',
-                            color: 'var(--olive-medium)',
+                            color: 'var(--olive)',
                             fontSize: '0.7rem',
                             fontWeight: 500,
                             padding: '3px 8px',
@@ -386,7 +386,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                           display: 'flex',
                           alignItems: 'flex-start',
                           gap: '6px',
-                          color: 'var(--olive-dark)',
+                          color: 'var(--burgundy-dark)',
                           fontSize: '0.8rem',
                           marginTop: '0.6rem',
                           background: 'var(--nude-bg)',

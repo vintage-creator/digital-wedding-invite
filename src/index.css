@@ -1,36 +1,45 @@
 /* ==========================================================================
    DEBORAH & TOM WEDDING DESIGN SYSTEM
-   Palette: Burgundy, Sage / Olive Green, Nude / Champagne, Gold
+   Palette: Burgundy, Sage / Olive Green, Nude
    ========================================================================== */
 
 :root {
-  /* Color Palette - User Specs: Burgundy, Sage/Olive, Nude */
+  /* Color Palette - couple's chosen wedding colors */
   --burgundy-dark: #3B081B;
   --burgundy: #5B0E2D;
   --burgundy-medium: #7A1C3E;
   --burgundy-light: #9E2B54;
   --burgundy-soft: #F9ECEF;
 
-  --olive-dark: #2F3929;
+  --olive-dark: #263622;
   --olive: #4A583F;
   --olive-medium: #6B7A5D;
   --olive-light: #8B9E7B;
-  --olive-soft: #EFEFDF;
+  --olive-soft: #EFF3E8;
 
-  --nude-bg: #FAF6F0;
+  --sage: #8EA682;
+  --sage-soft: #EEF3EA;
+  --sage-mist: #F6F8F2;
+
+  --nude-bg: #FBF7EF;
   --nude-card: #FFFFFF;
-  --nude-soft: #F4ECE1;
-  --nude-border: #E6D8C3;
+  --nude-soft: #F5EDE1;
+  --nude-border: #E8DAC8;
   --nude-muted: #8C7B6B;
+
+  --ivory: #FBF7EF;
+  --blush: #D9A7A7;
+  --blush-soft: #F8EAEA;
+  --champagne: #E7CF9D;
 
   --gold: #C5A059;
   --gold-light: #E4C889;
   --gold-dark: #9A7734;
   --gold-glow: rgba(197, 160, 89, 0.25);
 
-  --text-dark: #2A1D24;
-  --text-muted: #6B5B63;
-  --text-light: #FAF6F0;
+  --text-dark: #23301F;
+  --text-muted: #66705F;
+  --text-light: #FBF7EF;
 
   /* Typography */
   --font-script: 'Great Vibes', cursive;
@@ -44,9 +53,9 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 4px 12px rgba(91, 14, 45, 0.05);
-  --shadow-md: 0 8px 24px rgba(91, 14, 45, 0.08);
-  --shadow-lg: 0 16px 40px rgba(91, 14, 45, 0.12);
+  --shadow-sm: 0 4px 12px rgba(38, 54, 34, 0.05);
+  --shadow-md: 0 8px 24px rgba(38, 54, 34, 0.08);
+  --shadow-lg: 0 16px 40px rgba(38, 54, 34, 0.12);
   --shadow-gold: 0 8px 25px rgba(197, 160, 89, 0.25);
 
   /* Transitions */
@@ -219,7 +228,7 @@ main {
   border: 1px solid rgba(228, 200, 137, 0.3);
   color: #ffffff;
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 40px rgba(47, 57, 41, 0.25);
+  box-shadow: 0 16px 40px rgba(38, 54, 34, 0.22);
 }
 
 /* Primary & Secondary Buttons */
@@ -356,6 +365,164 @@ main {
   align-items: center;
   justify-content: center;
   animation: footerSealPulse 3s ease-in-out infinite;
+}
+
+.invitation-card-section {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(217, 167, 167, 0.14), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(142, 166, 130, 0.16), transparent 34%),
+    linear-gradient(180deg, var(--ivory) 0%, #fffdf8 100%);
+}
+
+.invitation-card-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  max-width: 690px;
+  min-height: min(860px, calc(100svh - 112px));
+  margin: 0 auto;
+  padding: clamp(2.25rem, 6vw, 5.75rem) clamp(1.35rem, 5vw, 4.4rem);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.88), transparent 49%),
+    repeating-linear-gradient(90deg, rgba(38, 54, 34, 0.026) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(0deg, rgba(91, 14, 45, 0.018) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg, rgba(255, 254, 250, 0.98), rgba(250, 246, 238, 0.98));
+  box-shadow:
+    0 34px 80px rgba(38, 54, 34, 0.12),
+    inset 0 0 0 12px rgba(255, 255, 255, 0.44),
+    inset 0 0 64px rgba(197, 160, 89, 0.08);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.invitation-card-shell::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.invitation-card-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/invitation-floral-relief.png') center / 100% 100% no-repeat;
+  opacity: 0.74;
+  filter: drop-shadow(7px 10px 12px rgba(38, 54, 34, 0.11));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invitation-card-logo-wrap {
+  position: relative;
+  z-index: 2;
+  width: min(36vw, 142px);
+  margin: 0 auto clamp(1.3rem, 3vw, 2rem);
+}
+
+.invitation-card-logo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.78;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 12px 20px rgba(38, 54, 34, 0.07));
+}
+
+.invitation-card-copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: min(100%, 500px);
+}
+
+.invitation-card-copy h2 {
+  margin: 1.55rem 0 1.75rem;
+  color: #151913;
+  font-family: var(--font-serif);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.18em, 2vw, 0.32em);
+}
+
+.invitation-card-copy h2 span {
+  display: block;
+  font-size: clamp(2rem, 7.5vw, 3.4rem);
+  font-weight: 400;
+}
+
+.invitation-card-copy h2 em {
+  display: block;
+  margin: 0.2rem 0;
+  color: var(--burgundy);
+  font: 400 clamp(1.35rem, 4.5vw, 2rem) var(--font-script);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.invitation-card-kicker {
+  margin: 0;
+  color: var(--olive);
+  font: 500 clamp(0.78rem, 1.7vw, 0.95rem) var(--font-serif);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.invitation-card-lead {
+  max-width: 540px;
+  color: var(--text-muted);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+}
+
+.invitation-card-details {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.55rem auto 1.35rem;
+}
+
+.invitation-card-details div {
+  padding: 0.25rem 0;
+  background: transparent;
+}
+
+.invitation-card-details span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.invitation-card-details strong {
+  display: block;
+  color: #171914;
+  font: 500 clamp(0.82rem, 1.9vw, 0.98rem) var(--font-serif);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.invitation-card-details small {
+  display: block;
+  color: var(--text-muted);
+  font: 500 0.82rem var(--font-sans);
+  letter-spacing: 0.03em;
+}
+
+.invitation-card-note {
+  color: var(--burgundy);
+  font: 400 clamp(1.25rem, 3vw, 1.7rem) var(--font-script);
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .hero-floral-frame {
@@ -649,6 +816,17 @@ main {
   box-shadow: 0 12px 32px rgba(59, 8, 27, 0.42);
 }
 
+.music-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  filter: grayscale(0.35);
+}
+
+.music-icon-button:disabled:hover {
+  transform: none;
+  box-shadow: 0 9px 28px rgba(59, 8, 27, 0.32);
+}
+
 .music-icon-button-playing {
   background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
   animation: musicControlPulse 2.4s ease-in-out infinite;
@@ -827,6 +1005,25 @@ button, a, input, select, textarea {
   .gallery-photo-card-1,
   .gallery-photo-card-4,
   .gallery-photo-card-5 { grid-column: span 1; }
+
+  .invitation-card-shell {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .invitation-card-logo-wrap {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .invitation-card-copy {
+    text-align: center;
+  }
+
+  .invitation-card-lead {
+    margin-inline: auto;
+  }
 }
 
 @media (max-width: 700px) {
@@ -974,6 +1171,18 @@ button, a, input, select, textarea {
     height: 100%;
     object-fit: contain;
     opacity: 0.35;
+  }
+
+  .invitation-card-shell {
+    padding: 1.2rem;
+  }
+
+  .invitation-card-shell::before {
+    inset: 9px;
+  }
+
+  .invitation-card-details div {
+    text-align: left;
   }
 
   .form-input,

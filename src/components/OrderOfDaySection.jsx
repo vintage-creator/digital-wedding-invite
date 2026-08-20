@@ -13,7 +13,7 @@ export default function OrderOfDaySection() {
   ];
 
   const whiteSchedule = [
-    { time: '11:00 AM', title: 'Holy Matrimony Ceremony', desc: 'Exchange of vows and rings at Bolton White Hotels hall.' },
+    { time: '11:00 AM', title: 'Holy Matrimony Ceremony', desc: 'Exchange of vows and rings at Bolton White Event Centre, Wuse Zone 7.' },
     { time: '12:30 PM', title: 'Cocktail & Mocktail Hour', desc: 'Canapés, acoustic music, and arrival photo booth.' },
     { time: '01:30 PM', title: 'Grand Reception Entry', desc: 'Entrance of bridal party, Deborah & Tom’s first dance.' },
     { time: '03:00 PM', title: 'Gourmet Banquet & Speeches', desc: 'Three-course dinner, family toasts, and cake cutting.' },
@@ -49,21 +49,21 @@ export default function OrderOfDaySection() {
           borderRadius: '40px',
           border: '1.5px solid var(--nude-border)',
           marginBottom: '2.5rem',
-          boxShadow: '0 2px 10px rgba(74, 88, 63, 0.06)'
+          boxShadow: '0 2px 10px rgba(38, 54, 34, 0.06)'
         }}>
           <button
             onClick={() => setActiveTab('traditional')}
             style={{
               padding: '10px 22px',
               borderRadius: '30px',
-              border: activeTab === 'traditional' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
-              background: activeTab === 'traditional' ? 'var(--olive)' : 'transparent',
-              color: activeTab === 'traditional' ? '#FFFFFF' : 'var(--olive-dark)',
+              border: activeTab === 'traditional' ? '1.5px solid #C5A059' : '1px solid transparent',
+              background: activeTab === 'traditional' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
+              color: activeTab === 'traditional' ? '#2B2318' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
+              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
             }}
           >
             Traditional Schedule (Dec 17)
@@ -74,14 +74,14 @@ export default function OrderOfDaySection() {
             style={{
               padding: '10px 22px',
               borderRadius: '30px',
-              border: activeTab === 'white' ? '1px solid rgba(228, 200, 137, 0.4)' : '1px solid transparent',
-              background: activeTab === 'white' ? 'var(--olive)' : 'transparent',
-              color: activeTab === 'white' ? '#FFFFFF' : 'var(--olive-dark)',
+              border: activeTab === 'white' ? '1.5px solid #C5A059' : '1px solid transparent',
+              background: activeTab === 'white' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
+              color: activeTab === 'white' ? '#2B2318' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(74, 88, 63, 0.22)' : 'none'
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
             }}
           >
             White Wedding Schedule (Dec 19)

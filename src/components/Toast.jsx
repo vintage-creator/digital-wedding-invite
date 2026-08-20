@@ -7,7 +7,7 @@ export default function Toast({ toast, onClose }) {
   const icons = {
     success: <CheckCircle style={{ color: '#C5A059' }} size={20} />,
     error: <AlertCircle style={{ color: '#E53E3E' }} size={20} />,
-    info: <Info style={{ color: '#6B7A5D' }} size={20} />
+    info: <Info style={{ color: '#8EA682' }} size={20} />
   };
 
   return (
@@ -21,7 +21,7 @@ export default function Toast({ toast, onClose }) {
       alignItems: 'center',
       gap: '12px',
       padding: '12px 20px',
-      background: 'rgba(74, 88, 63, 0.95)',
+      background: 'rgba(38, 54, 34, 0.95)',
       backdropFilter: 'blur(16px)',
       border: '1px solid rgba(197, 160, 89, 0.4)',
       color: '#FFFFFF',

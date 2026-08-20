@@ -25,11 +25,11 @@ export default function EventsSection() {
       type: 'White Wedding & Reception',
       date: 'Saturday, 19th December 2026',
       time: '11:00 AM WAT',
-      venue: 'Bolton White Hotels Abuja',
-      address: 'Plot 700, Area 11, Garki, Abuja, Nigeria',
+      venue: 'Bolton White Event Centre',
+      address: '31 Kigoma Street, Wuse Zone 7, Abuja, Nigeria',
       attire: 'Formal / Black Tie Optional (Olive & Nude accents)',
-      image: '/assets/bolton_white.jpg',
-      mapUrl: 'https://maps.google.com/?q=Bolton+White+Hotels+Abuja',
+      image: '/assets/bolton_white_deborah_tom.jpg',
+      mapUrl: 'https://maps.google.com/?q=31+Kigoma+Street+Wuse+Zone+7+Abuja+Bolton+White+Event+Centre',
       calendarTitle: 'Deborah & Tom — White Wedding & Reception',
       calendarDescription: 'White Wedding Ceremony and reception for Deborah & Tom.',
       calendarStart: '20261219T110000',
@@ -121,7 +121,7 @@ export default function EventsSection() {
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   boxShadow: isHovered
-                    ? '0 25px 55px rgba(74, 88, 63, 0.14), 0 0 20px rgba(197, 160, 89, 0.4)'
+                    ? '0 25px 55px rgba(38, 54, 34, 0.14), 0 0 20px rgba(197, 160, 89, 0.32)'
                     : '0 15px 40px rgba(0,0,0,0.06)',
                   transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
                   transition: 'transform 0.4s ease, boxShadow 0.4s ease, border 0.4s ease'
@@ -155,7 +155,7 @@ export default function EventsSection() {
                       position: 'absolute',
                       top: '16px',
                       left: '16px',
-                      background: 'rgba(74, 88, 63, 0.90)',
+                      background: 'rgba(91, 14, 45, 0.86)',
                       color: '#FFFFFF',
                       fontSize: '0.78rem',
                       fontWeight: 700,
@@ -200,7 +200,7 @@ export default function EventsSection() {
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', color: 'var(--text-muted)' }}>
-                        <MapPin size={18} style={{ color: 'var(--olive)', flexShrink: 0, marginTop: '2px' }} />
+                        <MapPin size={18} style={{ color: 'var(--gold-dark)', flexShrink: 0, marginTop: '2px' }} />
                         <span style={{ fontSize: '0.9rem' }}>{evt.address}</span>
                       </div>
 

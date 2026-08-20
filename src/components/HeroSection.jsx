@@ -12,7 +12,7 @@ export default function HeroSection() {
         justifyContent: 'center',
         padding: '110px 1.5rem 60px',
         position: 'relative',
-        background: 'radial-gradient(circle at 50% 30%, rgba(244, 236, 225, 0.8), var(--nude-bg))',
+        background: 'radial-gradient(circle at 50% 28%, rgba(255, 253, 252, 0.88) 0%, rgba(248, 240, 232, 0.96) 46%, var(--nude-soft) 100%)',
         overflow: 'hidden'
       }}
     >
@@ -31,10 +31,10 @@ export default function HeroSection() {
           style={{
             margin: '0 auto',
             width: 'min(92vw, 620px)',
-            background: '#FFFFFF',
+            background: 'rgba(255, 253, 252, 0.96)',
             border: '2.5px solid var(--gold)',
             borderRadius: '310px 310px 24px 24px',
-            boxShadow: '0 25px 60px rgba(91, 14, 45, 0.15), inset 0 0 30px rgba(197, 160, 89, 0.1)',
+            boxShadow: '0 25px 60px rgba(38, 54, 34, 0.11), inset 0 0 30px rgba(197, 160, 89, 0.1)',
             padding: 'clamp(2.75rem, 6vw, 4.5rem) clamp(1.75rem, 6vw, 4.25rem)',
             position: 'relative'
           }}
@@ -98,7 +98,7 @@ export default function HeroSection() {
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              <MapPin size={16} style={{ color: 'var(--olive)' }} />
+              <MapPin size={16} style={{ color: 'var(--gold-dark)' }} />
               <span>Abuja, Nigeria</span>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function HeroSection() {
               <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>Traditional:</span> The Nest Gardens, Guzape
             </p>
             <p style={{ color: 'var(--burgundy-medium)', fontWeight: 500 }}>
-              <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>White Wedding:</span> Bolton White Hotels
+              <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>White Wedding:</span> Bolton White Event Centre
             </p>
           </div>
 

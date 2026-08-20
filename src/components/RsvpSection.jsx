@@ -52,7 +52,7 @@ export default function RsvpSection({ onTriggerToast }) {
         spread: 50,
         startVelocity: 25,
         origin: { y: 0.75 },
-        colors: ['#5B0E2D', '#7A1C3E', '#4A583F', '#C5A059']
+        colors: ['#5B0E2D', '#4A583F', '#8EA682', '#E5D9C3']
       });
     } catch (err) {}
 

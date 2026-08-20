@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import EnvelopeCover from './components/EnvelopeCover';
 import HeroSection from './components/HeroSection';
+import InvitationCardSection from './components/InvitationCardSection';
 import CountdownSection from './components/CountdownSection';
 import EventsSection from './components/EventsSection';
 import OrderOfDaySection from './components/OrderOfDaySection';
@@ -70,6 +71,7 @@ export default function App() {
       {/* Main Sections */}
       <main>
         <HeroSection />
+        <InvitationCardSection />
         <CountdownSection />
         <EventsSection />
         <RsvpSection onTriggerToast={triggerToast} />
@@ -100,7 +102,7 @@ export default function App() {
             width: '46px',
             height: '46px',
             borderRadius: '50%',
-            background: 'rgba(74, 88, 63, 0.90)',
+            background: 'rgba(91, 14, 45, 0.90)',
             backdropFilter: 'blur(12px)',
             border: '1.5px solid var(--gold)',
             color: '#E4C889',

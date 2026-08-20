@@ -73,6 +73,23 @@ export default function HeroSection() {
             Deborah & Tom
           </h1>
 
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '0.35rem 0.85rem',
+            border: '1px solid rgba(197, 160, 89, 0.42)',
+            borderRadius: '999px',
+            background: 'rgba(251, 247, 239, 0.72)',
+            color: 'var(--olive)',
+            fontSize: '0.78rem',
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+            marginBottom: '0.75rem'
+          }}>
+            #TheBestOfDeb
+          </span>
+
           <p style={{
             fontFamily: 'var(--font-serif)',
             fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',

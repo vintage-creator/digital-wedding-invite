@@ -525,6 +525,145 @@ main {
   text-transform: none;
 }
 
+.invitation-card-hashtag {
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  margin: 0.9rem auto 0;
+  color: var(--burgundy);
+}
+
+.invitation-card-hashtag-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.invitation-card-hashtag-mark span {
+  display: inline-block;
+  width: clamp(84px, 18vw, 132px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--burgundy), transparent);
+  opacity: 0.7;
+}
+
+.invitation-card-hashtag-mark i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--burgundy);
+  font: 700 0.9rem var(--font-serif);
+  line-height: 1;
+}
+
+.invitation-card-hashtag strong {
+  color: var(--burgundy);
+  font: 500 clamp(0.74rem, 1.7vw, 0.86rem) var(--font-serif);
+  letter-spacing: clamp(0.22em, 1.8vw, 0.42em);
+  text-transform: none;
+}
+
+.countdown-sticky-panel {
+  position: sticky;
+  top: 88px;
+  z-index: 90;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: clamp(0.9rem, 2vw, 1.35rem);
+  border: 1px solid rgba(197, 160, 89, 0.34);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(251, 247, 239, 0.88));
+  box-shadow:
+    0 20px 48px rgba(38, 54, 34, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.countdown-tabs {
+  display: inline-flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(251, 247, 239, 0.72);
+  padding: 6px;
+  border-radius: 40px;
+  border: 1.5px solid var(--nude-border);
+  box-shadow: 0 2px 10px rgba(38, 54, 34, 0.06);
+  margin-bottom: 1rem;
+}
+
+.countdown-tabs button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.countdown-tabs .countdown-tab-active {
+  border: 1.5px solid #C5A059;
+  background: linear-gradient(135deg, #FAF6F0, #EFE5D5);
+  color: #2B2318;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.2);
+}
+
+.countdown-event-date {
+  margin-bottom: 1rem;
+}
+
+.countdown-event-date .badge-gold {
+  max-width: 100%;
+  word-break: break-word;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.4rem, 2vw, 1rem);
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.countdown-time-card {
+  padding: clamp(0.75rem, 2vw, 1.1rem) clamp(0.3rem, 1.5vw, 0.85rem);
+  text-align: center;
+  border: 1.5px solid var(--nude-border);
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 16px;
+}
+
+.countdown-time-value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 4.6vw, 3rem);
+  font-weight: 700;
+  color: var(--burgundy-dark);
+  line-height: 1;
+}
+
+.countdown-time-label {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(0.6rem, 1.6vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
 .hero-floral-frame {
   position: absolute;
   z-index: 1;
@@ -1044,6 +1183,46 @@ button, a, input, select, textarea {
   .section-title { font-size: clamp(2rem, 10vw, 2.8rem); }
   .section-title-script { font-size: clamp(2.45rem, 13vw, 3.5rem); }
   .section-subtitle { margin-bottom: 2rem; font-size: 0.98rem; }
+
+  .countdown-sticky-panel {
+    top: 68px;
+    margin-inline: -0.2rem;
+    padding: 0.85rem 0.7rem;
+    border-radius: 20px;
+  }
+
+  .countdown-tabs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+    margin-bottom: 0.75rem;
+  }
+
+  .countdown-tabs button {
+    width: 100%;
+    padding: 0.72rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .countdown-event-date {
+    margin-bottom: 0.75rem;
+  }
+
+  .countdown-event-date .badge-gold {
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    line-height: 1.35;
+  }
+
+  .countdown-grid {
+    gap: 0.45rem;
+  }
+
+  .countdown-time-card {
+    padding: 0.7rem 0.25rem;
+    border-radius: 12px;
+  }
 
   .btn {
     min-height: 46px;

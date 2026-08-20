@@ -71,8 +71,8 @@ export default function App() {
       {/* Main Sections */}
       <main>
         <HeroSection />
-        <InvitationCardSection />
         <CountdownSection />
+        <InvitationCardSection />
         <EventsSection />
         <RsvpSection onTriggerToast={triggerToast} />
         <OrderOfDaySection />

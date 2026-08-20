@@ -34,7 +34,7 @@ export default function CountdownSection() {
   }, [activeTab]);
 
   return (
-    <section id="countdown" className="section-padding" style={{ background: 'var(--nude-bg)' }}>
+    <section id="countdown" className="section-padding countdown-section" style={{ background: 'var(--section-blush)' }}>
       <div className="max-w-content text-center">
         
         {/* Eyebrow & Title */}
@@ -49,7 +49,7 @@ export default function CountdownSection() {
           Join us as we count down every second to our magical wedding celebrations in Abuja.
         </p>
 
-        <div className="countdown-sticky-panel">
+        <div className="countdown-panel">
           {/* Event Selection Tabs */}
           <div className="countdown-tabs">
             <button
@@ -96,7 +96,6 @@ export default function CountdownSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

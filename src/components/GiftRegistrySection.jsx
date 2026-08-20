@@ -173,7 +173,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
   };
 
   return (
-    <section id="registry" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="registry" className="section-padding" style={{ background: 'var(--section-sage)' }}>
       <div className="max-w-content text-center">
         
         <span className="section-eyebrow">
@@ -195,7 +195,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             margin: '0 auto 3.5rem',
             padding: '2rem 1.5rem',
             border: '2px solid var(--gold)',
-            background: 'var(--nude-bg)',
+            background: 'rgba(255, 253, 249, 0.9)',
             borderRadius: '20px',
             textAlign: 'center'
           }}
@@ -209,7 +209,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
           </p>
 
           <div style={{
-            background: '#FFFFFF',
+            background: 'var(--nude-card)',
             border: '1.5px solid var(--nude-border)',
             borderRadius: '14px',
             padding: '1.2rem',
@@ -271,9 +271,9 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 style={{
                   padding: '8px 18px',
                   borderRadius: '30px',
-                  border: isActive ? '1.5px solid #C5A059' : '1px solid var(--nude-border)',
-                  background: isActive ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'var(--nude-bg)',
-                  color: isActive ? '#2B2318' : 'var(--text-dark)',
+                  border: isActive ? '1.5px solid var(--blush-muted)' : '1px solid var(--nude-border)',
+                  background: isActive ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'var(--nude-card)',
+                  color: isActive ? 'var(--burgundy-dark)' : 'var(--text-dark)',
                   fontSize: '0.82rem',
                   fontWeight: 500,
                   cursor: 'pointer',
@@ -281,7 +281,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  boxShadow: isActive ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
+                  boxShadow: isActive ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
                 }}
               >
                 <span>{cat.name}</span>
@@ -326,7 +326,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                       borderRadius: '16px',
                       padding: '1.4rem',
                       border: '1.5px solid var(--nude-border)',
-                      background: '#FFFFFF',
+                      background: 'var(--nude-card)',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -343,8 +343,8 @@ export default function GiftRegistrySection({ onTriggerToast }) {
 
                         {hasGivers ? (
                           <span style={{
-                            background: 'rgba(74, 88, 63, 0.12)',
-                            color: 'var(--olive-dark)',
+                            background: 'var(--blush-soft)',
+                            color: 'var(--burgundy-dark)',
                             fontSize: '0.72rem',
                             fontWeight: 600,
                             padding: '3px 8px',
@@ -357,7 +357,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                           </span>
                         ) : (
                           <span style={{
-                            background: 'var(--nude-bg)',
+                            background: 'var(--blush-mist)',
                             color: 'var(--olive)',
                             fontSize: '0.7rem',
                             fontWeight: 500,
@@ -389,7 +389,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                           color: 'var(--burgundy-dark)',
                           fontSize: '0.8rem',
                           marginTop: '0.6rem',
-                          background: 'var(--nude-bg)',
+                          background: 'var(--blush-mist)',
                           padding: '6px 10px',
                           borderRadius: '8px',
                           border: '1px solid var(--nude-border)'
@@ -463,7 +463,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             className="glass-card"
             style={{
               width: 'min(92vw, 440px)',
-              background: '#FFFFFF',
+              background: 'var(--nude-card)',
               borderRadius: '24px',
               padding: '2rem 1.5rem',
               position: 'relative',

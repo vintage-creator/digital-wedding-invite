@@ -185,7 +185,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
   };
 
   return (
-    <section id="gallery" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="gallery" className="section-padding" style={{ background: 'var(--section-bright)' }}>
       <div className="max-w-content text-center">
         
         <span className="section-eyebrow">
@@ -234,7 +234,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           maxWidth: '650px',
           margin: '0 auto 3rem',
           border: '1.5px dashed var(--burgundy-medium)',
-          background: 'var(--nude-bg)'
+          background: 'rgba(252, 242, 239, 0.66)'
         }}>
           <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', marginBottom: '1rem' }}>
             <Upload size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: '-3px' }} />
@@ -248,7 +248,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           <form onSubmit={handleUploadSubmit}>
             {/* File Drop Input */}
             <div style={{
-              background: '#FFFFFF',
+              background: 'var(--nude-card)',
               border: '2px dashed var(--nude-border)',
               borderRadius: 'var(--radius-md)',
               padding: '1.5rem',
@@ -368,7 +368,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
                 cursor: 'pointer',
                 textAlign: 'left',
                 border: '1.5px solid var(--nude-border)',
-                background: '#FFFFFF',
+                background: 'var(--nude-card)',
                 transition: 'transform 0.3s ease'
               }}
               onClick={() => setActiveLightbox(photo)}
@@ -449,7 +449,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
               position: 'relative',
               maxWidth: '850px',
               width: '100%',
-              background: '#FFFFFF',
+              background: 'var(--nude-card)',
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
               boxShadow: '0 25px 60px rgba(0,0,0,0.5)'

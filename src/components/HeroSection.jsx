@@ -12,7 +12,7 @@ export default function HeroSection() {
         justifyContent: 'center',
         padding: '110px 1.5rem 60px',
         position: 'relative',
-        background: 'radial-gradient(circle at 50% 28%, rgba(255, 253, 252, 0.88) 0%, rgba(248, 240, 232, 0.96) 46%, var(--nude-soft) 100%)',
+        background: 'radial-gradient(circle at 50% 28%, rgba(255, 253, 249, 0.9) 0%, rgba(252, 242, 239, 0.72) 42%, var(--ivory) 76%, var(--nude-soft) 100%)',
         overflow: 'hidden'
       }}
     >
@@ -31,10 +31,10 @@ export default function HeroSection() {
           style={{
             margin: '0 auto',
             width: 'min(92vw, 620px)',
-            background: 'rgba(255, 253, 252, 0.96)',
-            border: '2.5px solid var(--gold)',
+            background: 'rgba(255, 253, 249, 0.96)',
+            border: '2px solid rgba(231, 207, 157, 0.72)',
             borderRadius: '310px 310px 24px 24px',
-            boxShadow: '0 25px 60px rgba(38, 54, 34, 0.11), inset 0 0 30px rgba(197, 160, 89, 0.1)',
+            boxShadow: '0 25px 60px rgba(38, 54, 34, 0.10), inset 0 0 30px rgba(216, 161, 162, 0.12)',
             padding: 'clamp(2.75rem, 6vw, 4.5rem) clamp(1.75rem, 6vw, 4.25rem)',
             position: 'relative'
           }}
@@ -43,7 +43,7 @@ export default function HeroSection() {
           <div style={{
             position: 'absolute',
             inset: '12px',
-            border: '1px solid rgba(197, 160, 89, 0.4)',
+            border: '1px solid rgba(216, 161, 162, 0.38)',
             borderRadius: '298px 298px 16px 16px',
             pointerEvents: 'none'
           }} />
@@ -55,7 +55,7 @@ export default function HeroSection() {
             fontWeight: 600,
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
-            color: 'var(--gold-dark)',
+            color: 'var(--blush-muted)',
             marginBottom: '0.5rem'
           }}>
             Save The Date
@@ -78,9 +78,9 @@ export default function HeroSection() {
             alignItems: 'center',
             justifyContent: 'center',
             padding: '0.35rem 0.85rem',
-            border: '1px solid rgba(197, 160, 89, 0.42)',
+            border: '1px solid rgba(216, 161, 162, 0.38)',
             borderRadius: '999px',
-            background: 'rgba(251, 247, 239, 0.72)',
+            background: 'rgba(252, 242, 239, 0.72)',
             color: 'var(--olive)',
             fontSize: '0.78rem',
             fontWeight: 600,

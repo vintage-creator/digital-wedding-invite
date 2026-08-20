@@ -65,7 +65,7 @@ export default function RsvpSection({ onTriggerToast }) {
   };
 
   return (
-    <section id="rsvp" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="rsvp" className="section-padding" style={{ background: 'var(--section-blush)' }}>
       <div className="max-w-narrow text-center">
         
         <span className="section-eyebrow">
@@ -82,7 +82,7 @@ export default function RsvpSection({ onTriggerToast }) {
         <div className="glass-card" style={{
           padding: 'clamp(1.5rem, 5vw, 3rem)',
           border: '1.5px solid var(--nude-border)',
-          background: 'var(--nude-bg)',
+          background: 'rgba(255, 253, 249, 0.92)',
           textAlign: 'left'
         }}>
           {submitted ? (
@@ -173,9 +173,9 @@ export default function RsvpSection({ onTriggerToast }) {
                       style={{
                         padding: '12px 10px',
                         borderRadius: 'var(--radius-sm)',
-                        border: formData.attendance === opt.id ? '2px solid var(--olive)' : '1px solid var(--nude-border)',
-                        background: formData.attendance === opt.id ? 'rgba(74, 88, 63, 0.12)' : '#FFFFFF',
-                        color: formData.attendance === opt.id ? 'var(--olive-dark)' : 'var(--text-dark)',
+                        border: formData.attendance === opt.id ? '2px solid var(--blush-muted)' : '1px solid var(--nude-border)',
+                        background: formData.attendance === opt.id ? 'var(--blush-soft)' : 'var(--nude-card)',
+                        color: formData.attendance === opt.id ? 'var(--burgundy-dark)' : 'var(--text-dark)',
                         fontWeight: formData.attendance === opt.id ? 600 : 400,
                         fontSize: '0.85rem',
                         cursor: 'pointer',

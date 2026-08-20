@@ -81,7 +81,7 @@ export default function EventsSection() {
   };
 
   return (
-    <section id="events" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="events" className="section-padding" style={{ background: 'var(--section-bright)' }}>
       <div className="max-w-content text-center">
         
         <span className="section-eyebrow">
@@ -116,7 +116,7 @@ export default function EventsSection() {
                   borderRadius: '24px',
                   overflow: 'hidden',
                   border: isHovered ? '1.5px solid var(--gold)' : '1.5px solid var(--nude-border)',
-                  background: 'var(--nude-bg)',
+                  background: 'var(--nude-card)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',

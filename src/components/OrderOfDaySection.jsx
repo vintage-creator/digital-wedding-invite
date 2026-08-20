@@ -23,7 +23,7 @@ export default function OrderOfDaySection() {
   const currentSchedule = activeTab === 'traditional' ? traditionalSchedule : whiteSchedule;
 
   return (
-    <section id="order" className="section-padding" style={{ background: '#FFFFFF' }}>
+    <section id="order" className="section-padding" style={{ background: 'var(--section-bright)' }}>
       <div className="max-w-narrow text-center">
         
         <span className="section-eyebrow">
@@ -44,7 +44,7 @@ export default function OrderOfDaySection() {
           flexWrap: 'wrap',
           justifyContent: 'center',
           gap: '4px',
-          background: 'var(--nude-bg)',
+          background: 'rgba(252, 242, 239, 0.58)',
           padding: '6px',
           borderRadius: '40px',
           border: '1.5px solid var(--nude-border)',
@@ -56,14 +56,14 @@ export default function OrderOfDaySection() {
             style={{
               padding: '10px 22px',
               borderRadius: '30px',
-              border: activeTab === 'traditional' ? '1.5px solid #C5A059' : '1px solid transparent',
-              background: activeTab === 'traditional' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
-              color: activeTab === 'traditional' ? '#2B2318' : 'var(--text-muted)',
+              border: activeTab === 'traditional' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
+              background: activeTab === 'traditional' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
+              color: activeTab === 'traditional' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
+              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
             }}
           >
             Traditional Schedule (Dec 17)
@@ -74,14 +74,14 @@ export default function OrderOfDaySection() {
             style={{
               padding: '10px 22px',
               borderRadius: '30px',
-              border: activeTab === 'white' ? '1.5px solid #C5A059' : '1px solid transparent',
-              background: activeTab === 'white' ? 'linear-gradient(135deg, #FAF6F0, #EFE5D5)' : 'transparent',
-              color: activeTab === 'white' ? '#2B2318' : 'var(--text-muted)',
+              border: activeTab === 'white' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
+              background: activeTab === 'white' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
+              color: activeTab === 'white' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
               fontWeight: 500,
               fontSize: '0.85rem',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(197, 160, 89, 0.2)' : 'none'
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
             }}
           >
             White Wedding Schedule (Dec 19)
@@ -110,7 +110,7 @@ export default function OrderOfDaySection() {
                 width: '28px',
                 height: '28px',
                 borderRadius: '50%',
-                background: '#FFFFFF',
+                background: 'var(--nude-card)',
                 border: `2px solid ${activeTab === 'traditional' ? 'var(--burgundy)' : 'var(--olive)'}`,
                 display: 'flex',
                 alignItems: 'center',

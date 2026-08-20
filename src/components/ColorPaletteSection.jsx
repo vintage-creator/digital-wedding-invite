@@ -38,7 +38,7 @@ export default function ColorPaletteSection() {
   ];
 
   return (
-    <section id="colors" className="section-padding" style={{ background: 'var(--nude-bg)', overflow: 'hidden' }}>
+    <section id="colors" className="section-padding" style={{ background: 'var(--section-sage)', overflow: 'hidden' }}>
       <div className="max-w-content text-center">
         
         <span className="section-eyebrow">

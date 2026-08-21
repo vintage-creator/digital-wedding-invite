@@ -30,6 +30,16 @@ export default function RsvpSection({ onTriggerToast }) {
       return;
     }
 
+    if (!formData.phone.trim()) {
+      if (onTriggerToast) {
+        onTriggerToast({
+          type: 'error',
+          message: 'Please enter your phone or WhatsApp number.'
+        });
+      }
+      return;
+    }
+
     const attendanceLabels = {
       both: 'Both events',
       traditional: 'Traditional wedding only',
@@ -184,11 +194,12 @@ export default function RsvpSection({ onTriggerToast }) {
                 <div className="form-group">
                   <label className="form-label" htmlFor="phone">
                     <Phone size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                    Phone Number / WhatsApp
+                    Phone Number / WhatsApp *
                   </label>
                   <input
                     id="phone"
                     type="tel"
+                    required
                     placeholder="+234 800 000 0000"
                     className="form-input"
                     value={formData.phone}

@@ -12,6 +12,10 @@ Then run:
 
 `supabase/migrations/202608210003_allow_multiple_gift_card_pledges.sql`
 
+Then run:
+
+`supabase/migrations/202608210004_require_phone_contacts.sql`
+
 It creates the application tables, row-level security policies, public views, and the required storage bucket.
 
 ## Storage bucket to create
@@ -32,6 +36,8 @@ The migration creates this bucket automatically:
 - `couple_admins`: maps Supabase Auth users to dashboard/admin access.
 - `dashboard_wedding_stats`: authenticated couple-admin metrics view for RSVP, gift, and gallery counts.
 - `dashboard_passcodes`: stores the hashed dashboard password for the no-login couple dashboard.
+
+RSVP phone numbers and gift pledge phone/WhatsApp contacts are required for new records so the couple can track and follow up from the dashboard.
 
 ## Couple dashboard security
 

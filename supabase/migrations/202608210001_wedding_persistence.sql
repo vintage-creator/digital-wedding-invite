@@ -63,7 +63,7 @@ using (public.is_couple_admin());
 create table if not exists public.rsvps (
   id uuid primary key default gen_random_uuid(),
   full_name text not null check (char_length(trim(full_name)) between 1 and 180),
-  phone text,
+  phone text not null check (char_length(trim(phone)) between 5 and 40),
   email text,
   attendance text not null default 'both'
     check (attendance in ('both', 'traditional', 'white', 'decline')),
@@ -127,7 +127,7 @@ create table if not exists public.gift_reservations (
   gift_id text not null unique,
   gift_title text not null,
   giver_name text not null check (char_length(trim(giver_name)) between 1 and 180),
-  contact_no text,
+  contact_no text not null check (char_length(trim(contact_no)) between 5 and 40),
   status text not null default 'reserved'
     check (status in ('reserved', 'contacted', 'fulfilled', 'cancelled')),
   notes text,

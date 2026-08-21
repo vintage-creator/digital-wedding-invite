@@ -6,6 +6,7 @@
 --   supabase/migrations/202608210001_wedding_persistence.sql
 --   supabase/migrations/202608210002_dashboard_passcode_rpc.sql
 --   supabase/migrations/202608210003_allow_multiple_gift_card_pledges.sql
+--   supabase/migrations/202608210004_require_phone_contacts.sql
 --
 -- Run both migrations in Supabase Dashboard > SQL Editor for a new database.
 -- They create:
@@ -19,6 +20,7 @@
 --   - wedding-guest-photos storage bucket
 --   - RLS policies for guests, dashboard access, and couple admins
 --   - multiple gift-card pledges while keeping physical gifts unique
+--   - required RSVP/gift pledge phone contacts for new records
 --
 -- Set or change the no-login dashboard password with:
 --

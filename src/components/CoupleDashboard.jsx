@@ -13,8 +13,6 @@ import {
   MessageCircle,
   Phone,
   RefreshCw,
-  Share2,
-  ShieldCheck,
   Users,
   XCircle
 } from 'lucide-react';
@@ -189,25 +187,6 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
     }
   };
 
-  const handleNativeShare = async (photo) => {
-    const shareData = {
-      title: 'Deborah & Tom Wedding Photo',
-      text: getPhotoShareText(photo),
-      url: photo.public_url
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        return;
-      } catch (err) {
-        if (err?.name === 'AbortError') return;
-      }
-    }
-
-    await handleCopyPhotoLink(photo);
-  };
-
   const openSharePlatform = (platform, photo) => {
     const encodedUrl = encodeURIComponent(photo.public_url);
     const encodedText = encodeURIComponent(getPhotoShareText(photo));
@@ -224,10 +203,6 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
     <main className="couple-dashboard">
       <section className="dashboard-hero">
         <div className="dashboard-hero-copy">
-          <div className="dashboard-private-badge">
-            <ShieldCheck size={15} />
-            For Deborah &amp; Tom
-          </div>
           <span className="section-eyebrow">Private Couple Dashboard</span>
           <h1>Deborah &amp; Tom’s Wedding Console</h1>
           <p>
@@ -468,20 +443,23 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
                         >
                           <Download size={14} /> Download
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => handlePhotoStatus(photo.id, 'hidden')}
-                          disabled={actionId === `photo-${photo.id}`}
-                        >
-                          <XCircle size={14} /> Hide
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handlePhotoStatus(photo.id, 'published')}
-                          disabled={actionId === `photo-${photo.id}`}
-                        >
-                          <CheckCircle2 size={14} /> Show on Gallery
-                        </button>
+                        {photo.status === 'published' ? (
+                          <button
+                            type="button"
+                            onClick={() => handlePhotoStatus(photo.id, 'hidden')}
+                            disabled={actionId === `photo-${photo.id}`}
+                          >
+                            <XCircle size={14} /> Hide from Gallery
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handlePhotoStatus(photo.id, 'published')}
+                            disabled={actionId === `photo-${photo.id}`}
+                          >
+                            <CheckCircle2 size={14} /> Show on Gallery
+                          </button>
+                        )}
                       </div>
                     </div>
                   </article>
@@ -522,35 +500,35 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
                   </div>
 
                   <div className="dashboard-photo-lightbox-actions">
-                    <button type="button" className="btn btn-outline-sage" onClick={() => handleNativeShare(activePhoto)}>
-                      <Share2 size={16} /> Share
-                    </button>
                     <button type="button" className="btn btn-outline-burgundy" onClick={() => handlePhotoDownload(activePhoto)}>
                       <Download size={16} /> Download
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-nude"
-                      onClick={() => handlePhotoStatus(activePhoto.id, 'hidden')}
-                      disabled={actionId === `photo-${activePhoto.id}`}
-                    >
-                      <XCircle size={16} /> Hide from Gallery
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-burgundy"
-                      onClick={() => handlePhotoStatus(activePhoto.id, 'published')}
-                      disabled={actionId === `photo-${activePhoto.id}`}
-                    >
-                      <CheckCircle2 size={16} /> Show on Gallery
-                    </button>
+                    {activePhoto.status === 'published' ? (
+                      <button
+                        type="button"
+                        className="btn btn-nude"
+                        onClick={() => handlePhotoStatus(activePhoto.id, 'hidden')}
+                        disabled={actionId === `photo-${activePhoto.id}`}
+                      >
+                        <XCircle size={16} /> Hide from Gallery
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-burgundy"
+                        onClick={() => handlePhotoStatus(activePhoto.id, 'published')}
+                        disabled={actionId === `photo-${activePhoto.id}`}
+                      >
+                        <CheckCircle2 size={16} /> Show on Gallery
+                      </button>
+                    )}
                   </div>
                 </div>
 
                 <div className="dashboard-share-panel">
                   <div>
                     <strong>Share / publish online</strong>
-                    <p>Use these when the couple wants to post this photo outside the website.</p>
+                    <p>Post or send this photo outside the wedding website.</p>
                   </div>
                   <div className="dashboard-share-actions">
                     <button type="button" onClick={() => openSharePlatform('whatsapp', activePhoto)}>

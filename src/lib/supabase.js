@@ -36,6 +36,10 @@ export async function fetchGiftReservations() {
 
 export async function createGiftReservation({ giftId, giftTitle, giverName, contactNo }) {
   requireConfig();
+  if (!contactNo?.trim()) {
+    throw new Error('Phone / WhatsApp number is required for gift pledges.');
+  }
+
   const response = await fetch(`${supabaseUrl}/rest/v1/gift_reservations`, {
     method: 'POST',
     headers: headers({ 'Content-Type': 'application/json', Prefer: 'return=minimal' }),
@@ -43,7 +47,7 @@ export async function createGiftReservation({ giftId, giftTitle, giverName, cont
       gift_id: giftId,
       gift_title: giftTitle,
       giver_name: giverName,
-      contact_no: contactNo || null
+      contact_no: contactNo.trim()
     })
   });
   if (!response.ok) await parseError(response, 'Unable to reserve this gift.');
@@ -59,12 +63,16 @@ export async function createRsvp({
   whatsappLinkOpened = false
 }) {
   requireConfig();
+  if (!phone?.trim()) {
+    throw new Error('Phone / WhatsApp number is required for RSVP.');
+  }
+
   const response = await fetch(`${supabaseUrl}/rest/v1/rsvps`, {
     method: 'POST',
     headers: headers({ 'Content-Type': 'application/json', Prefer: 'return=representation' }),
     body: JSON.stringify({
       full_name: fullName,
-      phone: phone || null,
+      phone: phone.trim(),
       email: email || null,
       attendance,
       guest_count: guestCount,

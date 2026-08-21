@@ -59,14 +59,26 @@ export default function GiftRegistrySection({ onTriggerToast }) {
 
   const handleGiftCardSubmit = async (event) => {
     event.preventDefault();
-    if (!giverName.trim() || isSubmitting) return;
+    if (isSubmitting) return;
+
+    if (!giverName.trim() || !contactNo.trim()) {
+      if (onTriggerToast) {
+        onTriggerToast({
+          type: 'error',
+          message: 'Please enter your name and phone/WhatsApp number for the gift-card pledge.'
+        });
+      }
+      return;
+    }
 
     setIsSubmitting(true);
     const nameStr = giverName.trim();
+    const contactStr = contactNo.trim();
     const nextPledge = {
       gift_id: giftCardOption.id,
       gift_title: giftCardOption.title,
       giver_name: nameStr,
+      contact_no: contactStr,
       created_at: new Date().toISOString()
     };
 
@@ -75,7 +87,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
         giftId: giftCardOption.id,
         giftTitle: giftCardOption.title,
         giverName: nameStr,
-        contactNo: contactNo.trim() || null
+        contactNo: contactStr
       });
       setGiftCardPledges((current) => [nextPledge, ...current]);
     } catch (err) {
@@ -305,11 +317,12 @@ export default function GiftRegistrySection({ onTriggerToast }) {
 
               <div className="form-group" style={{ marginTop: '1rem' }}>
                 <label className="form-label" htmlFor="contactNo">
-                  Phone / WhatsApp (Optional)
+                  Phone / WhatsApp *
                 </label>
                 <input
                   id="contactNo"
                   type="text"
+                  required
                   placeholder="e.g. 08012345678"
                   className="form-input"
                   value={contactNo}

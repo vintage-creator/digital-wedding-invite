@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Heart, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Users } from 'lucide-react';
+import { Heart, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Users, Loader2 } from 'lucide-react';
+import { createRsvp } from '../lib/supabase';
 
 export default function RsvpSection({ onTriggerToast }) {
   const [formData, setFormData] = useState({
@@ -13,9 +14,12 @@ export default function RsvpSection({ onTriggerToast }) {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     if (!formData.fullName) {
       if (onTriggerToast) {
         onTriggerToast({
@@ -42,9 +46,44 @@ export default function RsvpSection({ onTriggerToast }) {
       formData.email.trim() ? `Email: ${formData.email.trim()}` : null,
       formData.message.trim() ? `Message / dietary needs: ${formData.message.trim()}` : null
     ].filter(Boolean).join('\n');
+    const whatsappUrl = `https://wa.me/2348132804142?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappWindow = window.open('about:blank', '_blank');
 
-    window.open(`https://wa.me/2348132804142?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
+    if (whatsappWindow) {
+      try {
+        whatsappWindow.opener = null;
+        whatsappWindow.document.title = 'Opening WhatsApp…';
+        whatsappWindow.document.body.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+        whatsappWindow.document.body.style.padding = '2rem';
+        whatsappWindow.document.body.innerHTML = '<p>Saving RSVP, then opening WhatsApp…</p>';
+      } catch (err) {}
+    }
+
+    setIsSubmitting(true);
+    let savedToDatabase = false;
+
+    try {
+      await createRsvp({
+        fullName: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        attendance: formData.attendance,
+        guestCount: Number(formData.guestCount) || 1,
+        message: formData.message.trim(),
+        whatsappLinkOpened: true
+      });
+      savedToDatabase = true;
+    } catch (err) {
+      console.log('RSVP database save failed; continuing with WhatsApp fallback:', err);
+    }
+
+    if (whatsappWindow && !whatsappWindow.closed) {
+      whatsappWindow.location.href = whatsappUrl;
+    } else {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
     setSubmitted(true);
+    setIsSubmitting(false);
 
     try {
       confetti({
@@ -58,8 +97,10 @@ export default function RsvpSection({ onTriggerToast }) {
 
     if (onTriggerToast) {
       onTriggerToast({
-        type: 'success',
-        message: `WhatsApp is ready with ${formData.fullName}'s RSVP details.`
+        type: savedToDatabase ? 'success' : 'info',
+        message: savedToDatabase
+          ? `${formData.fullName}'s RSVP has been saved. WhatsApp is open as an extra notification.`
+          : `WhatsApp is ready with ${formData.fullName}'s RSVP details. Database save did not complete.`
       });
     }
   };
@@ -95,7 +136,7 @@ export default function RsvpSection({ onTriggerToast }) {
                 We can't wait to celebrate with you, {formData.fullName}!
               </h4>
               <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '460px', margin: '0 auto 1.5rem' }}>
-                WhatsApp has opened with your RSVP details. Tap Send there so the couple receives your response.
+                Your RSVP has been saved. WhatsApp has also opened with your details as an extra notification for the couple.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -233,9 +274,14 @@ export default function RsvpSection({ onTriggerToast }) {
               </div>
 
               {/* Submit Button */}
-              <button type="submit" className="btn btn-burgundy" style={{ width: '100%', marginTop: '1rem' }}>
-                <Send size={16} />
-                Send RSVP
+              <button
+                type="submit"
+                className="btn btn-burgundy"
+                disabled={isSubmitting}
+                style={{ width: '100%', marginTop: '1rem', opacity: isSubmitting ? 0.72 : 1 }}
+              >
+                {isSubmitting ? <Loader2 size={16} className="spin" /> : <Send size={16} />}
+                {isSubmitting ? 'Saving RSVP...' : 'Send RSVP'}
               </button>
             </form>
           )}

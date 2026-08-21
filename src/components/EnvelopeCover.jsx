@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { verifyDashboardPasscode } from '../lib/supabase';
 
-export default function EnvelopeCover({ onOpen }) {
+export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
   const [isOpening, setIsOpening] = useState(false);
   const [isCardPresented, setIsCardPresented] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [accessCode, setAccessCode] = useState('');
   const [accessError, setAccessError] = useState('');
+  const [isCheckingCode, setIsCheckingCode] = useState(false);
   const invitationCode = (import.meta.env.VITE_INVITATION_CODE || 'DT2026').trim().toLowerCase();
 
   useEffect(() => {
@@ -46,11 +48,41 @@ export default function EnvelopeCover({ onOpen }) {
     };
   }, [isDismissed]);
 
-  const handleSealClick = () => {
-    if (isOpening) return;
+  const handleSealClick = async () => {
+    if (isOpening || isCheckingCode) return;
 
-    if (accessCode.trim().toLowerCase() !== invitationCode) {
+    const enteredCode = accessCode.trim();
+
+    if (!enteredCode) {
       setAccessError('Please enter the invitation code to open this card.');
+      return;
+    }
+
+    if (enteredCode.toLowerCase() !== invitationCode) {
+      setIsCheckingCode(true);
+      setAccessError('');
+
+      try {
+        const isDashboardPassword = await verifyDashboardPasscode(enteredCode);
+        if (isDashboardPassword) {
+          setIsLeaving(true);
+          if (onDashboardOpen) onDashboardOpen(enteredCode);
+
+          setTimeout(() => {
+            setIsDismissed(true);
+            window.requestAnimationFrame(() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+            });
+          }, 450);
+          return;
+        }
+      } catch (err) {
+        console.log('Access verification failed:', err);
+      } finally {
+        setIsCheckingCode(false);
+      }
+
+      setAccessError('We could not verify that access code. Please check it and try again.');
       return;
     }
 
@@ -119,7 +151,7 @@ export default function EnvelopeCover({ onOpen }) {
       <div className={`invitation-arrival-copy ${isOpening ? 'invitation-arrival-copy-opening' : ''}`}>
         <span>Your invitation has arrived</span>
         <strong>Deborah &amp; Tom invite you</strong>
-        <small>Enter your access code, then tap the wax seal</small>
+          <small>{isCheckingCode ? 'Checking access…' : 'Enter your access code, then tap the wax seal'}</small>
         <form
           className="invitation-code-form"
           onSubmit={(event) => {
@@ -138,6 +170,7 @@ export default function EnvelopeCover({ onOpen }) {
             }}
             placeholder="Enter code"
             autoComplete="off"
+            disabled={isCheckingCode}
           />
           {accessError && <p role="alert">{accessError}</p>}
         </form>

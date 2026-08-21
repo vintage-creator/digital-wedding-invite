@@ -10,6 +10,7 @@ import ColorPaletteSection from './components/ColorPaletteSection';
 import PhotoGallerySection from './components/PhotoGallerySection';
 import GiftRegistrySection from './components/GiftRegistrySection';
 import RsvpSection from './components/RsvpSection';
+import CoupleDashboard from './components/CoupleDashboard';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
 import PetalsCanvas from './components/PetalsCanvas';
@@ -21,6 +22,7 @@ export default function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState(null);
+  const [dashboardPasscode, setDashboardPasscode] = useState('');
 
   const triggerToast = (nextToast) => {
     setToast(nextToast);
@@ -50,6 +52,19 @@ export default function App() {
     setIsMusicPlaying(true);
   };
 
+  const handleDashboardOpen = (passcode) => {
+    setDashboardPasscode(passcode);
+    setEnvelopeOpened(true);
+    setIsMusicPlaying(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
+  const handleDashboardExit = () => {
+    setDashboardPasscode('');
+    setEnvelopeOpened(true);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -63,29 +78,39 @@ export default function App() {
       <PetalsCanvas active={envelopeOpened} />
 
       {/* Landing Envelope Cover */}
-      <EnvelopeCover onOpen={handleEnvelopeOpen} />
+      <EnvelopeCover onOpen={handleEnvelopeOpen} onDashboardOpen={handleDashboardOpen} />
 
-      {/* Main Wedding Website Header & Navigation */}
-      <Navbar />
+      {dashboardPasscode ? (
+        <CoupleDashboard
+          dashboardPasscode={dashboardPasscode}
+          onTriggerToast={triggerToast}
+          onExit={handleDashboardExit}
+        />
+      ) : (
+        <>
+          {/* Main Wedding Website Header & Navigation */}
+          <Navbar />
 
-      {/* Main Sections */}
-      <main>
-        <HeroSection />
-        <CountdownSection />
-        <InvitationCardSection />
-        <EventsSection />
-        <RsvpSection onTriggerToast={triggerToast} />
-        <OrderOfDaySection />
-        <ColorPaletteSection />
-        <GiftRegistrySection onTriggerToast={triggerToast} />
-        <PhotoGallerySection onTriggerToast={triggerToast} />
-      </main>
+          {/* Main Sections */}
+          <main>
+            <HeroSection />
+            <CountdownSection />
+            <InvitationCardSection />
+            <EventsSection />
+            <RsvpSection onTriggerToast={triggerToast} />
+            <OrderOfDaySection />
+            <ColorPaletteSection />
+            <GiftRegistrySection onTriggerToast={triggerToast} />
+            <PhotoGallerySection onTriggerToast={triggerToast} />
+          </main>
 
-      {/* Footer */}
-      <Footer />
+          {/* Footer */}
+          <Footer />
+        </>
+      )}
 
       {/* Floating Audio Controls */}
-      <MusicPlayer isPlaying={isMusicPlaying} setIsPlaying={setIsMusicPlaying} />
+      {!dashboardPasscode && <MusicPlayer isPlaying={isMusicPlaying} setIsPlaying={setIsMusicPlaying} />}
 
       <Toast toast={toast} onClose={() => setToast(null)} />
 

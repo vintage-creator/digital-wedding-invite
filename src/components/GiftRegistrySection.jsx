@@ -1,55 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Gift, CreditCard, CheckCircle2, Copy, X, HeartHandshake, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
-import { fetchGiftReservations, createGiftReservation } from '../lib/supabase';
+import { CheckCircle2, Copy, CreditCard, Gift, HeartHandshake, Loader2, X } from 'lucide-react';
+import { createGiftReservation, fetchGiftReservations } from '../lib/supabase';
+
+const giftCardOption = {
+  id: 'gift-card-voucher',
+  title: 'Gift Card / Voucher',
+  category: 'Gift Cards & Vouchers'
+};
 
 export default function GiftRegistrySection({ onTriggerToast }) {
-  // claimedGifts stores arrays of givers per giftId: { [giftId]: [ { giverName, date }, ... ] }
-  const [claimedGifts, setClaimedGifts] = useState({});
+  const [giftCardPledges, setGiftCardPledges] = useState([]);
   const [selectedGift, setSelectedGift] = useState(null);
   const [giverName, setGiverName] = useState('');
   const [contactNo, setContactNo] = useState('');
   const [copiedBank, setCopiedBank] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [visibleCount, setVisibleCount] = useState(8);
 
-  const registryItems = [
-    { id: 'gift-cards', title: 'Gift Cards & Vouchers', category: 'Vouchers & Experiences', categoryGroup: 'vouchers' },
-    { id: 'dinnerware', title: 'High-Quality Dinnerware Set', category: 'Dining & Kitchen', categoryGroup: 'kitchen' },
-    { id: 'cutlery', title: 'Premium Cutlery Set', category: 'Dining & Kitchen', categoryGroup: 'kitchen' },
-    { id: 'wine-glasses', title: 'Wine & Champagne Glasses', category: 'Glassware', categoryGroup: 'kitchen' },
-    { id: 'whiskey-glasses', title: 'Whiskey & Tumbler Glasses', category: 'Glassware', categoryGroup: 'kitchen' },
-    { id: 'coffee-tea-set', title: 'Coffee & Tea Porcelain Set', category: 'Dining & Kitchen', categoryGroup: 'kitchen' },
-    { id: 'air-fryer', title: 'Digital Air Fryer', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'blender', title: 'High-Speed Countertop Blender', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'food-processor', title: 'Multi-Function Food Processor', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'stand-mixer', title: 'Electric Stand Mixer', category: 'Baking & Kitchen', categoryGroup: 'appliances' },
-    { id: 'toaster', title: '4-Slice Electric Toaster', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'electric-kettle', title: 'Cordless Electric Kettle', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'microwave', title: 'Digital Microwave Oven', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'robot-vacuum', title: 'Smart Robot Vacuum Cleaner', category: 'Home Tech', categoryGroup: 'electronics' },
-    { id: 'large-tv', title: 'Large-Screen 4K Smart TV', category: 'Electronics', categoryGroup: 'electronics' },
-    { id: 'fridge', title: 'Double Door Fridge / Freezer', category: 'Home Appliances', categoryGroup: 'appliances' },
-    { id: 'air-purifier', title: 'HEPA Air Purifier', category: 'Home Care', categoryGroup: 'electronics' },
-    { id: 'soundbar', title: 'Premium Soundbar Surround System', category: 'Electronics', categoryGroup: 'electronics' },
-    { id: 'smart-speaker', title: 'Smart Home Voice Speaker', category: 'Electronics', categoryGroup: 'electronics' },
-    { id: 'pots-pans', title: 'Non-Stick Pots & Pans Cookware Set', category: 'Cookware', categoryGroup: 'cookware' },
-    { id: 'baking-set', title: 'Professional Baking Pan Set', category: 'Baking', categoryGroup: 'cookware' },
-    { id: 'serving-platters', title: 'Crystal & Ceramic Serving Platters', category: 'Dining', categoryGroup: 'kitchen' }
-  ];
-
-  const categories = [
-    { id: 'all', name: 'All Wishes' },
-    { id: 'kitchen', name: 'Dining & Kitchen' },
-    { id: 'appliances', name: 'Home Appliances' },
-    { id: 'electronics', name: 'Electronics & Tech' },
-    { id: 'cookware', name: 'Cookware & Baking' },
-    { id: 'vouchers', name: 'Gift Vouchers' }
-  ];
-
-  // Fetch live gift reservations from Supabase database (grouping multiple givers per gift)
   useEffect(() => {
     let isMounted = true;
     setIsLoading(true);
@@ -57,32 +25,16 @@ export default function GiftRegistrySection({ onTriggerToast }) {
     fetchGiftReservations()
       .then((data) => {
         if (!isMounted) return;
-        const mapped = {};
-        if (Array.isArray(data)) {
-          data.forEach((row) => {
-            if (!mapped[row.gift_id]) {
-              mapped[row.gift_id] = [];
-            }
-            mapped[row.gift_id].push({
-              giverName: row.giver_name,
-              date: row.created_at ? new Date(row.created_at).toLocaleDateString() : ''
-            });
-          });
-        }
-        setClaimedGifts(mapped);
+        const pledges = Array.isArray(data)
+          ? data.filter((row) => row.gift_id === giftCardOption.id)
+          : [];
+        setGiftCardPledges(pledges);
       })
       .catch((err) => {
-        console.log('Database fetch fallback to localStorage:', err);
+        console.log('Gift-card pledge fetch fallback:', err);
         try {
-          const stored = localStorage.getItem('wedding_claimed_gifts');
-          if (stored && isMounted) {
-            const parsed = JSON.parse(stored);
-            const normalized = {};
-            Object.keys(parsed).forEach((k) => {
-              normalized[k] = Array.isArray(parsed[k]) ? parsed[k] : [parsed[k]];
-            });
-            setClaimedGifts(normalized);
-          }
+          const stored = localStorage.getItem('wedding_gift_card_pledges');
+          if (stored && isMounted) setGiftCardPledges(JSON.parse(stored));
         } catch (e) {}
       })
       .finally(() => {
@@ -94,47 +46,44 @@ export default function GiftRegistrySection({ onTriggerToast }) {
     };
   }, []);
 
-  const filteredItems = registryItems.filter(
-    (item) => activeCategory === 'all' || item.categoryGroup === activeCategory
-  );
+  const handleCopyAccount = () => {
+    navigator.clipboard.writeText('8670260812');
+    setCopiedBank(true);
 
-  const displayedItems = filteredItems.slice(0, visibleCount);
-  const remainingCount = filteredItems.length - visibleCount;
+    try {
+      confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#C5A059', '#E4C889'] });
+    } catch (e) {}
 
-  const handleCategoryChange = (catId) => {
-    setActiveCategory(catId);
-    setVisibleCount(8); // Reset to initial 8 items on category switch
+    setTimeout(() => setCopiedBank(false), 3000);
   };
 
-  const handleClaimSubmit = async (e) => {
-    e.preventDefault();
-    if (!giverName.trim() || !selectedGift || isSubmitting) return;
+  const handleGiftCardSubmit = async (event) => {
+    event.preventDefault();
+    if (!giverName.trim() || isSubmitting) return;
 
     setIsSubmitting(true);
-    const giftId = selectedGift.id;
-    const giftTitle = selectedGift.title;
     const nameStr = giverName.trim();
-
-    const newEntry = {
-      giverName: nameStr,
-      date: new Date().toLocaleDateString()
+    const nextPledge = {
+      gift_id: giftCardOption.id,
+      gift_title: giftCardOption.title,
+      giver_name: nameStr,
+      created_at: new Date().toISOString()
     };
-
-    const currentGivers = claimedGifts[giftId] || [];
-    const updatedState = { ...claimedGifts, [giftId]: [...currentGivers, newEntry] };
-    setClaimedGifts(updatedState);
 
     try {
       await createGiftReservation({
-        giftId,
-        giftTitle,
+        giftId: giftCardOption.id,
+        giftTitle: giftCardOption.title,
         giverName: nameStr,
         contactNo: contactNo.trim() || null
       });
+      setGiftCardPledges((current) => [nextPledge, ...current]);
     } catch (err) {
-      console.log('Saved locally due to database offline:', err);
+      console.log('Saved gift-card pledge locally due to database issue:', err);
+      const updated = [nextPledge, ...giftCardPledges];
+      setGiftCardPledges(updated);
       try {
-        localStorage.setItem('wedding_claimed_gifts', JSON.stringify(updatedState));
+        localStorage.setItem('wedding_gift_card_pledges', JSON.stringify(updated));
       } catch (e) {}
     } finally {
       setIsSubmitting(false);
@@ -152,7 +101,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
     if (onTriggerToast) {
       onTriggerToast({
         type: 'success',
-        message: `Thank you ${nameStr}! Your gift pledge for "${giftTitle}" has been saved.`
+        message: `Thank you ${nameStr}! Your gift-card pledge has been saved.`
       });
     }
 
@@ -161,292 +110,131 @@ export default function GiftRegistrySection({ onTriggerToast }) {
     setContactNo('');
   };
 
-  const handleCopyAccount = () => {
-    navigator.clipboard.writeText('8670260812');
-    setCopiedBank(true);
-
-    try {
-      confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#C5A059', '#E4C889'] });
-    } catch (e) {}
-
-    setTimeout(() => setCopiedBank(false), 3000);
-  };
-
   return (
     <section id="registry" className="section-padding" style={{ background: 'var(--section-sage)' }}>
       <div className="max-w-content text-center">
-        
         <span className="section-eyebrow">
           <Gift size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
-          Wedding Gift Registry
+          Wedding Gifts
         </span>
         <h2 className="section-title-script">
-          Gift Wishlist & Contributions
+          Gifts & Contributions
         </h2>
         <p className="section-subtitle">
-          Your love, presence, and prayers mean everything to us. If you wish to bless us with a gift, feel free to pledge any item below or send a cash contribution.
+          Your presence, prayers, and love are the greatest gifts. For guests who would still love to bless Deborah &amp; Tom, the couple has shared a transfer option and a simple gift-card option.
         </p>
 
-        {/* Bank Account Details Card */}
         <div
-          className="glass-card"
           style={{
-            maxWidth: '560px',
-            margin: '0 auto 3.5rem',
-            padding: '2rem 1.5rem',
-            border: '2px solid var(--gold)',
-            background: 'rgba(255, 253, 249, 0.9)',
-            borderRadius: '20px',
-            textAlign: 'center'
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+            gap: '1.2rem',
+            alignItems: 'stretch',
+            maxWidth: '980px',
+            margin: '0 auto',
+            textAlign: 'left'
           }}
         >
-          <CreditCard size={32} style={{ color: 'var(--burgundy)', margin: '0 auto 0.8rem' }} />
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
-            Cash & Honeymoon Transfer Details
-          </h3>
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
-            Direct bank transfer details for cash gifts and blessings for the couple.
-          </p>
-
-          <div style={{
-            background: 'var(--nude-card)',
-            border: '1.5px solid var(--nude-border)',
-            borderRadius: '14px',
-            padding: '1.2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem',
-            textAlign: 'left'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Bank Name:</span>
-              <strong style={{ color: 'var(--text-dark)' }}>First Bank</strong>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Account Name:</span>
-              <strong style={{ color: 'var(--burgundy-dark)' }}>TOM TOY TREATS</strong>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.92rem', paddingTop: '0.4rem', borderTop: '1px dashed var(--nude-border)' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Account Number:</span>
-              <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: 'var(--gold-dark)' }}>
-                8670260812
-              </span>
-            </div>
-          </div>
-
-          <button
-            onClick={handleCopyAccount}
-            className="btn btn-outline-sage"
-            style={{ width: '100%', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+          <article
+            className="glass-card"
+            style={{
+              padding: '2rem 1.5rem',
+              border: '2px solid var(--gold)',
+              background: 'rgba(255, 253, 249, 0.92)',
+              borderRadius: '22px'
+            }}
           >
-            {copiedBank ? <CheckCircle2 size={16} /> : <Copy size={16} />}
-            {copiedBank ? 'Account Number Copied!' : 'Copy Account Number (8670260812)'}
-          </button>
-        </div>
+            <CreditCard size={32} style={{ color: 'var(--burgundy)', marginBottom: '0.8rem' }} />
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
+              Cash & Honeymoon Transfer
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
+              Direct bank transfer details for cash gifts and blessings for the couple.
+            </p>
 
-        {/* Physical Gift Registry Header */}
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--burgundy-dark)', marginBottom: '1.2rem' }}>
-          Physical Gift Wishlist ({registryItems.length} Items)
-        </h3>
-
-        {/* Category Filter Pills Bar */}
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '0.6rem',
-          marginBottom: '2.5rem'
-        }}>
-          {categories.map((cat) => {
-            const count = cat.id === 'all'
-              ? registryItems.length
-              : registryItems.filter((i) => i.categoryGroup === cat.id).length;
-            const isActive = activeCategory === cat.id;
-
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                style={{
-                  padding: '8px 18px',
-                  borderRadius: '30px',
-                  border: isActive ? '1.5px solid var(--blush-muted)' : '1px solid var(--nude-border)',
-                  background: isActive ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'var(--nude-card)',
-                  color: isActive ? 'var(--burgundy-dark)' : 'var(--text-dark)',
-                  fontSize: '0.82rem',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: isActive ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
-                }}
-              >
-                <span>{cat.name}</span>
-                <span style={{
-                  fontSize: '0.72rem',
-                  background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.06)',
-                  color: isActive ? 'var(--burgundy-dark)' : 'var(--olive)',
-                  padding: '2px 7px',
-                  borderRadius: '10px'
-                }}>
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {isLoading ? (
-          <div style={{ padding: '2rem', color: 'var(--text-muted)' }}>
-            <Loader2 className="animate-spin" size={24} style={{ margin: '0 auto 0.5rem', color: 'var(--burgundy)' }} />
-            <p style={{ fontSize: '0.9rem' }}>Loading live gift wishlist…</p>
-          </div>
-        ) : (
-          <>
-            {/* Displayed Items Grid */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
-              gap: '1.2rem',
-              width: '100%',
-              textAlign: 'left'
+              background: 'var(--nude-card)',
+              border: '1.5px solid var(--nude-border)',
+              borderRadius: '14px',
+              padding: '1.2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.5rem'
             }}>
-              {displayedItems.map((item) => {
-                const givers = claimedGifts[item.id] || [];
-                const hasGivers = givers.length > 0;
-
-                return (
-                  <div
-                    key={item.id}
-                    className="glass-card"
-                    style={{
-                      borderRadius: '16px',
-                      padding: '1.4rem',
-                      border: '1.5px solid var(--nude-border)',
-                      background: 'var(--nude-card)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.3s ease',
-                      boxShadow: '0 4px 18px rgba(0,0,0,0.03)'
-                    }}
-                  >
-                    <div>
-                      {/* Top Badge Row */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
-                        <span style={{ fontSize: '0.72rem', color: 'var(--gold-dark)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>
-                          {item.category}
-                        </span>
-
-                        {hasGivers ? (
-                          <span style={{
-                            background: 'var(--blush-soft)',
-                            color: 'var(--burgundy-dark)',
-                            fontSize: '0.72rem',
-                            fontWeight: 600,
-                            padding: '3px 8px',
-                            borderRadius: '10px',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px'
-                          }}>
-                            <HeartHandshake size={12} /> {givers.length} {givers.length === 1 ? 'Pledge' : 'Pledges'}
-                          </span>
-                        ) : (
-                          <span style={{
-                            background: 'var(--blush-mist)',
-                            color: 'var(--olive)',
-                            fontSize: '0.7rem',
-                            fontWeight: 500,
-                            padding: '3px 8px',
-                            borderRadius: '10px',
-                            border: '1px solid var(--nude-border)'
-                          }}>
-                            Open Wish
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Title */}
-                      <h4 style={{
-                        fontFamily: 'var(--font-serif)',
-                        fontSize: '1.12rem',
-                        color: 'var(--text-dark)',
-                        margin: '0 0 0.5rem 0',
-                        lineHeight: 1.35
-                      }}>
-                        {item.title}
-                      </h4>
-
-                      {hasGivers && (
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          gap: '6px',
-                          color: 'var(--burgundy-dark)',
-                          fontSize: '0.8rem',
-                          marginTop: '0.6rem',
-                          background: 'var(--blush-mist)',
-                          padding: '6px 10px',
-                          borderRadius: '8px',
-                          border: '1px solid var(--nude-border)'
-                        }}>
-                          <HeartHandshake size={13} style={{ flexShrink: 0, marginTop: '2px', color: 'var(--gold-dark)' }} />
-                          <span>
-                            Pledged with love by <strong>{givers.map((g) => g.giverName).join(', ')}</strong>
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Reserve / Gift Button (Always Open for All Guests) */}
-                    <div style={{ marginTop: '1.2rem' }}>
-                      <button
-                        onClick={() => setSelectedGift(item)}
-                        className="btn btn-sage"
-                        style={{ width: '100%', padding: '10px', fontSize: '0.85rem' }}
-                      >
-                        <Gift size={15} /> Reserve / Gift This Item
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
+                <span style={{ color: 'var(--text-muted)' }}>Bank Name:</span>
+                <strong style={{ color: 'var(--text-dark)', textAlign: 'right' }}>First Bank</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
+                <span style={{ color: 'var(--text-muted)' }}>Account Name:</span>
+                <strong style={{ color: 'var(--burgundy-dark)', textAlign: 'right' }}>TOM TOY TREATS</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'center', fontSize: '0.92rem', paddingTop: '0.4rem', borderTop: '1px dashed var(--nude-border)' }}>
+                <span style={{ color: 'var(--text-muted)' }}>Account Number:</span>
+                <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: 'var(--gold-dark)' }}>
+                  8670260812
+                </span>
+              </div>
             </div>
 
-            {/* Show More / Show Less CTA Button */}
-            <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-              {remainingCount > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => setVisibleCount((prev) => prev + 8)}
-                  className="btn btn-outline-sage"
-                  style={{ padding: '11px 26px', fontSize: '0.88rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                >
-                  <ChevronDown size={17} /> Show More Wishes ({remainingCount} Remaining)
-                </button>
+            <button
+              onClick={handleCopyAccount}
+              className="btn btn-outline-sage"
+              style={{ width: '100%', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+            >
+              {copiedBank ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+              {copiedBank ? 'Account Number Copied!' : 'Copy Account Number'}
+            </button>
+          </article>
+
+          <article
+            className="glass-card"
+            style={{
+              padding: '2rem 1.5rem',
+              border: '1.5px solid var(--nude-border)',
+              background: 'linear-gradient(135deg, rgba(255, 253, 249, 0.94), rgba(248, 232, 228, 0.74))',
+              borderRadius: '22px'
+            }}
+          >
+            <HeartHandshake size={32} style={{ color: 'var(--burgundy)', marginBottom: '0.8rem' }} />
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
+              Gift Card Option
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
+              Prefer to give a shopping voucher, digital card, experience card, or store gift card? You can leave your name here so the couple can track it privately.
+            </p>
+
+            <div style={{
+              border: '1px solid var(--nude-border)',
+              borderRadius: '14px',
+              padding: '1rem',
+              background: 'rgba(255, 253, 249, 0.72)',
+              marginBottom: '1rem'
+            }}>
+              {isLoading ? (
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.86rem' }}>
+                  <Loader2 className="spin" size={15} /> Checking gift-card pledges…
+                </span>
               ) : (
-                filteredItems.length > 8 && (
-                  <button
-                    type="button"
-                    onClick={() => setVisibleCount(8)}
-                    className="btn btn-outline-sage"
-                    style={{ padding: '9px 22px', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                  >
-                    <ChevronUp size={15} /> Show Less
-                  </button>
-                )
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--olive-dark)', fontWeight: 700, fontSize: '0.9rem' }}>
+                  <HeartHandshake size={15} />
+                  {giftCardPledges.length} {giftCardPledges.length === 1 ? 'gift-card pledge' : 'gift-card pledges'}
+                </span>
               )}
             </div>
-          </>
-        )}
 
+            <button
+              type="button"
+              onClick={() => setSelectedGift(giftCardOption)}
+              className="btn btn-sage"
+              style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+            >
+              <Gift size={16} /> Pledge a Gift Card
+            </button>
+          </article>
+        </div>
       </div>
 
-      {/* Claim Item Modal */}
       {selectedGift && (
         <div style={{
           position: 'fixed',
@@ -472,6 +260,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             }}
           >
             <button
+              type="button"
               onClick={() => setSelectedGift(null)}
               style={{
                 position: 'absolute',
@@ -482,6 +271,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 color: 'var(--text-muted)',
                 cursor: 'pointer'
               }}
+              aria-label="Close gift-card pledge form"
             >
               <X size={20} />
             </button>
@@ -489,17 +279,14 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <Gift size={40} style={{ color: 'var(--burgundy)', margin: '0 auto 0.5rem' }} />
               <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: 0 }}>
-                Gift Pledge for the Couple
+                Gift Card Pledge
               </h3>
-              <p style={{ fontSize: '0.92rem', color: 'var(--gold-dark)', fontWeight: 600, margin: '0.2rem 0' }}>
-                "{selectedGift.title}"
-              </p>
               <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Please enter your name so Deborah & Tom can know who is blessing them with this gift.
+                Please enter your name so Deborah &amp; Tom can track your gift-card pledge privately.
               </p>
             </div>
 
-            <form onSubmit={handleClaimSubmit}>
+            <form onSubmit={handleGiftCardSubmit}>
               <div className="form-group">
                 <label className="form-label" htmlFor="giverName">
                   Your Full Name *
@@ -548,10 +335,10 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 >
                   {isSubmitting ? (
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                      <Loader2 className="animate-spin" size={16} /> Saving…
+                      <Loader2 className="spin" size={16} /> Saving…
                     </span>
                   ) : (
-                    'Confirm Gift Pledge'
+                    'Confirm Pledge'
                   )}
                 </button>
               </div>

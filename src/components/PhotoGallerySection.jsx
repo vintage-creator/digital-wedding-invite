@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Camera, Upload, X, Heart, Download, Image, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchGuestPhotos, uploadGuestPhoto } from '../lib/supabase';
 
+const MAX_UPLOAD_SIZE = 10 * 1024 * 1024;
+const COMPRESSION_TRIGGER_SIZE = 1.5 * 1024 * 1024;
+const MAX_IMAGE_EDGE = 1800;
+const JPEG_QUALITY = 0.78;
+
 export default function PhotoGallerySection({ onTriggerToast }) {
   const [photos, setPhotos] = useState([]);
 
@@ -18,6 +23,63 @@ export default function PhotoGallerySection({ onTriggerToast }) {
   const [activeFilter, setActiveFilter] = useState('all');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
+  const [selectedFileInfo, setSelectedFileInfo] = useState('');
+
+  const formatFileSize = (bytes) => {
+    if (!bytes) return '0 KB';
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const compressImageFile = (file) => new Promise((resolve) => {
+    if (!file || file.size < COMPRESSION_TRIGGER_SIZE || file.type === 'image/gif') {
+      resolve(file);
+      return;
+    }
+
+    const image = new window.Image();
+    const objectUrl = URL.createObjectURL(file);
+
+    image.onload = () => {
+      const largestEdge = Math.max(image.width, image.height);
+      const scale = largestEdge > MAX_IMAGE_EDGE ? MAX_IMAGE_EDGE / largestEdge : 1;
+      const width = Math.max(1, Math.round(image.width * scale));
+      const height = Math.max(1, Math.round(image.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext('2d');
+      if (!context) {
+        URL.revokeObjectURL(objectUrl);
+        resolve(file);
+        return;
+      }
+
+      context.drawImage(image, 0, 0, width, height);
+      canvas.toBlob((blob) => {
+        URL.revokeObjectURL(objectUrl);
+        if (!blob || blob.size >= file.size) {
+          resolve(file);
+          return;
+        }
+
+        const compressedFile = new File(
+          [blob],
+          `${file.name.replace(/\.[^.]+$/, '') || 'guest-photo'}.jpg`,
+          { type: 'image/jpeg', lastModified: Date.now() }
+        );
+        resolve(compressedFile);
+      }, 'image/jpeg', JPEG_QUALITY);
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(file);
+    };
+
+    image.src = objectUrl;
+  });
 
   const mapRecord = (record) => ({
     id: record.id,
@@ -56,9 +118,10 @@ export default function PhotoGallerySection({ onTriggerToast }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 10 * 1024 * 1024) {
+      if (file.size > MAX_UPLOAD_SIZE) {
         setSelectedFile(null);
         setPreviewImage(null);
+        setSelectedFileInfo('');
         setUploadError('Image size should be less than 10MB.');
         if (onTriggerToast) {
           onTriggerToast({
@@ -78,6 +141,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
       setUploadError('');
       if (previewImage) URL.revokeObjectURL(previewImage);
       setPreviewImage(URL.createObjectURL(file));
+      setSelectedFileInfo(`${file.name} · ${formatFileSize(file.size)}`);
       if (isReplacement && onTriggerToast) {
         onTriggerToast({ type: 'info', message: 'Photo selection updated. Review it before publishing.' });
       }
@@ -88,6 +152,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
     if (previewImage) URL.revokeObjectURL(previewImage);
     setPreviewImage(null);
     setSelectedFile(null);
+    setSelectedFileInfo('');
     setUploadError('');
     const input = document.getElementById('guestPhotoInput');
     if (input) input.value = '';
@@ -107,8 +172,16 @@ export default function PhotoGallerySection({ onTriggerToast }) {
     setIsUploading(true);
     setUploadError('');
     try {
+      const uploadFile = await compressImageFile(selectedFile);
+      if (uploadFile.size < selectedFile.size && onTriggerToast) {
+        onTriggerToast({
+          type: 'info',
+          message: `Photo optimized from ${formatFileSize(selectedFile.size)} to ${formatFileSize(uploadFile.size)} before upload.`
+        });
+      }
+
       const record = await uploadGuestPhoto({
-        file: selectedFile,
+        file: uploadFile,
         uploaderName: uploadName.trim() || 'Guest Friend',
         caption: uploadCaption.trim() || 'Celebration moment with Deborah & Tom',
         eventType: uploadEvent
@@ -125,6 +198,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
       setPhotos((current) => [newPhoto, ...current]);
       setSelectedFile(null);
       setPreviewImage(null);
+      setSelectedFileInfo('');
       setUploadName('');
       setUploadCaption('');
       setUploadEvent('general');
@@ -159,6 +233,11 @@ export default function PhotoGallerySection({ onTriggerToast }) {
   };
 
   const activePhotoIndex = activeLightbox ? photos.findIndex((photo) => photo.id === activeLightbox.id) : -1;
+  const galleryDensityClass = photos.length >= 24
+    ? 'gallery-mosaic-dense'
+    : photos.length >= 15
+      ? 'gallery-mosaic-compact'
+      : '';
   const showPreviousPhoto = () => {
     if (!photos.length) return;
     setActiveLightbox(photos[(activePhotoIndex - 1 + photos.length) % photos.length]);
@@ -296,11 +375,17 @@ export default function PhotoGallerySection({ onTriggerToast }) {
                     Click or drag & drop a photo here
                   </p>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    Supports JPG, PNG, WEBP up to 10MB
+                    Supports JPG, PNG, WEBP up to 10MB. Large images are optimized before upload.
                   </span>
                 </div>
               )}
             </div>
+
+            {selectedFileInfo && (
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: '-0.75rem 0 1rem' }}>
+                Selected: {selectedFileInfo}
+              </p>
+            )}
 
             {/* Guest Name & Caption */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '1rem', marginBottom: '1rem', width: '100%', textAlign: 'left' }}>
@@ -351,13 +436,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
         </div>}
 
         {/* Live Photo Grid */}
-        <div className="photo-grid gallery-mosaic" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))',
-          gap: '1.5rem',
-          width: '100%',
-          marginTop: '2rem'
-        }}>
+        <div className={`photo-grid gallery-mosaic ${galleryDensityClass}`}>
           {photos.map((photo, index) => (
             <div
               key={photo.id}
@@ -375,7 +454,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
               onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-6px)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
+              <div className="gallery-photo-media">
                 <img
                   src={photo.url}
                   alt={photo.caption}

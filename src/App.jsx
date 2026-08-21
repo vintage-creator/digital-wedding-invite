@@ -17,12 +17,34 @@ import PetalsCanvas from './components/PetalsCanvas';
 import Toast from './components/Toast';
 import { ArrowUp } from 'lucide-react';
 
+const DASHBOARD_PATH = '/dashboard';
+const DASHBOARD_SESSION_KEY = 'deborah_tom_dashboard_passcode';
+
+const normalizePath = (path) => {
+  const normalized = path.replace(/\/+$/, '');
+  return normalized || '/';
+};
+
+const isDashboardRoute = () => (
+  typeof window !== 'undefined' && normalizePath(window.location.pathname) === DASHBOARD_PATH
+);
+
+const getStoredDashboardPasscode = () => {
+  if (typeof window === 'undefined') return '';
+  if (!isDashboardRoute()) return '';
+  try {
+    return window.sessionStorage.getItem(DASHBOARD_SESSION_KEY) || '';
+  } catch (err) {
+    return '';
+  }
+};
+
 export default function App() {
-  const [envelopeOpened, setEnvelopeOpened] = useState(false);
+  const [dashboardPasscode, setDashboardPasscode] = useState(getStoredDashboardPasscode);
+  const [envelopeOpened, setEnvelopeOpened] = useState(() => Boolean(getStoredDashboardPasscode()));
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [toast, setToast] = useState(null);
-  const [dashboardPasscode, setDashboardPasscode] = useState('');
 
   const triggerToast = (nextToast) => {
     setToast(nextToast);
@@ -33,6 +55,33 @@ export default function App() {
     const timer = window.setTimeout(() => setToast(null), 4200);
     return () => window.clearTimeout(timer);
   }, [toast]);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isDashboardRoute()) {
+        const storedPasscode = getStoredDashboardPasscode();
+        setDashboardPasscode(storedPasscode);
+        setEnvelopeOpened(Boolean(storedPasscode));
+      } else {
+        setDashboardPasscode('');
+      }
+    };
+
+    window.addEventListener('popstate', handleRouteChange);
+    return () => window.removeEventListener('popstate', handleRouteChange);
+  }, []);
+
+  useEffect(() => {
+    if (dashboardPasscode) {
+      try {
+        window.sessionStorage.setItem(DASHBOARD_SESSION_KEY, dashboardPasscode);
+      } catch (err) {}
+
+      if (!isDashboardRoute()) {
+        window.history.pushState({ view: 'dashboard' }, '', DASHBOARD_PATH);
+      }
+    }
+  }, [dashboardPasscode]);
 
   // Monitor scroll for Back To Top button
   useEffect(() => {
@@ -50,9 +99,20 @@ export default function App() {
   const handleEnvelopeOpen = () => {
     setEnvelopeOpened(true);
     setIsMusicPlaying(true);
+    if (isDashboardRoute()) {
+      window.history.replaceState(null, '', '/');
+    }
   };
 
   const handleDashboardOpen = (passcode) => {
+    try {
+      window.sessionStorage.setItem(DASHBOARD_SESSION_KEY, passcode);
+    } catch (err) {}
+
+    if (!isDashboardRoute()) {
+      window.history.pushState({ view: 'dashboard' }, '', DASHBOARD_PATH);
+    }
+
     setDashboardPasscode(passcode);
     setEnvelopeOpened(true);
     setIsMusicPlaying(false);
@@ -60,6 +120,14 @@ export default function App() {
   };
 
   const handleDashboardExit = () => {
+    try {
+      window.sessionStorage.removeItem(DASHBOARD_SESSION_KEY);
+    } catch (err) {}
+
+    if (isDashboardRoute()) {
+      window.history.pushState({ view: 'invitation' }, '', '/');
+    }
+
     setDashboardPasscode('');
     setEnvelopeOpened(true);
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -78,7 +146,7 @@ export default function App() {
       <PetalsCanvas active={envelopeOpened} />
 
       {/* Landing Envelope Cover */}
-      <EnvelopeCover onOpen={handleEnvelopeOpen} onDashboardOpen={handleDashboardOpen} />
+      {!dashboardPasscode && <EnvelopeCover onOpen={handleEnvelopeOpen} onDashboardOpen={handleDashboardOpen} />}
 
       {dashboardPasscode ? (
         <CoupleDashboard

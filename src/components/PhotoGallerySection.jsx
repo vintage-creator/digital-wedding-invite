@@ -275,7 +275,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           Live Guest Photo Gallery
         </h2>
         <p className="section-subtitle">
-          A small collection of favourite moments. Guests can add celebration photos here and use #TheBestOfDeb when sharing online.
+          A small collection of favourite moments. Guests can add celebration photos here and use #TheBestOfDeb and #dtlovestory when sharing online.
         </p>
 
         <button
@@ -321,7 +321,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           </h3>
 
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '-0.35rem auto 1.25rem', maxWidth: '440px' }}>
-            Add your favourite moment for the couple’s gallery. Official hashtag: <strong style={{ color: 'var(--burgundy)' }}>#TheBestOfDeb</strong>
+            Add your favourite moment for the couple’s gallery. Official hashtags: <strong style={{ color: 'var(--burgundy)' }}>#TheBestOfDeb · #dtlovestory</strong>
           </p>
 
           <form onSubmit={handleUploadSubmit}>

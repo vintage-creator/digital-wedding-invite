@@ -127,7 +127,7 @@ export default function RsvpSection({ onTriggerToast }) {
           RSVP Invitation
         </h2>
         <p className="section-subtitle">
-          Your presence would mean the world to us. Please fill out the form below to confirm your attendance and share the celebration with #TheBestOfDeb.
+          Your presence would mean the world to us. Please fill out the form below to confirm your attendance and share the celebration with #TheBestOfDeb and #dtlovestory.
         </p>
 
         <div className="glass-card" style={{

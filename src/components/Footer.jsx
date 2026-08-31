@@ -46,7 +46,7 @@ export default function Footer() {
           marginTop: '0.4rem',
           textAlign: 'center'
         }}>
-          #TheBestOfDeb
+          #TheBestOfDeb · #dtlovestory
         </p>
 
         <div style={{

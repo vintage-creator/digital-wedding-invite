@@ -48,7 +48,7 @@ export default function InvitationCardSection() {
                 <i>♥</i>
                 <span />
               </div>
-              <strong>#TheBestOfDeb</strong>
+              <strong>#DTLovetale26</strong>
             </div>
           </div>
         </div>

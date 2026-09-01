@@ -87,7 +87,7 @@ export default function HeroSection() {
             letterSpacing: '0.08em',
             marginBottom: '0.75rem'
           }}>
-            #TheBestOfDeb
+            #DTLovetale26
           </span>
 
           <p style={{

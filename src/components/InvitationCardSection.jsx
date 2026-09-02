@@ -42,13 +42,17 @@ export default function InvitationCardSection() {
               Two hearts. One promise. A lifetime together.
             </p>
 
-            <div className="invitation-card-hashtag" aria-label="#TheBestOfDeb">
+            <div className="invitation-card-hashtag" aria-label="#TheBestOfDeb #dtlovestory">
               <div className="invitation-card-hashtag-mark" aria-hidden="true">
                 <span />
                 <i>♥</i>
                 <span />
               </div>
+<<<<<<< HEAD
               <strong>#DTLovetale26</strong>
+=======
+              <strong>#TheBestOfDeb · #dtlovestory</strong>
+>>>>>>> 8a3ef3d815eda969f71b255c75fe0d9e2ee90bc0
             </div>
           </div>
         </div>

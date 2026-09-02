@@ -46,7 +46,11 @@ export default function Footer() {
           marginTop: '0.4rem',
           textAlign: 'center'
         }}>
+<<<<<<< HEAD
           #DTLoveTale26
+=======
+          #TheBestOfDeb · #dtlovestory
+>>>>>>> 8a3ef3d815eda969f71b255c75fe0d9e2ee90bc0
         </p>
 
         <div style={{

@@ -175,7 +175,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
 
   const getPhotoShareText = (photo) => {
     const caption = photo.caption || 'A beautiful moment from Deborah & Tom’s wedding';
-    return `${caption}\n#TheBestOfDeb #dtlovestory`;
+    return `${caption}\n#DTLoveTale26`;
   };
 
   const handleCopyPhotoLink = async (photo) => {
@@ -472,7 +472,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
             <img src="/assets/dt-script-wax-seal.png" alt="Deborah and Tom wax seal" />
             <div>
               <strong>Deborah &amp; Tom</strong>
-              <span>#TheBestOfDeb · #dtlovestory · Wedding planning dashboard</span>
+              <span>#DTLoveTale26 · Wedding planning dashboard</span>
             </div>
           </footer>
 

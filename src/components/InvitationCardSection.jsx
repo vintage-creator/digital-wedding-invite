@@ -42,7 +42,7 @@ export default function InvitationCardSection() {
               Two hearts. One promise. A lifetime together.
             </p>
 
-            <div className="invitation-card-hashtag" aria-label="#TheBestOfDeb #dtlovestory">
+            <div className="invitation-card-hashtag" aria-label="#DTLoveTale26">
               <div className="invitation-card-hashtag-mark" aria-hidden="true">
                 <span />
                 <i>♥</i>

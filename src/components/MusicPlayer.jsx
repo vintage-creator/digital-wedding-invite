@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Music2, Pause } from 'lucide-react';
 
 export default function MusicPlayer({ isPlaying, setIsPlaying }) {
-  const volume = 0.12;
+  const volume = 0.08;
   const [audioUnavailable, setAudioUnavailable] = useState(false);
   const audioRef = useRef(null);
 

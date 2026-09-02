@@ -48,11 +48,7 @@ export default function InvitationCardSection() {
                 <i>♥</i>
                 <span />
               </div>
-<<<<<<< HEAD
               <strong>#DTLovetale26</strong>
-=======
-              <strong>#TheBestOfDeb · #dtlovestory</strong>
->>>>>>> 8a3ef3d815eda969f71b255c75fe0d9e2ee90bc0
             </div>
           </div>
         </div>

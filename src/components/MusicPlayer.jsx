@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Music2, Pause, Volume2, VolumeX } from 'lucide-react';
 
-const DEFAULT_VOLUME = 0.15;
+const DEFAULT_VOLUME = 0.07;
 
 export default function MusicPlayer({ isPlaying, setIsPlaying }) {
   const [volume, setVolume] = useState(DEFAULT_VOLUME);
@@ -9,23 +9,38 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }) {
   const [showSlider, setShowSlider] = useState(false);
   const [audioUnavailable, setAudioUnavailable] = useState(false);
   const audioRef = useRef(null);
+  const volumeRef = useRef(DEFAULT_VOLUME); // always-current volume for async callbacks
 
   const musicUrl = '/assets/the-vow-ruthanne-acoustic-or-instrumental.mp3';
 
-  // Set volume immediately when audio is ready — prevents full-volume burst on first play
+  // Keep volumeRef in sync so event handlers always read the latest value
+  useEffect(() => {
+    volumeRef.current = isMuted ? 0 : volume;
+  }, [volume, isMuted]);
+
+  // Ref callback: fires the instant the <audio> element is inserted into the DOM —
+  // before the browser has any chance to play at full volume.
+  const setAudioRef = useCallback((el) => {
+    audioRef.current = el;
+    if (el) {
+      el.volume = volumeRef.current;
+    }
+  }, []);
+
+  // Also enforce volume when browser signals it has enough data to play
   const handleCanPlay = () => {
     setAudioUnavailable(false);
     if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : volume;
+      audioRef.current.volume = volumeRef.current;
     }
   };
 
-  // Handle Play/Pause — always enforce correct volume before playing
+  // Handle Play/Pause — always enforce correct volume before calling play()
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    audio.volume = isMuted ? 0 : volume;
+    audio.volume = volumeRef.current;
 
     if (isPlaying) {
       const playPromise = audio.play();
@@ -64,7 +79,7 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }) {
       onMouseLeave={() => setShowSlider(false)}
     >
       <audio
-        ref={audioRef}
+        ref={setAudioRef}
         src={musicUrl}
         loop
         preload="auto"

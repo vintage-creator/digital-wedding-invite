@@ -35,6 +35,7 @@ export default function ColorPaletteSection() {
       textLight: false,
       defaultRotate: 12,
       role: 'Main Background',
+      text: 'Blush pink,Burgundy, Nude/Gold accent',
       description: 'Warm, polished, and understated.'
     }
   ];
@@ -68,6 +69,7 @@ const whiteColors = [
       textLight: false,
       defaultRotate: 12,
       role: 'Main Background',
+      text: 'B see finish leleyi o o ',
       description: 'Warm, polished, and understated.'
     }
   ];
@@ -248,11 +250,13 @@ const whiteColors = [
                 </div>
               </div>
             );
+            
           })}
         </div>
 
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '-0.5rem' }}>
-          Burgundy, sage or olive green, and nude.
+          {activeTab=='whiteColors' ? "Blush pink + Burgundy + Nude/Gold accent" : "Ivory + Sage Green + Champagne gold"}
+
         </p>
 
       </div>

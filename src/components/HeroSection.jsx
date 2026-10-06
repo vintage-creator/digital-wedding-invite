@@ -88,7 +88,6 @@ export default function HeroSection() {
             marginBottom: '0.75rem'
           }}>
             #DTLovetale26
-
           </span>
 
           <p style={{

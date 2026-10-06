@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Music2, Pause, Volume2, VolumeX } from 'lucide-react';
 
-const DEFAULT_VOLUME = 0.07;
+const DEFAULT_VOLUME = 0.04;
 
 export default function MusicPlayer({ isPlaying, setIsPlaying }) {
 

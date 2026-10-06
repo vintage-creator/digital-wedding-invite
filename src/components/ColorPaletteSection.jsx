@@ -3,23 +3,59 @@ import { Palette } from 'lucide-react';
 
 export default function ColorPaletteSection() {
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [activeTab, setActiveTab] = useState('traditionalColors');
+  
 
-  const colors = [
+  const traditionalColors = [
     {
-      id: 'burgundy',
-      name: 'Burgundy',
-      hex: '#5B0E2D',
-      bgGradient: 'linear-gradient(180deg, #8C244C 0%, #5B0E2D 100%)',
+      id: 'ivory',
+      name: 'Ivory',
+      hex: '#919136',
+      bgGradient: 'linear-gradient(to bottom, #919136, #2d3015)',
       textLight: true,
       defaultRotate: -12,
       role: 'Primary Accent',
       description: 'Rich, ceremonial, and elegant.'
     },
     {
-      id: 'sage-olive',
-      name: 'Sage / Olive Green',
-      hex: '#4A583F',
-      bgGradient: 'linear-gradient(180deg, #8B9E7B 0%, #4A583F 100%)',
+      id: 'sage-green',
+      name: 'Sage Green',
+      hex: '#6b8d6a',
+      bgGradient: 'linear-gradient(135deg, #8fae8d 0%, #6b8d6a 50%, #4b6b4a 100%)',
+      textLight: true,
+      defaultRotate: 0,
+      role: 'Secondary Accent',
+      description: 'Soft botanical calm with depth.'
+    },
+    {
+      id: 'champagne-gold',
+      name: 'Champagne gold',
+      hex: '#D29F51',
+      bgGradient: 'linear-gradient(135deg, #F0CF97 0%, #D29F51 50%, #A47227 100%)',
+      textLight: false,
+      defaultRotate: 12,
+      role: 'Main Background',
+      text: 'Blush pink,Burgundy, Nude/Gold accent',
+      description: 'Warm, polished, and understated.'
+    }
+  ];
+
+const whiteColors = [
+    {
+      id: 'blush pink',
+      name: 'Blush Pink',
+      hex: '#FE828C',
+      bgGradient: 'linear-gradient(135deg, #FE828C 0%, #FFB56B 100%)',
+      textLight: true,
+      defaultRotate: -12,
+      role: 'Primary Accent',
+      description: 'Rich, ceremonial, and elegant.'
+    },
+    {
+      id: 'burgundy',
+      name: 'Burgundy',
+      hex: '#800020',
+      bgGradient: 'linear-gradient(135deg, #800020, #4A0012)',
       textLight: true,
       defaultRotate: 0,
       role: 'Secondary Accent',
@@ -27,20 +63,26 @@ export default function ColorPaletteSection() {
     },
     {
       id: 'nude',
-      name: 'Nude / Champagne',
-      hex: '#E5D9C3',
-      bgGradient: 'linear-gradient(180deg, #FAF6F0 0%, #E5D9C3 100%)',
+      name: 'Nude / Gold accent',
+      hex: '#EFBF04',
+      bgGradient: 'linear-gradient(90deg, #e3c4b1 50%, #d4af37 50%)',
       textLight: false,
       defaultRotate: 12,
       role: 'Main Background',
+      text: 'B see finish leleyi o o ',
       description: 'Warm, polished, and understated.'
     }
   ];
 
+  const handleTabChange = (tab) => {setActiveTab(tab);};
+
+  const color = activeTab === 'traditionalColors' ? traditionalColors : whiteColors;
+
   return (
+    <section>
+
     <section id="colors" className="section-padding" style={{ background: 'var(--section-sage)', overflow: 'hidden' }}>
       <div className="max-w-content text-center">
-        
         <span className="section-eyebrow">
           <Palette size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
           Wedding Color Guide
@@ -51,6 +93,56 @@ export default function ColorPaletteSection() {
         <p className="section-subtitle">
           Guests are warmly invited to dress within the couple’s chosen tones.
         </p>
+
+<div className="schedule-tabs" style={{
+          display: 'inline-flex',
+          maxWidth: '100%',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '4px',
+          background: 'rgba(252, 242, 239, 0.58)',
+          padding: '6px',
+          borderRadius: '40px',
+          border: '1.5px solid var(--nude-border)',
+          marginBottom: '2.5rem',
+          boxShadow: '0 2px 10px rgba(38, 54, 34, 0.06)'
+        }}>
+          <button
+            onClick={() => handleTabChange('traditionalColors')}
+            style={{
+              padding: '10px 22px',
+              borderRadius: '30px',
+              border: activeTab === 'traditionalColors' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
+              background: activeTab === 'traditionalColors' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
+              color: activeTab === 'traditionalColors' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
+              fontWeight: 500,
+              fontSize: '0.85rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'traditionalColors' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
+            }}
+          >
+            Traditional Colour Code 
+          </button>
+          
+          <button
+            onClick={() => handleTabChange('whiteColors')}
+            style={{
+              padding: '10px 22px',
+              borderRadius: '30px',
+              border: activeTab === 'whiteColors' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
+              background: activeTab === 'whiteColors' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
+              color: activeTab === 'whiteColors' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
+              fontWeight: 500,
+              fontSize: '0.85rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
+            }}
+          >
+            White Wedding Colour Code 
+          </button>
+        </div>
 
         <div className="color-deck"
           style={{
@@ -64,7 +156,7 @@ export default function ColorPaletteSection() {
             position: 'relative'
           }}
         >
-          {colors.map((color, idx) => {
+          {color.map((color, idx) => {
             const isHovered = hoveredIdx === idx;
             return (
               <div
@@ -158,14 +250,17 @@ export default function ColorPaletteSection() {
                 </div>
               </div>
             );
+            
           })}
         </div>
 
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '-0.5rem' }}>
-          Burgundy, sage or olive green, and nude.
+          {activeTab=='whiteColors' ? "Blush pink + Burgundy + Nude/Gold accent" : "Ivory + Sage Green + Champagne gold"}
+
         </p>
 
       </div>
+    </section>
     </section>
   );
 }

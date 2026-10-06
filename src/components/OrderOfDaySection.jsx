@@ -29,7 +29,7 @@ export default function OrderOfDaySection() {
         <span className="section-eyebrow">
           <Clock size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
           Program Schedule
-        </span>
+        </span>``
         <h2 className="section-title-script">
           Order of the Day
         </h2>

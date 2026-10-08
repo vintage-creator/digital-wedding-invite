@@ -79,7 +79,7 @@ const whiteColors = [
   const color = activeTab === 'traditionalColors' ? traditionalColors : whiteColors;
 
   return (
-    <section>
+    
 
     <section id="colors" className="section-padding" style={{ background: 'var(--section-sage)', overflow: 'hidden' }}>
       <div className="max-w-content text-center">
@@ -261,6 +261,6 @@ const whiteColors = [
 
       </div>
     </section>
-    </section>
+    
   );
 }

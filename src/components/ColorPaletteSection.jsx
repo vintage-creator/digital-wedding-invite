@@ -65,7 +65,7 @@ const whiteColors = [
       id: 'nude',
       name: 'Nude / Gold accent',
       hex: '#EFBF04',
-      bgGradient: 'linear-gradient(90deg, #e3c4b1 50%, #d4af37 50%)',
+      bgGradient: 'linear-gradient(135deg, #e8cdb8 0%, #d9b896 40%, #c9a05a 70%, #d4af37 100%)',
       textLight: false,
       defaultRotate: 12,
       role: 'Main Background',

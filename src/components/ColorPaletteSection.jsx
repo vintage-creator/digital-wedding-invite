@@ -255,7 +255,7 @@ const whiteColors = [
         </div>
 
         <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '-0.5rem' }}>
-          {activeTab=='whiteColors' ? "Blush pink + Burgundy + Nude/Gold accent" : "Ivory + Sage Green + Champagne gold"}
+          {activeTab === 'whiteColors' ? "🌸 Blush Pink + Burgundy + Nude / Gold Accent" : "🌿 Ivory + Sage Green + Champagne Gold"}
 
         </p>
 

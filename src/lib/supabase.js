@@ -69,7 +69,7 @@ export async function createRsvp({
 
   const response = await fetch(`${supabaseUrl}/rest/v1/rsvps`, {
     method: 'POST',
-    headers: headers({ 'Content-Type': 'application/json', Prefer: 'return=representation' }),
+    headers: headers({ 'Content-Type': 'application/json', Prefer: 'return=minimal' }),
     body: JSON.stringify({
       full_name: fullName,
       phone: phone.trim(),
@@ -82,8 +82,6 @@ export async function createRsvp({
     })
   });
   if (!response.ok) await parseError(response, 'Unable to save this RSVP.');
-  const [record] = await response.json();
-  return record;
 }
 
 export async function verifyDashboardPasscode(passcode) {

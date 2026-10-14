@@ -56,7 +56,7 @@ export default function RsvpSection({ onTriggerToast }) {
       formData.email.trim() ? `Email: ${formData.email.trim()}` : null,
       formData.message.trim() ? `Message / dietary needs: ${formData.message.trim()}` : null
     ].filter(Boolean).join('\n');
-    const whatsappUrl = `https://wa.me/2348132804142?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/34658344473?text=${encodeURIComponent(whatsappMessage)}`;
     const whatsappWindow = window.open('about:blank', '_blank');
 
     if (whatsappWindow) {

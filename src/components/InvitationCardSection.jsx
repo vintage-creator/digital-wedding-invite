@@ -30,11 +30,11 @@ export default function InvitationCardSection() {
               <div>
                 <span>White Wedding &amp; Reception</span>
                 <strong>Saturday, 19th December 2026</strong>
-                <small>Bolton White Event Centre, Wuse Zone 7</small>
+                <small>Christ Embassy Abuja Zonal Church, Loveworld Auditorium</small>
               </div>
               <div>
                 <span>Reception to follow</span>
-                <strong>31 Kigoma Street, Wuse Zone 7, Abuja</strong>
+                <strong>1 Loveworld St, Jabi, Abuja</strong>
               </div>
             </div>
 

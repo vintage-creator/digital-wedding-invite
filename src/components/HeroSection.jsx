@@ -126,7 +126,7 @@ export default function HeroSection() {
               <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>Traditional:</span> The Nest Gardens, Guzape
             </p>
             <p style={{ color: 'var(--burgundy-medium)', fontWeight: 500 }}>
-              <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>White Wedding:</span> Bolton White Event Centre
+              <span style={{ color: 'var(--gold-dark)', fontWeight: 600 }}>White Wedding:</span> Christ Embassy Abuja Zonal Church, Loveworld Auditorium
             </p>
           </div>
 

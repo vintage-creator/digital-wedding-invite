@@ -14,28 +14,18 @@ export default function Footer() {
     }}>
       <div className="max-w-content" style={{ margin: '0 auto', position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         
-        {/* Access Card OT Emblem */}
+        {/* Access Card OT Wax Seal */}
         <div style={{
-          width: '74px',
-          height: '74px',
-          borderRadius: '50%',
-          border: '2px solid var(--gold-light)',
-          background: 'rgba(92, 32, 89, 0.65)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: '90px',
+          height: '90px',
           marginBottom: '1rem',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)'
+          filter: 'drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45))'
         }}>
-          <span style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1.9rem',
-            fontWeight: 700,
-            color: '#FFFFFF',
-            letterSpacing: '1px'
-          }}>
-            OT
-          </span>
+          <img
+            src="/assets/ot_wax_seal.png"
+            alt="OT plum wax seal"
+            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+          />
         </div>
 
         {/* Script Names */}

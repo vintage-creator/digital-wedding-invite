@@ -137,7 +137,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         width: '100vw',
         height: '100dvh',
         zIndex: 10000,
-        background: 'radial-gradient(circle at 50% 35%, #FAF6F0 0%, #E5D9C3 46%, #8EA682 100%)',
+        background: 'radial-gradient(circle at 50% 35%, #FAF4F9 0%, #E8D2E6 46%, #380C34 100%)',
         transition: 'opacity 1s ease',
         opacity: isLeaving ? 0 : 1,
         pointerEvents: isLeaving ? 'none' : 'all',
@@ -191,17 +191,17 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           transition: 'transform 1.3s cubic-bezier(0.4, 0, 0.2, 1)'
         }}
       >
-        {/* Reference Sage Green Paper Envelope Image */}
+        {/* Reference Plum Paper Envelope Image */}
         <img
-          src="/assets/sage_envelope.jpg"
+          src="/assets/burgundy_envelope.jpg"
           alt="Opeyemi & Temilayojesu Wedding Envelope"
           style={{
             width: '100%',
             height: '100%',
             objectFit: 'cover',
             borderRadius: '16px',
-            boxShadow: '0 35px 90px rgba(59, 8, 27, 0.34)',
-            filter: 'saturate(0.78) brightness(1.06) contrast(0.96)',
+            boxShadow: '0 35px 90px rgba(50, 12, 48, 0.45)',
+            filter: 'hue-rotate(320deg) saturate(1.22) brightness(0.92)',
             display: 'block'
           }}
         />
@@ -216,14 +216,14 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             width: 'clamp(150px, 24vw, 280px)',
             height: 'clamp(150px, 24vw, 280px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255, 242, 178, 0.75) 0%, rgba(197, 160, 89, 0.3) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(162, 232, 184, 0.85) 0%, rgba(92, 32, 89, 0.4) 50%, transparent 75%)',
             zIndex: 9,
             pointerEvents: 'none',
             animation: isOpening ? 'fadeOut 0.5s forwards' : 'glowingAuraPulse 2.8s ease-in-out infinite'
           }}
         />
 
-        {/* 3D Rotating Burgundy Wax Seal Button with D & T Monogram */}
+        {/* 3D Rotating Plum Wax Seal Button with OT Monogram */}
         <button
           id="sealBtn"
           onClick={handleSealClick}
@@ -239,7 +239,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             padding: 0,
             cursor: 'pointer',
             zIndex: 10,
-            filter: 'drop-shadow(0 0 25px rgba(255, 242, 178, 0.9)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65))',
+            filter: 'drop-shadow(0 0 25px rgba(162, 232, 184, 0.7)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65))',
             animation: isOpening
               ? 'sealRotateOpen 1.1s cubic-bezier(0.5, -0.3, 0.4, 1) forwards'
               : 'glowingSealPulse 2.8s ease-in-out infinite',
@@ -249,8 +249,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           aria-label="Open Invitation"
         >
           <img
-            src="/assets/dt-script-wax-seal.png"
-            alt="D and T burgundy wax seal"
+            src="/assets/ot_wax_seal.png"
+            alt="OT royal plum wax seal"
             style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
           />
         </button>

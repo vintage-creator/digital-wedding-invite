@@ -1,5 +1,6 @@
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const WEDDING_SLUG = (import.meta.env.VITE_WEDDING_SLUG || 'opeyemi-temilayojesu').trim();
 
 const requireConfig = () => {
   if (!supabaseUrl || !supabaseAnonKey) {
@@ -27,7 +28,7 @@ const parseError = async (response, fallback) => {
 export async function fetchGiftReservations() {
   requireConfig();
   const response = await fetch(
-    `${supabaseUrl}/rest/v1/public_gift_reservations?select=gift_id,gift_title,giver_name,created_at&order=created_at.desc`,
+    `${supabaseUrl}/rest/v1/public_gift_reservations?select=gift_id,gift_title,giver_name,created_at&wedding_slug=eq.${encodeURIComponent(WEDDING_SLUG)}&order=created_at.desc`,
     { headers: headers() }
   );
   if (!response.ok) await parseError(response, 'Unable to load gift reservations.');
@@ -47,7 +48,8 @@ export async function createGiftReservation({ giftId, giftTitle, giverName, cont
       gift_id: giftId,
       gift_title: giftTitle,
       giver_name: giverName,
-      contact_no: contactNo.trim()
+      contact_no: contactNo.trim(),
+      wedding_slug: WEDDING_SLUG
     })
   });
   if (!response.ok) await parseError(response, 'Unable to reserve this gift.');
@@ -78,7 +80,8 @@ export async function createRsvp({
       guest_count: guestCount,
       message: message || null,
       source: 'website',
-      whatsapp_link_opened: whatsappLinkOpened
+      whatsapp_link_opened: whatsappLinkOpened,
+      wedding_slug: WEDDING_SLUG
     })
   });
   if (!response.ok) await parseError(response, 'Unable to save this RSVP.');
@@ -155,7 +158,7 @@ export async function fetchGuestPhotos({ offset = 0, limit = 12, eventType = 'al
   requireConfig();
   const eventFilter = eventType === 'all' ? '' : `&event_type=eq.${encodeURIComponent(eventType)}`;
   const response = await fetch(
-    `${supabaseUrl}/rest/v1/guest_photos?select=id,storage_path,public_url,uploader_name,caption,event_type,created_at&order=created_at.desc&offset=${offset}&limit=${limit + 1}${eventFilter}`,
+    `${supabaseUrl}/rest/v1/guest_photos?select=id,storage_path,public_url,uploader_name,caption,event_type,created_at&wedding_slug=eq.${encodeURIComponent(WEDDING_SLUG)}&order=created_at.desc&offset=${offset}&limit=${limit + 1}${eventFilter}`,
     { headers: headers() }
   );
   if (!response.ok) await parseError(response, 'Unable to load guest photos.');
@@ -167,7 +170,7 @@ export async function uploadGuestPhoto({ file, uploaderName, caption, eventType 
   requireConfig();
   const extension = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
   const uniqueId = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  const storagePath = `uploads/${new Date().getFullYear()}/${uniqueId}.${extension}`;
+  const storagePath = `uploads/${WEDDING_SLUG}/${new Date().getFullYear()}/${uniqueId}.${extension}`;
   const uploadResponse = await fetch(
     `${supabaseUrl}/storage/v1/object/wedding-guest-photos/${storagePath}`,
     {
@@ -187,7 +190,8 @@ export async function uploadGuestPhoto({ file, uploaderName, caption, eventType 
       public_url: publicUrl,
       uploader_name: uploaderName,
       caption,
-      event_type: eventType
+      event_type: eventType,
+      wedding_slug: WEDDING_SLUG
     })
   });
   if (!metadataResponse.ok) await parseError(metadataResponse, 'Photo uploaded, but its gallery details could not be saved.');

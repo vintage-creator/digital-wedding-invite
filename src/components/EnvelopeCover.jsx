@@ -137,7 +137,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         width: '100vw',
         height: '100dvh',
         zIndex: 10000,
-        background: 'radial-gradient(circle at 50% 35%, #FAF4F9 0%, #E8D2E6 46%, #380C34 100%)',
+        background: 'radial-gradient(circle at 50% 35%, #FAF4F9 0%, #E8D2E6 46%, #5C2059 100%)',
         transition: 'opacity 1s ease',
         opacity: isLeaving ? 0 : 1,
         pointerEvents: isLeaving ? 'none' : 'all',
@@ -191,7 +191,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           transition: 'transform 1.3s cubic-bezier(0.4, 0, 0.2, 1)'
         }}
       >
-        {/* Reference Plum Paper Envelope Image */}
+        {/* Plum Paper Envelope Image */}
         <img
           src="/assets/burgundy_envelope.jpg"
           alt="Opeyemi & Temilayojesu Wedding Envelope"
@@ -216,7 +216,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             width: 'clamp(150px, 24vw, 280px)',
             height: 'clamp(150px, 24vw, 280px)',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(162, 232, 184, 0.85) 0%, rgba(92, 32, 89, 0.4) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(114, 199, 142, 0.82) 0%, rgba(92, 32, 89, 0.42) 50%, transparent 75%)',
             zIndex: 9,
             pointerEvents: 'none',
             animation: isOpening ? 'fadeOut 0.5s forwards' : 'glowingAuraPulse 2.8s ease-in-out infinite'
@@ -239,7 +239,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             padding: 0,
             cursor: 'pointer',
             zIndex: 10,
-            filter: 'drop-shadow(0 0 25px rgba(162, 232, 184, 0.7)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65))',
+            filter: 'drop-shadow(0 0 25px rgba(114, 199, 142, 0.75)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65))',
             animation: isOpening
               ? 'sealRotateOpen 1.1s cubic-bezier(0.5, -0.3, 0.4, 1) forwards'
               : 'glowingSealPulse 2.8s ease-in-out infinite',
@@ -248,11 +248,36 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           title="Tap Seal to Open Invitation"
           aria-label="Open Invitation"
         >
-          <img
-            src="/assets/ot_wax_seal.png"
-            alt="OT royal plum wax seal"
-            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-          />
+          <span style={{
+            position: 'absolute',
+            inset: '5%',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            border: '2px solid rgba(255, 255, 255, 0.55)',
+            background: '#5C2059',
+            boxShadow: 'inset 0 0 0 5px rgba(114, 199, 142, 0.24), inset 0 0 24px rgba(32, 7, 32, 0.6)'
+          }}>
+            <img
+              src="/assets/ot_access_card_page_1.png"
+              alt=""
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                width: '270%',
+                maxWidth: 'none',
+                height: 'auto',
+                left: '-88.54%',
+                top: '-26.04%'
+              }}
+            />
+            <span style={{
+              position: 'absolute',
+              inset: '3%',
+              borderRadius: '50%',
+              border: '1px solid rgba(255, 255, 255, 0.24)',
+              pointerEvents: 'none'
+            }} />
+          </span>
         </button>
       </div>
 
@@ -580,7 +605,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         @keyframes glowingSealPulse {
           0%, 100% {
             transform: translate(-50%, -50%) scale(1);
-            filter: drop-shadow(0 0 22px rgba(255, 242, 178, 0.85)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65));
+            filter: drop-shadow(0 0 22px rgba(114, 199, 142, 0.75)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65));
           }
           50% {
             transform: translate(-50%, -50%) scale(1.045);

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Music2, Pause, Volume2, VolumeX } from 'lucide-react';
 
 const DEFAULT_VOLUME = 0.04;
+const MUSIC_TITLE = 'Unbreakable by Westlife';
 
 export default function MusicPlayer({ isPlaying, setIsPlaying }) {
 
@@ -12,7 +13,7 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }) {
   const audioRef = useRef(null);
   const volumeRef = useRef(DEFAULT_VOLUME); // always-current volume for async callbacks
 
-  const musicUrl = '/assets/the-vow-ruthanne-acoustic-or-instrumental.mp3';
+  const musicUrl = (import.meta.env.VITE_WEDDING_MUSIC_URL || '/assets/unbreakable-westlife.mp3').trim();
 
   // Keep volumeRef in sync so event handlers always read the latest value
   useEffect(() => {
@@ -95,21 +96,31 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }) {
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
-        background: 'rgba(59, 8, 27, 0.88)',
+        background: 'rgba(50, 12, 48, 0.92)',
         backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(197, 160, 89, 0.35)',
+        border: '1px solid rgba(114, 199, 142, 0.48)',
         borderRadius: '30px',
-        padding: '6px 12px 6px 8px',
-        boxShadow: '0 8px 24px rgba(59, 8, 27, 0.25)',
+        padding: '6px 14px 6px 8px',
+        boxShadow: '0 8px 24px rgba(50, 12, 48, 0.3)',
       }}>
+
+        <span style={{
+          color: '#F7EEF6',
+          fontSize: '0.75rem',
+          fontWeight: 500,
+          letterSpacing: '0.03em',
+          whiteSpace: 'nowrap'
+        }}>
+          Unbreakable <span style={{ color: '#72C78E' }}>· Westlife</span>
+        </span>
 
         {/* Play / Pause */}
         <button
           onClick={togglePlay}
           className={`music-icon-button ${isPlaying ? 'music-icon-button-playing' : ''}`}
           title={audioUnavailable
-            ? "Add 'The Vow' by RuthAnne audio file to enable music"
-            : isPlaying ? 'Pause The Vow by RuthAnne' : "Play 'The Vow' by RuthAnne"}
+            ? `Add a licensed ${MUSIC_TITLE} audio file to enable music`
+            : isPlaying ? `Pause ${MUSIC_TITLE}` : `Play ${MUSIC_TITLE}`}
           aria-label={audioUnavailable ? 'Music file unavailable' : isPlaying ? 'Pause music' : 'Play music'}
           aria-pressed={isPlaying}
           disabled={audioUnavailable}

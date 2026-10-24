@@ -1,12 +1,12 @@
-# Deborah & Tom - Digital Wedding Invitation
+# Opeyemi & Temilayojesu - Digital Wedding Invitation
 
-A web application built for the wedding celebration of Deborah & Tom (#DeborahAndTom2026).
+A web application built for the wedding celebration of Opeyemi & Temilayojesu (#EVERAFTER21').
 
 ## Overview
 
-This repository contains the interactive digital wedding invitation for Deborah & Tom's wedding in Abuja, Nigeria (December 17th & 19th, 2026).
+This repository contains the interactive digital wedding invitation for Opeyemi & Temilayojesu's wedding at Green Life Event Center, Oregun, Ikeja, Lagos on Saturday, 21st November 2026.
 
-The platform features an interactive envelope cover, event scheduling and venue details, color palette dress code guides, live guest photo sharing, a gift registry with database reservation tracking, bank transfer details, and an integrated WhatsApp RSVP system.
+The platform features an interactive OT-branded envelope cover, event scheduling and venue details, mint-green and plum dress-code guidance, live guest photo sharing with Supabase Storage, gift-card pledge tracking, optional bank-transfer details, and an integrated WhatsApp RSVP system.
 
 ## Tech Stack
 
@@ -50,6 +50,10 @@ npm run build
 
 The compiled output will be generated in the `dist` directory.
 
+### Wedding-specific configuration
+
+Copy `.env.example` to a local environment file and provide the Supabase values. The music player is configured for “Unbreakable” by Westlife and expects a licensed audio file at `/public/assets/unbreakable-westlife.mp3`, or a URL supplied through `VITE_WEDDING_MUSIC_URL`. Bank-transfer fields are intentionally blank until the couple provides current details.
+
 ## License
 
-Private repository for Deborah & Tom's Wedding Celebration.
+Private repository for Opeyemi & Temilayojesu's Wedding Celebration.

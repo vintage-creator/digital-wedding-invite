@@ -13,8 +13,8 @@ export default function EventsSection() {
       venue: 'Green Life Event Center, Oregun',
       address: 'Plot 2 Kudirat Abiola Way, Oregun, Ikeja, Lagos, Nigeria',
       attire: 'Color of the Day: Mint Green and Plum',
-      image: '/assets/ot_access_card_page_1.png',
       mapUrl: 'https://maps.google.com/?q=Green+Life+Event+Center+Oregun+Ikeja+Lagos',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=Green+Life+Event+Center+Oregun+Ikeja+Lagos&output=embed',
       calendarTitle: 'Opeyemi & Temilayojesu — Wedding & Reception (#EVERAFTER21\')',
       calendarDescription: 'Wedding Ceremony and Reception for Opeyemi & Temilayojesu at Green Life Event Center, Oregun, Ikeja, Lagos. Access Card Admits One.',
       calendarStart: '20261121T100000',
@@ -112,60 +112,38 @@ export default function EventsSection() {
                 }}
               >
                 <div>
-                  {/* Venue Location Photograph Header with Hover Zoom */}
-                  <div style={{ position: 'relative', height: '260px', overflow: 'hidden', cursor: 'pointer', background: 'var(--burgundy)' }}>
-                    <img
-                      src={evt.image}
-                      alt={evt.venue}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transform: isHovered ? 'scale(1.06)' : 'scale(1)',
-                        transition: 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)'
-                      }}
+                  <div style={{ height: '280px', background: 'var(--section-sage)' }}>
+                    <iframe
+                      title={`${evt.venue} map`}
+                      src={evt.mapEmbedUrl}
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                      style={{ border: 0, display: 'block' }}
                     />
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: isHovered
-                        ? 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(50, 12, 48, 0.88) 100%)'
-                        : 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(50, 12, 48, 0.78) 100%)',
-                      transition: 'background 0.4s ease'
-                    }} />
-
-                    {/* Badge */}
+                  </div>
+                  <div style={{
+                    padding: '1rem 1.4rem',
+                    background: 'linear-gradient(135deg, var(--plum, #5C2059), var(--burgundy, #320C30))',
+                    color: '#FFFFFF',
+                    borderTop: '2px solid var(--mint, #72C78E)'
+                  }}>
                     <span style={{
-                      position: 'absolute',
-                      top: '16px',
-                      left: '16px',
-                      background: 'rgba(92, 32, 89, 0.90)',
-                      color: '#FFFFFF',
-                      fontSize: '0.78rem',
+                      display: 'block',
+                      color: 'var(--mint, #72C78E)',
+                      fontSize: '0.7rem',
                       fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      padding: '6px 14px',
-                      borderRadius: '20px',
-                      border: '1.2px solid rgba(114, 199, 142, 0.6)',
-                      backdropFilter: 'blur(8px)',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.35)',
-                      textTransform: 'uppercase'
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      marginBottom: '0.35rem'
                     }}>
                       {evt.type}
                     </span>
-
-                    <div style={{ position: 'absolute', bottom: '16px', left: '16px', right: '16px', color: '#FFFFFF' }}>
-                      <h3 style={{
-                        fontFamily: 'var(--font-serif)',
-                        fontSize: '1.55rem',
-                        margin: 0,
-                        textShadow: '0 2px 6px rgba(0,0,0,0.7)',
-                        transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-                        transition: 'transform 0.3s ease'
-                      }}>
-                        {evt.venue}
-                      </h3>
-                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: 0 }}>
+                      {evt.venue}
+                    </h3>
                   </div>
 
                   {/* Venue Info Details */}

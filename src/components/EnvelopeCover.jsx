@@ -9,6 +9,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
   const [accessCode, setAccessCode] = useState('');
   const [accessError, setAccessError] = useState('');
   const [isCheckingCode, setIsCheckingCode] = useState(false);
+  const [isLogoUnavailable, setIsLogoUnavailable] = useState(false);
   const invitationCode = (import.meta.env.VITE_INVITATION_CODE || 'everafter21').trim().toLowerCase();
   const validCodes = ['everafter21', 'everafter21\'', 'ever_after_21', 'ot2026', 'ot21', invitationCode];
 
@@ -151,8 +152,11 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
     >
       <div className={`invitation-arrival-copy ${isOpening ? 'invitation-arrival-copy-opening' : ''}`}>
         <span>Your invitation has arrived</span>
-        <strong>Opeyemi &amp; Temilayojesu invite you</strong>
-          <small>{isCheckingCode ? 'Checking access…' : 'Enter access code (e.g. EVERAFTER21), then tap the wax seal'}</small>
+        <strong>
+          <span>Opeyemi &amp; Temilayojesu</span>
+          <em>invite you to celebrate</em>
+        </strong>
+        <small>{isCheckingCode ? 'Checking access…' : 'Enter access code (e.g. EVERAFTER21), then tap the OT wax seal to open'}</small>
         <form
           className="invitation-code-form"
           onSubmit={(event) => {
@@ -245,8 +249,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
               : 'glowingSealPulse 2.8s ease-in-out infinite',
             transition: 'opacity 0.55s ease, transform 0.3s ease'
           }}
-          title="Tap Seal to Open Invitation"
-          aria-label="Open Invitation"
+          title="Enter the invitation code, then tap the OT seal to open"
+          aria-label="Open invitation with the OT wax seal"
         >
           <img
             src="/assets/dt-script-wax-seal.png"
@@ -264,13 +268,13 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             position: 'absolute',
             left: '50%',
             top: '50%',
-            width: '76%',
+            width: '58%',
             aspectRatio: '1 / 1',
             transform: 'translate(-50%, -50%)',
             borderRadius: '50%',
-            border: '1px solid rgba(218, 244, 221, 0.72)',
-            background: 'radial-gradient(circle at 36% 28%, #93688F 0%, #6B3A68 43%, #471D46 100%)',
-            boxShadow: 'inset 0 2px 5px rgba(255, 255, 255, 0.2), inset 0 -9px 16px rgba(25, 5, 25, 0.5), 0 0 0 3px rgba(53, 18, 52, 0.55)',
+            border: '1px solid rgba(232, 205, 157, 0.72)',
+            background: 'radial-gradient(circle at 36% 28%, #80577C 0%, #63345F 48%, #482346 100%)',
+            boxShadow: 'inset 0 2px 5px rgba(255, 255, 255, 0.2), inset 0 -9px 16px rgba(25, 5, 25, 0.42)',
             display: 'grid',
             placeItems: 'center',
             overflow: 'hidden'
@@ -279,16 +283,17 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
               position: 'absolute',
               inset: '4%',
               borderRadius: '50%',
-              border: '1px solid rgba(218, 244, 221, 0.3)',
+              border: '1px solid rgba(232, 205, 157, 0.34)',
               pointerEvents: 'none'
             }} />
             <span aria-hidden="true" style={{
-              color: '#E6F6E6',
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(1.7rem, 5.2vw, 3.6rem)',
-              fontWeight: 700,
-              letterSpacing: '0.04em',
-              textShadow: '0 2px 3px rgba(24, 5, 24, 0.72), 0 -1px 1px rgba(255, 255, 255, 0.45)'
+              color: '#F1D9AD',
+              fontFamily: 'var(--font-script)',
+              fontSize: 'clamp(2.4rem, 6vw, 4rem)',
+              fontWeight: 400,
+              letterSpacing: '-0.08em',
+              lineHeight: 1,
+              textShadow: '0 1px 0 rgba(255, 244, 219, 0.7), 0 2px 1px rgba(30, 8, 29, 0.78), 0 0 10px rgba(255, 225, 177, 0.2)'
             }}>
               OT
             </span>
@@ -299,18 +304,18 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
       {isCardPresented && (
         <div className="cover-invitation-card" role="dialog" aria-label="Opeyemi and Temilayojesu wedding access card">
           <div className="cover-invitation-card-inner">
-            <img
-              src="/assets/ot_access_card_page_1.png"
-              alt="Opeyemi and Temilayojesu OT access card"
-              style={{
-                width: '100%',
-                maxHeight: '260px',
-                objectFit: 'contain',
-                borderRadius: '16px',
-                marginBottom: '1rem',
-                boxShadow: '0 8px 24px rgba(50, 12, 48, 0.2)'
-              }}
-            />
+            {isLogoUnavailable ? (
+              <div className="cover-invitation-logo-fallback" role="img" aria-label="OT monogram">
+                <span>OT</span>
+              </div>
+            ) : (
+              <img
+                className="cover-invitation-logo"
+                src="/assets/ot-logo-mark.png"
+                alt="Opeyemi and Temilayojesu OT monogram with floral detail"
+                onError={() => setIsLogoUnavailable(true)}
+              />
+            )}
             <span className="cover-invitation-eyebrow">Access Card Granted</span>
             <h2>
               <span>Opeyemi</span>
@@ -386,8 +391,29 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           color: #54214f;
         }
 
+        .invitation-arrival-copy strong > span {
+          display: block;
+          font: 400 clamp(1.45rem, 5.5vw, 2.85rem) var(--font-script);
+          letter-spacing: 0;
+          text-transform: none;
+          white-space: nowrap;
+          color: #54214f;
+        }
+
+        .invitation-arrival-copy strong > em {
+          display: block;
+          margin-top: 0.15rem;
+          font: 600 clamp(0.6rem, 1.25vw, 0.72rem) var(--font-sans);
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          font-style: normal;
+          color: #4b3450;
+        }
+
         .invitation-arrival-copy small {
           font-size: clamp(0.56rem, 1.2vw, 0.68rem);
+          line-height: 1.5;
+          letter-spacing: 0.1em;
           color: #4b3450;
         }
 
@@ -451,7 +477,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         }
 
         .cover-invitation-card-inner {
-          width: min(88vw, 500px);
+          box-sizing: border-box;
+          width: min(calc(100vw - 2rem), 500px);
           min-height: min(78dvh, 680px);
           max-height: min(88dvh, 760px);
           overflow: auto;
@@ -508,14 +535,36 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         }
 
         .cover-invitation-logo {
-          width: min(36vw, 132px);
-          aspect-ratio: 1 / 1;
-          object-fit: contain;
-          margin: 0 auto 1rem;
+          width: min(28vw, 132px);
+          height: min(28vw, 132px);
+          object-fit: cover;
+          object-position: center;
+          margin: 0 auto 0.9rem;
           display: block;
-          opacity: 0.76;
-          mix-blend-mode: multiply;
-          filter: drop-shadow(0 8px 14px rgba(38, 54, 34, 0.08));
+          border: 1px solid rgba(197, 160, 89, 0.42);
+          border-radius: 50%;
+          background: #784576;
+          box-shadow: 0 8px 22px rgba(38, 54, 34, 0.16);
+        }
+
+        .cover-invitation-logo-fallback {
+          display: grid;
+          place-items: center;
+          width: min(28vw, 132px);
+          aspect-ratio: 1;
+          box-sizing: border-box;
+          margin: 0 auto 0.9rem;
+          border: 1px solid rgba(232, 205, 157, 0.72);
+          border-radius: 50%;
+          color: #F1D9AD;
+          background: radial-gradient(circle at 36% 28%, #80577C, #482346 82%);
+          box-shadow: 0 8px 22px rgba(38, 54, 34, 0.18), inset 0 0 0 5px rgba(255, 255, 255, 0.08);
+        }
+
+        .cover-invitation-logo-fallback span {
+          font: 400 clamp(2.8rem, 8vw, 4rem)/1 var(--font-script);
+          letter-spacing: -0.08em;
+          text-shadow: 0 1px 0 rgba(255, 244, 219, 0.7), 0 2px 1px rgba(30, 8, 29, 0.72);
         }
 
         .cover-invitation-eyebrow {
@@ -527,17 +576,21 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         }
 
         .cover-invitation-card h2 {
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          overflow-wrap: anywhere;
           margin: 1.15rem 0 1.05rem;
           color: #151913;
           font-family: var(--font-serif);
           line-height: 1.08;
           text-transform: uppercase;
-          letter-spacing: clamp(0.16em, 2vw, 0.3em);
+          letter-spacing: clamp(0.01em, 0.7vw, 0.09em);
         }
 
         .cover-invitation-card h2 span {
           display: block;
-          font-size: clamp(2rem, 8.2vw, 3.35rem);
+          font-size: clamp(1.35rem, 5.7vw, 2.5rem);
           font-weight: 400;
         }
 
@@ -702,11 +755,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             max-height: 84dvh;
             padding: 1.5rem 1.05rem;
           }
-          .cover-invitation-logo {
-            width: min(38vw, 132px);
-          }
           .cover-invitation-card h2 span {
-            font-size: clamp(1.7rem, 9vw, 2.65rem);
+            font-size: clamp(1.35rem, 6vw, 2.2rem);
           }
           .cover-invitation-card p,
           .cover-invitation-date {
@@ -745,7 +795,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           }
           .cover-invitation-eyebrow { font-size: 0.58rem; }
           .cover-invitation-card h2 { margin: 0.45rem 0; }
-          .cover-invitation-card h2 span { font-size: clamp(1.4rem, 7vw, 2.1rem); }
+          .cover-invitation-card h2 span { font-size: clamp(1.25rem, 5.5vw, 1.9rem); }
           .cover-invitation-card p,
           .cover-invitation-date { font-size: 0.66rem; }
           #sealBtn { width: clamp(82px, 15vw, 126px) !important; }

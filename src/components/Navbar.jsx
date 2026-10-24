@@ -53,10 +53,10 @@ export default function Navbar() {
             color: 'var(--burgundy)',
             fontWeight: 600
           }}>
-            Deborah & Tom
+            Opeyemi & Temilayojesu
           </span>
           <span className="badge-gold" style={{ fontSize: '0.65rem', padding: '0.15rem 0.5rem' }}>
-            Dec 2026
+            Nov 2026
           </span>
         </a>
 

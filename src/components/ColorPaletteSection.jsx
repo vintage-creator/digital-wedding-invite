@@ -1,266 +1,192 @@
 import React, { useState } from 'react';
-import { Palette } from 'lucide-react';
+import { Palette, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function ColorPaletteSection() {
   const [hoveredIdx, setHoveredIdx] = useState(null);
-  const [activeTab, setActiveTab] = useState('traditionalColors');
-  
 
-  const traditionalColors = [
+  const colors = [
     {
-      id: 'ivory',
-      name: 'Ivory',
-      hex: '#919136',
-      bgGradient: 'linear-gradient(to bottom, #919136, #2d3015)',
+      id: 'plum',
+      name: 'Royal Plum',
+      hex: '#5C2059',
+      bgGradient: 'linear-gradient(135deg, #7A2876 0%, #5C2059 50%, #350F33 100%)',
       textLight: true,
-      defaultRotate: -12,
-      role: 'Primary Accent',
-      description: 'Rich, ceremonial, and elegant.'
+      defaultRotate: -8,
+      role: 'Primary Regal Tone',
+      description: 'Rich, majestic, and celebratory. Ideal for main gowns, jackets, aṣọ-òkè, and caps.'
     },
     {
-      id: 'sage-green',
-      name: 'Sage Green',
-      hex: '#6b8d6a',
-      bgGradient: 'linear-gradient(135deg, #8fae8d 0%, #6b8d6a 50%, #4b6b4a 100%)',
+      id: 'mint-green',
+      name: 'Mint Green',
+      hex: '#72C78E',
+      bgGradient: 'linear-gradient(135deg, #9CE3B3 0%, #72C78E 50%, #295D3D 100%)',
       textLight: true,
       defaultRotate: 0,
-      role: 'Secondary Accent',
-      description: 'Soft botanical calm with depth.'
+      role: 'Signature Botanical Accent',
+      description: 'Fresh, graceful, and lively. Perfect for geles, agbádás, dresses, and pocket squares.'
     },
     {
-      id: 'champagne-gold',
-      name: 'Champagne gold',
-      hex: '#D29F51',
-      bgGradient: 'linear-gradient(135deg, #F0CF97 0%, #D29F51 50%, #A47227 100%)',
+      id: 'soft-lilac',
+      name: 'Lilac Mauve',
+      hex: '#D6B0D5',
+      bgGradient: 'linear-gradient(135deg, #F0DBEF 0%, #D6B0D5 50%, #9B6399 100%)',
       textLight: false,
-      defaultRotate: 12,
-      role: 'Main Background',
-      text: 'Blush pink,Burgundy, Nude/Gold accent',
-      description: 'Warm, polished, and understated.'
+      defaultRotate: 8,
+      role: 'Harmonious Complement',
+      description: 'A soft, romantic bridge between plum and mint. Subtle and flattering.'
     }
   ];
-
-const whiteColors = [
-    {
-      id: 'blush pink',
-      name: 'Blush Pink',
-      hex: '#FE828C',
-      bgGradient: 'linear-gradient(135deg, #FE828C 0%, #FFB56B 100%)',
-      textLight: true,
-      defaultRotate: -12,
-      role: 'Primary Accent',
-      description: 'Rich, ceremonial, and elegant.'
-    },
-    {
-      id: 'burgundy',
-      name: 'Burgundy',
-      hex: '#800020',
-      bgGradient: 'linear-gradient(135deg, #800020, #4A0012)',
-      textLight: true,
-      defaultRotate: 0,
-      role: 'Secondary Accent',
-      description: 'Soft botanical calm with depth.'
-    },
-    {
-      id: 'nude',
-      name: 'Nude / Gold accent',
-      hex: '#EFBF04',
-      bgGradient: 'linear-gradient(135deg, #e8cdb8 0%, #d9b896 40%, #c9a05a 70%, #d4af37 100%)',
-      textLight: false,
-      defaultRotate: 12,
-      role: 'Main Background',
-      text: 'B see finish leleyi o o ',
-      description: 'Warm, polished, and understated.'
-    }
-  ];
-
-  const handleTabChange = (tab) => {setActiveTab(tab);};
-
-  const color = activeTab === 'traditionalColors' ? traditionalColors : whiteColors;
 
   return (
-    
-
     <section id="colors" className="section-padding" style={{ background: 'var(--section-sage)', overflow: 'hidden' }}>
       <div className="max-w-content text-center">
+        
         <span className="section-eyebrow">
           <Palette size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
-          Wedding Color Guide
+          Color of the Day
         </span>
         <h2 className="section-title-script">
-          Wedding Color Code & Attire
+          Mint Green &amp; Plum
         </h2>
         <p className="section-subtitle">
-          Guests are warmly invited to dress within the couple’s chosen tones.
+          Our wedding color theme is <strong>Mint Green and Plum</strong>. Guests are warmly encouraged to celebrate with us in these festive tones!
         </p>
 
-<div className="schedule-tabs" style={{
-          display: 'inline-flex',
-          maxWidth: '100%',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '4px',
-          background: 'rgba(252, 242, 239, 0.58)',
-          padding: '6px',
-          borderRadius: '40px',
-          border: '1.5px solid var(--nude-border)',
-          marginBottom: '2.5rem',
-          boxShadow: '0 2px 10px rgba(38, 54, 34, 0.06)'
-        }}>
-          <button
-            onClick={() => handleTabChange('traditionalColors')}
-            style={{
-              padding: '10px 22px',
-              borderRadius: '30px',
-              border: activeTab === 'traditionalColors' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
-              background: activeTab === 'traditionalColors' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
-              color: activeTab === 'traditionalColors' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
-              fontWeight: 500,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'traditionalColors' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
-            }}
-          >
-            Traditional Colour Code 
-          </button>
-          
-          <button
-            onClick={() => handleTabChange('whiteColors')}
-            style={{
-              padding: '10px 22px',
-              borderRadius: '30px',
-              border: activeTab === 'whiteColors' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
-              background: activeTab === 'whiteColors' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
-              color: activeTab === 'whiteColors' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
-              fontWeight: 500,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
-            }}
-          >
-            White Wedding Colour Code 
-          </button>
-        </div>
-
-        <div className="color-deck"
+        {/* 3D Color Swatch Fan Cards */}
+        <div
+          className="color-deck"
           style={{
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center',
-            marginTop: '3.5rem',
-            marginBottom: '2.5rem',
-            padding: '40px 10px',
-            minHeight: '400px',
-            position: 'relative'
+            alignItems: 'center',
+            minHeight: '430px',
+            position: 'relative',
+            margin: '2rem 0 3rem'
           }}
         >
-          {color.map((color, idx) => {
+          {colors.map((c, idx) => {
             const isHovered = hoveredIdx === idx;
+            const anyHovered = hoveredIdx !== null;
+            
+            let rot = c.defaultRotate;
+            let transX = (idx - 1) * 70;
+            let transY = 0;
+            let scale = 1;
+            let zIndex = idx + 1;
+
+            if (isHovered) {
+              scale = 1.08;
+              transY = -32;
+              rot = 0;
+              zIndex = 10;
+            } else if (anyHovered) {
+              scale = 0.94;
+              transX = (idx - 1) * 110;
+              rot = c.defaultRotate * 1.3;
+            }
+
             return (
               <div
-                key={color.id}
+                key={c.id}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
-                onClick={() => setHoveredIdx(hoveredIdx === idx ? null : idx)}
-                className="color-card"
                 style={{
-                  width: 'clamp(140px, 20vw, 200px)',
-                  height: '350px',
-                  background: color.bgGradient,
+                  position: 'absolute',
+                  width: 'clamp(230px, 32vw, 290px)',
+                  height: 'clamp(330px, 44vw, 390px)',
                   borderRadius: '24px',
+                  background: c.bgGradient,
+                  color: c.textLight ? '#FFFFFF' : '#2A1529',
                   boxShadow: isHovered
-                    ? '0 26px 54px rgba(38, 54, 34, 0.28), 0 0 18px rgba(197, 160, 89, 0.45)'
-                    : '0 15px 35px rgba(38, 54, 34, 0.14)',
-                  border: isHovered ? '3px solid var(--gold)' : '1.5px solid rgba(255, 253, 252, 0.72)',
-                  margin: '0 -22px',
-                  zIndex: isHovered ? 20 : idx + 1,
-                  transform: isHovered
-                    ? 'translateY(-34px) rotate(0deg) scale(1.08)'
-                    : `rotate(${color.defaultRotate}deg) translateY(0px)`,
-                  transition: 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s ease, border-color 0.45s ease',
-                  willChange: 'transform',
-                  cursor: 'pointer',
+                    ? '0 30px 60px rgba(50, 12, 48, 0.28), 0 0 25px rgba(114, 199, 142, 0.35)'
+                    : '0 15px 35px rgba(50, 12, 48, 0.14)',
+                  padding: '1.8rem 1.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  padding: '1.5rem 1rem',
-                  position: 'relative',
-                  overflow: 'hidden'
+                  cursor: 'pointer',
+                  transform: `translateX(${transX}px) translateY(${transY}px) rotate(${rot}deg) scale(${scale})`,
+                  transformOrigin: 'bottom center',
+                  transition: 'all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
+                  zIndex: zIndex,
+                  border: '1.5px solid rgba(255, 255, 255, 0.35)',
+                  backdropFilter: 'blur(8px)'
                 }}
               >
-                {/* Top Badge Hex Code */}
-                <div style={{
-                  textAlign: 'center',
-                  opacity: isHovered ? 1 : 0.85
-                }}>
+                {/* Top Role / Header */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <span style={{
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.15em',
+                    fontSize: '0.74rem',
                     textTransform: 'uppercase',
-                    color: color.textLight ? '#F4ECE1' : 'var(--burgundy-dark)',
-                    background: color.textLight ? 'rgba(38, 54, 34, 0.35)' : 'rgba(255,255,255,0.72)',
-                    padding: '4px 12px',
-                    borderRadius: '12px',
-                    display: 'inline-block'
+                    letterSpacing: '0.12em',
+                    fontWeight: 700,
+                    opacity: 0.9
                   }}>
-                    {color.hex}
+                    {c.role}
+                  </span>
+                  <span style={{
+                    fontSize: '0.8rem',
+                    fontFamily: 'monospace',
+                    fontWeight: 600,
+                    opacity: 0.85
+                  }}>
+                    {c.hex}
                   </span>
                 </div>
 
-                {/* Bottom Content Detail */}
-                <div style={{
-                  textAlign: 'center',
-                  color: color.textLight ? '#FFFFFF' : 'var(--burgundy-dark)'
-                }}>
+                {/* Bottom Card Copy */}
+                <div>
                   <h3 style={{
                     fontFamily: 'var(--font-serif)',
-                    fontSize: '1.15rem',
-                    fontWeight: 600,
-                    margin: '0 0 0.3rem 0',
-                    lineHeight: 1.2,
-                    textShadow: color.textLight ? '0 2px 4px rgba(0,0,0,0.4)' : 'none'
+                    fontSize: '1.8rem',
+                    margin: '0 0 0.5rem',
+                    fontWeight: 600
                   }}>
-                    {color.name}
+                    {c.name}
                   </h3>
-
-                  <span style={{
-                    display: 'block',
-                    fontSize: '0.78rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
-                    opacity: 0.95
-                  }}>
-                    {color.role}
-                  </span>
-
                   <p style={{
-                      fontSize: '0.76rem',
-                      lineHeight: 1.4,
-                      opacity: isHovered ? 0.95 : 0,
-                      margin: '0.5rem 0 0 0',
-                      maxHeight: isHovered ? '80px' : 0,
-                      transform: isHovered ? 'translateY(0)' : 'translateY(8px)',
-                      transition: 'opacity 0.35s ease 0.08s, transform 0.45s ease 0.05s, max-height 0.45s ease'
-                    }}>
-                      {color.description}
-                    </p>
+                    fontSize: '0.86rem',
+                    lineHeight: 1.45,
+                    opacity: 0.92,
+                    margin: 0
+                  }}>
+                    {c.description}
+                  </p>
                 </div>
               </div>
             );
-            
           })}
         </div>
 
-        <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '-0.5rem' }}>
-          {activeTab === 'whiteColors' ? "🌸 Blush Pink + Burgundy + Nude / Gold Accent" : "🌿 Ivory + Sage Green + Champagne Gold"}
-
-        </p>
+        {/* Attire Advice Banner */}
+        <div
+          className="glass-card"
+          style={{
+            maxWidth: '680px',
+            margin: '0 auto',
+            padding: '1.4rem 2rem',
+            borderRadius: '20px',
+            background: 'var(--nude-card)',
+            border: '1px solid var(--nude-border)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            textAlign: 'left'
+          }}
+        >
+          <Sparkles size={24} style={{ color: 'var(--gold)', flexShrink: 0 }} />
+          <div>
+            <strong style={{ display: 'block', color: 'var(--burgundy)', fontSize: '0.98rem' }}>
+              Color of the Day: Mint Green &amp; Plum (#EVERAFTER21')
+            </strong>
+            <span style={{ fontSize: '0.86rem', color: 'var(--text-muted)' }}>
+              Whether you choose deep plum regal elegance, fresh mint green, or subtle accents, we cannot wait to see you look your absolute best!
+            </span>
+          </div>
+        </div>
 
       </div>
     </section>
-    
   );
 }

@@ -87,7 +87,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
 
   const handleCopySummary = async () => {
     const summary = [
-      'Deborah & Tom Wedding Dashboard Summary',
+      'Opeyemi & Temilayojesu Wedding Dashboard Summary (#EVERAFTER21\')',
       `Total RSVPs: ${stats.total_rsvps || 0}`,
       `Expected Guests: ${stats.expected_guests || 0}`,
       `Attending RSVPs: ${stats.attending_rsvps || 0}`,
@@ -161,7 +161,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
       const objectUrl = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = objectUrl;
-      link.download = `Deborah_Tom_${photo.id}.jpg`;
+      link.download = `Opeyemi_Temilayojesu_${photo.id}.jpg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -174,8 +174,8 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
   };
 
   const getPhotoShareText = (photo) => {
-    const caption = photo.caption || 'A beautiful moment from Deborah & Tom’s wedding';
-    return `${caption}\n#DTLoveTale26`;
+    const caption = photo.caption || 'A beautiful moment from Opeyemi & Temilayojesu’s wedding';
+    return `${caption}\n#EVERAFTER21'`;
   };
 
   const handleCopyPhotoLink = async (photo) => {
@@ -204,7 +204,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
       <section className="dashboard-hero">
         <div className="dashboard-hero-copy">
           <span className="section-eyebrow">Private Couple Dashboard</span>
-          <h1>Deborah &amp; Tom’s Wedding Console</h1>
+          <h1>Opeyemi &amp; Temilayojesu’s Wedding Console</h1>
           <p>
             A quiet place to see who is coming, who needs a reply, and the memories guests are sharing.
           </p>
@@ -237,7 +237,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
         <>
           <section className="dashboard-overview-card">
             <div className="dashboard-overview-mark">
-              <img src="/assets/dt-logo-mark-transparent.png" alt="Deborah and Tom logo" />
+              <img src="/assets/ot_access_card_page_1.png" alt="Opeyemi and Temilayojesu logo" />
             </div>
             <div>
               <span>Today at a glance</span>
@@ -469,10 +469,10 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
           )}
 
           <footer className="dashboard-footer">
-            <img src="/assets/dt-script-wax-seal.png" alt="Deborah and Tom wax seal" />
+            <img src="/assets/ot_access_card_page_1.png" alt="Opeyemi & Temilayojesu emblem" style={{ borderRadius: '8px' }} />
             <div>
-              <strong>Deborah &amp; Tom</strong>
-              <span>#DTLoveTale26 · Wedding planning dashboard</span>
+              <strong>Opeyemi &amp; Temilayojesu</strong>
+              <span>#EVERAFTER21' · Wedding planning dashboard</span>
             </div>
           </footer>
 

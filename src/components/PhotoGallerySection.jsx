@@ -183,7 +183,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
       const record = await uploadGuestPhoto({
         file: uploadFile,
         uploaderName: uploadName.trim() || 'Guest Friend',
-        caption: uploadCaption.trim() || 'Celebration moment with Deborah & Tom',
+        caption: uploadCaption.trim() || 'Celebration moment with Opeyemi & Temilayojesu',
         eventType: uploadEvent
       });
       const newPhoto = {
@@ -250,7 +250,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
   const handleDownload = (photoUrl, photoId) => {
     const link = document.createElement('a');
     link.href = photoUrl;
-    link.download = `Deborah_and_Tom_${photoId}.jpg`;
+    link.download = `Opeyemi_and_Temilayojesu_${photoId}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -275,7 +275,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           Live Guest Photo Gallery
         </h2>
         <p className="section-subtitle">
-          A small collection of favourite moments. Guests can add celebration photos here and use #DTLoveTale26 when sharing online.
+          A shared collection of favourite moments. Guests can upload live celebration photos here and use <strong>#EVERAFTER21'</strong> when sharing online.
         </p>
 
         <button
@@ -321,7 +321,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           </h3>
 
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '-0.35rem auto 1.25rem', maxWidth: '440px' }}>
-            Add your favourite moment for the couple's gallery. Official hashtag: <strong style={{ color: 'var(--burgundy)' }}>#DTLoveTale26</strong>
+            Add your favourite moment for the couple's gallery. Official hashtag: <strong style={{ color: 'var(--burgundy)' }}>#EVERAFTER21'</strong>
           </p>
 
           <form onSubmit={handleUploadSubmit}>
@@ -404,7 +404,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
                 <label className="form-label">Photo Caption / Wish</label>
                 <input
                   type="text"
-                  placeholder="e.g. Can't wait for Dec 17th!"
+                  placeholder="e.g. Celebrating Opeyemi & Temilayojesu!"
                   className="form-input"
                   value={uploadCaption}
                   onChange={(e) => setUploadCaption(e.target.value)}
@@ -419,9 +419,10 @@ export default function PhotoGallerySection({ onTriggerToast }) {
                   value={uploadEvent}
                   onChange={(e) => setUploadEvent(e.target.value)}
                 >
-                  <option value="general">Other Moment</option>
-                  <option value="traditional">Traditional Wedding</option>
-                  <option value="white">White Wedding</option>
+                  <option value="wedding">Wedding &amp; Reception</option>
+                  <option value="ceremony">Holy Matrimony</option>
+                  <option value="reception">Reception &amp; Party</option>
+                  <option value="general">Celebration Moment</option>
                 </select>
               </div>
             </div>

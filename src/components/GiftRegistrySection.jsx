@@ -133,7 +133,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
           Gifts & Contributions
         </h2>
         <p className="section-subtitle">
-          Your presence, prayers, and love are the greatest gifts. For guests who would still love to bless Deborah &amp; Tom, the couple has shared a transfer option and a simple gift-card option.
+          Your presence, prayers, and love are the greatest gifts. For guests who would still love to bless Opeyemi &amp; Temilayojesu (#EVERAFTER21'), the couple has provided a transfer option and a simple gift-card option.
         </p>
 
         <div
@@ -294,7 +294,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
                 Gift Card Pledge
               </h3>
               <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                Please enter your name so Deborah &amp; Tom can track your gift-card pledge privately.
+                Please enter your name so Opeyemi &amp; Temilayojesu can track your gift-card pledge privately.
               </p>
             </div>
 

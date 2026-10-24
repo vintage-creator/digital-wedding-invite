@@ -18,7 +18,7 @@ import Toast from './components/Toast';
 import { ArrowUp } from 'lucide-react';
 
 const DASHBOARD_PATH = '/dashboard';
-const DASHBOARD_SESSION_KEY = 'deborah_tom_dashboard_passcode';
+const DASHBOARD_SESSION_KEY = 'opeyemi_temilayojesu_dashboard_passcode';
 
 const normalizePath = (path) => {
   const normalized = path.replace(/\/+$/, '');

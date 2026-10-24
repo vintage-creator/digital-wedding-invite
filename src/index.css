@@ -1,53 +1,53 @@
 /* ==========================================================================
-   DEBORAH & TOM WEDDING DESIGN SYSTEM
-   Palette: Ivory/Cream, Blush, Sage/Olive, Champagne Gold, Burgundy
+   OPEYEMI & TEMILAYOJESU WEDDING DESIGN SYSTEM (#EVERAFTER21')
+   Palette: Mint Green and Plum with Lilac, White & Soft Gold accents
    ========================================================================== */
 
 :root {
   /* Color Palette - couple's chosen wedding colors */
-  --burgundy-dark: #3B081B;
-  --burgundy: #5B0E2D;
-  --burgundy-medium: #7A1C3E;
-  --burgundy-light: #9E2B54;
-  --burgundy-soft: #F8ECEF;
+  --burgundy-dark: #320C30;
+  --burgundy: #5C2059;
+  --burgundy-medium: #742970;
+  --burgundy-light: #943A8E;
+  --burgundy-soft: #F7EEF6;
 
-  --olive-dark: #263622;
-  --olive: #4A583F;
-  --olive-medium: #647457;
-  --olive-light: #8EA682;
-  --olive-soft: #EEF3EA;
+  --olive-dark: #1A3E28;
+  --olive: #295D3D;
+  --olive-medium: #3E8257;
+  --olive-light: #72C78E;
+  --olive-soft: #EDF7F1;
 
-  --sage: #8EA682;
-  --sage-soft: #EEF3EA;
-  --sage-mist: #F6F8F2;
+  --sage: #72C78E;
+  --sage-soft: #EDF7F1;
+  --sage-mist: #F4FAF6;
 
-  --nude-bg: #FCF7EF;
-  --nude-card: #FFFDF9;
-  --nude-soft: #F6EDE2;
-  --nude-border: #E9DCCD;
-  --nude-muted: #8C7B6B;
+  --nude-bg: #FAF6FA;
+  --nude-card: #FFFFFF;
+  --nude-soft: #F3E8F2;
+  --nude-border: #E5D2E4;
+  --nude-muted: #7E657D;
 
-  --ivory: #FCF7EF;
-  --cream: #FFF9F0;
-  --blush: #D8A1A2;
-  --blush-muted: #C99091;
-  --blush-soft: #F8E8E4;
-  --blush-mist: #FCF2EF;
-  --champagne: #E7CF9D;
+  --ivory: #FAF6FA;
+  --cream: #FCF9FC;
+  --blush: #9CE3B3;
+  --blush-muted: #5BB37A;
+  --blush-soft: #EEF8F2;
+  --blush-mist: #F5FAF7;
+  --champagne: #D8F0E1;
 
-  --gold: #C5A059;
-  --gold-light: #E4C889;
-  --gold-dark: #9A7734;
-  --gold-glow: rgba(197, 160, 89, 0.25);
+  --gold: #3E8257;
+  --gold-light: #72C78E;
+  --gold-dark: #225635;
+  --gold-glow: rgba(114, 199, 142, 0.28);
 
-  --text-dark: #24301F;
-  --text-muted: #68705F;
-  --text-light: #FBF7EF;
+  --text-dark: #2A1529;
+  --text-muted: #645163;
+  --text-light: #FAF6FA;
 
-  --section-ivory: linear-gradient(180deg, #FCF7EF 0%, #FFF9F0 100%);
-  --section-bright: linear-gradient(180deg, #FFFDF9 0%, #FCF7EF 100%);
-  --section-blush: radial-gradient(circle at 16% 12%, rgba(216, 161, 162, 0.22), transparent 34%), linear-gradient(180deg, #FFF9F0 0%, #FCF2EF 100%);
-  --section-sage: radial-gradient(circle at 84% 10%, rgba(142, 166, 130, 0.18), transparent 32%), linear-gradient(180deg, #FCF7EF 0%, #F6F8F2 100%);
+  --section-ivory: linear-gradient(180deg, #FAF6FA 0%, #FFFFFF 100%);
+  --section-bright: linear-gradient(180deg, #FFFFFF 0%, #FAF6FA 100%);
+  --section-blush: radial-gradient(circle at 16% 12%, rgba(92, 32, 89, 0.08), transparent 34%), linear-gradient(180deg, #FFFFFF 0%, #FBF4FA 100%);
+  --section-sage: radial-gradient(circle at 84% 10%, rgba(114, 199, 142, 0.16), transparent 32%), linear-gradient(180deg, #FAF6FA 0%, #F4FAF6 100%);
 
   /* Typography */
   --font-script: 'Great Vibes', cursive;

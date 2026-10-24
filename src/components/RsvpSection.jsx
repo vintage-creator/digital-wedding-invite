@@ -41,22 +41,22 @@ export default function RsvpSection({ onTriggerToast }) {
     }
 
     const attendanceLabels = {
-      both: 'Both events',
-      traditional: 'Traditional wedding only',
-      white: 'White wedding only',
+      both: 'Joyfully attending (Wedding & Reception — Nov 21)',
+      traditional: 'Attending Wedding Ceremony',
+      white: 'Attending Reception',
       decline: 'Regretfully declines'
     };
     const whatsappMessage = [
-      'Hello Deborah & Tom, here is my wedding RSVP:',
+      'Hello Opeyemi & Temilayojesu (#EVERAFTER21\'), here is my wedding RSVP:',
       '',
       `Name: ${formData.fullName.trim()}`,
       `Attendance: ${attendanceLabels[formData.attendance]}`,
       `Number of guests: ${formData.guestCount}`,
       formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
       formData.email.trim() ? `Email: ${formData.email.trim()}` : null,
-      formData.message.trim() ? `Message / dietary needs: ${formData.message.trim()}` : null
+      formData.message.trim() ? `Message / blessings: ${formData.message.trim()}` : null
     ].filter(Boolean).join('\n');
-    const whatsappUrl = `https://wa.me/34658344473?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/2349027330272?text=${encodeURIComponent(whatsappMessage)}`;
     const whatsappWindow = window.open('about:blank', '_blank');
 
     if (whatsappWindow) {
@@ -121,14 +121,35 @@ export default function RsvpSection({ onTriggerToast }) {
         
         <span className="section-eyebrow">
           <Heart size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
-          Kindly Respond By Nov 15, 2026
+          Kindly Respond By Nov 10, 2026
         </span>
         <h2 className="section-title-script">
           RSVP Invitation
         </h2>
         <p className="section-subtitle">
-          Your presence would mean the world to us. Please fill out the form below to confirm your attendance and share the celebration with #DTLoveTale26.
+          Your presence would mean the world to us. Please fill out the form below to confirm your attendance with <strong>#EVERAFTER21'</strong>.
         </p>
+
+        {/* RSVP Helpline Notice */}
+        <div style={{
+          display: 'inline-flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1.2rem',
+          marginBottom: '2rem',
+          fontSize: '0.85rem',
+          color: 'var(--text-muted)'
+        }}>
+          <span>RSVP Contacts:</span>
+          <a href="tel:09027330272" style={{ color: 'var(--burgundy)', fontWeight: 600, textDecoration: 'none' }}>
+            Seyi: 09027330272
+          </a>
+          <span>•</span>
+          <a href="tel:08132804142" style={{ color: 'var(--burgundy)', fontWeight: 600, textDecoration: 'none' }}>
+            Tolu: 08132804142
+          </a>
+        </div>
 
         <div className="glass-card" style={{
           padding: 'clamp(1.5rem, 5vw, 3rem)',
@@ -213,12 +234,10 @@ export default function RsvpSection({ onTriggerToast }) {
                 <label className="form-label">
                   Attendance Selection
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.8rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.8rem' }}>
                   {[
-                    { id: 'both', label: 'Both Events' },
-                    { id: 'traditional', label: 'Traditional Only' },
-                    { id: 'white', label: 'White Wedding Only' },
-                    { id: 'decline', label: 'Regretfully Decline' }
+                    { id: 'both', label: 'Joyfully Attending (Nov 21)' },
+                    { id: 'decline', label: 'Regretfully Declines' }
                   ].map((opt) => (
                     <label
                       key={opt.id}
@@ -253,7 +272,7 @@ export default function RsvpSection({ onTriggerToast }) {
               <div className="form-group" style={{ marginTop: '0.5rem' }}>
                 <label className="form-label" htmlFor="guestCount">
                   <Users size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                  Number of Attending Guests
+                  Number of Attending Guests (Access Card Admits One)
                 </label>
                 <select
                   id="guestCount"
@@ -261,10 +280,10 @@ export default function RsvpSection({ onTriggerToast }) {
                   value={formData.guestCount}
                   onChange={(e) => setFormData({ ...formData, guestCount: parseInt(e.target.value) })}
                 >
-                  <option value={1}>1 Guest (Just Me)</option>
-                  <option value={2}>2 Guests (Me + Plus One)</option>
+                  <option value={1}>1 Guest (1 Access Card)</option>
+                  <option value={2}>2 Guests</option>
                   <option value={3}>3 Guests</option>
-                  <option value={4}>4 Guests (Family)</option>
+                  <option value={4}>4 Guests</option>
                   <option value={5}>5+ Guests</option>
                 </select>
               </div>
@@ -273,7 +292,7 @@ export default function RsvpSection({ onTriggerToast }) {
               <div className="form-group" style={{ marginTop: '0.5rem' }}>
                 <label className="form-label" htmlFor="message">
                   <MessageSquare size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                  Wishes for Deborah & Tom / Dietary Requirements
+                  Wishes for Opeyemi &amp; Temilayojesu / Special Notes
                 </label>
                 <textarea
                   id="message"

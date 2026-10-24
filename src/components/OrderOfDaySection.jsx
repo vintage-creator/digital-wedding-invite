@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Clock, CheckCircle2 } from 'lucide-react';
 
 export default function OrderOfDaySection() {
-  const [activeTab, setActiveTab] = useState('traditional');
-
-  const traditionalSchedule = [
-    { time: '10:00 AM', title: 'Guest Arrival & Welcome', desc: 'Arrival of guests at The Nest Gardens Guzape, welcomed with traditional music.' },
-    { time: '11:00 AM', title: 'Bride & Groom Entrance', desc: 'Grand entry of the families and couple in rich traditional regal attire.' },
-    { time: '12:30 PM', title: 'Dowry & Marriage Rites', desc: 'Traditional blessing, exchange of gifts, and cultural marriage rites.' },
-    { time: '02:00 PM', title: 'Buffet Feast & Refreshments', desc: 'Sumptuous local delicacies, fine wines, and cultural dance performances.' },
-    { time: '04:00 PM', title: 'Photo Sessions & Toast', desc: 'Family photographs, cutting of traditional cake, and open floor dancing.' }
+  const schedule = [
+    {
+      time: '10:00 AM',
+      title: 'Guest Arrival & Access Card Verification',
+      desc: 'Arrival of esteemed guests at Green Life Event Center, Oregun, Lagos. Kindly present your digital or physical Access Card (Admits One).'
+    },
+    {
+      time: '10:45 AM',
+      title: 'Processional & Couple’s Entrance',
+      desc: 'Grand procession of families, bridal train, and the radiant entrance of Opeyemi & Temilayojesu in rich Plum & Mint Green regal elegance.'
+    },
+    {
+      time: '11:15 AM',
+      title: 'Solemnization of Holy Matrimony',
+      desc: 'Exchange of vows, blessing of rings, and solemnization of marriage rites before God and witnesses.'
+    },
+    {
+      time: '01:00 PM',
+      title: 'Grand Reception & Couple’s First Dance',
+      desc: 'Celebration entry of the newlyweds into the reception hall, first dance, and welcome address.'
+    },
+    {
+      time: '02:30 PM',
+      title: 'Banquet Feast, Toasts & Cake Cutting',
+      desc: 'Gourmet banquet dinner, family toasts, cutting of the wedding cake, and photo sessions.'
+    },
+    {
+      time: '04:30 PM',
+      title: 'Open Dance Floor & After-Party',
+      desc: 'Celebratory music, bouquet toss, dancing, and memorable moments with friends and family.'
+    }
   ];
-
-  const whiteSchedule = [
-    { time: '11:00 AM', title: 'Holy Matrimony Ceremony', desc: 'Exchange of vows and rings at Christ Embassy Abuja Zonal Church, Loveworld Auditorium, Jabi.' },
-    { time: '12:30 PM', title: 'Cocktail & Mocktail Hour', desc: 'Canapés, acoustic music, and arrival photo booth.' },
-    { time: '01:30 PM', title: 'Grand Reception Entry', desc: 'Entrance of bridal party, Deborah & Tom’s first dance.' },
-    { time: '03:00 PM', title: 'Gourmet Banquet & Speeches', desc: 'Three-course dinner, family toasts, and cake cutting.' },
-    { time: '05:00 PM', title: 'After-Party & Celebration', desc: 'DJ music, dancing, bouquet toss, and midnight snacks.' }
-  ];
-
-  const currentSchedule = activeTab === 'traditional' ? traditionalSchedule : whiteSchedule;
 
   return (
     <section id="order" className="section-padding" style={{ background: 'var(--section-bright)' }}>
@@ -29,122 +42,76 @@ export default function OrderOfDaySection() {
         <span className="section-eyebrow">
           <Clock size={14} style={{ display: 'inline', marginRight: '6px', verticalAlign: '-2px' }} />
           Program Schedule
-        </span>``
+        </span>
         <h2 className="section-title-script">
           Order of the Day
         </h2>
         <p className="section-subtitle">
-          Here is what to expect as we celebrate each milestone of our wedding weekend.
+          Saturday, 21st November 2026 • Green Life Event Center, Oregun, Lagos
         </p>
 
-        {/* Tab Selection */}
-        <div className="schedule-tabs" style={{
-          display: 'inline-flex',
-          maxWidth: '100%',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '4px',
-          background: 'rgba(252, 242, 239, 0.58)',
-          padding: '6px',
-          borderRadius: '40px',
-          border: '1.5px solid var(--nude-border)',
-          marginBottom: '2.5rem',
-          boxShadow: '0 2px 10px rgba(38, 54, 34, 0.06)'
+        {/* Timeline list */}
+        <div style={{
+          marginTop: '3.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          textAlign: 'left'
         }}>
-          <button
-            onClick={() => setActiveTab('traditional')}
-            style={{
-              padding: '10px 22px',
-              borderRadius: '30px',
-              border: activeTab === 'traditional' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
-              background: activeTab === 'traditional' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
-              color: activeTab === 'traditional' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
-              fontWeight: 500,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'traditional' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
-            }}
-          >
-            Traditional Schedule (Dec 17)
-          </button>
-          
-          <button
-            onClick={() => setActiveTab('white')}
-            style={{
-              padding: '10px 22px',
-              borderRadius: '30px',
-              border: activeTab === 'white' ? '1.5px solid var(--blush-muted)' : '1px solid transparent',
-              background: activeTab === 'white' ? 'linear-gradient(135deg, var(--blush-soft), var(--cream))' : 'transparent',
-              color: activeTab === 'white' ? 'var(--burgundy-dark)' : 'var(--text-muted)',
-              fontWeight: 500,
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: activeTab === 'white' ? '0 4px 14px rgba(216, 161, 162, 0.18)' : 'none'
-            }}
-          >
-            White Wedding Schedule (Dec 19)
-          </button>
-        </div>
-
-        {/* Timeline Items */}
-        <div style={{ position: 'relative', paddingLeft: '2.5rem', textAlign: 'left' }}>
-          {/* Vertical Timeline Line */}
-          <div style={{
-            position: 'absolute',
-            left: '14px',
-            top: '10px',
-            bottom: '10px',
-            width: '2px',
-            background: 'linear-gradient(180deg, var(--gold), var(--burgundy-medium), var(--olive))'
-          }} />
-
-          {currentSchedule.map((item, idx) => (
-            <div key={item.title} style={{ position: 'relative', paddingBottom: '2.2rem' }}>
-              {/* Dot */}
-              <div style={{
-                position: 'absolute',
-                left: '-2.5rem',
-                top: '2px',
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
-                background: 'var(--nude-card)',
-                border: `2px solid ${activeTab === 'traditional' ? 'var(--burgundy)' : 'var(--olive)'}`,
+          {schedule.map((item, idx) => (
+            <div
+              key={idx}
+              className="glass-card"
+              style={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-              }}>
-                <CheckCircle2 size={14} style={{ color: activeTab === 'traditional' ? 'var(--burgundy)' : 'var(--olive)' }} />
-              </div>
-
-              {/* Time Badge */}
-              <span style={{
-                fontFamily: 'var(--font-serif)',
+                alignItems: 'flex-start',
+                gap: '1.25rem',
+                padding: '1.4rem 1.6rem',
+                borderRadius: '18px',
+                border: '1.5px solid var(--nude-border)',
+                background: 'var(--nude-card)',
+                boxShadow: '0 4px 15px rgba(50, 12, 48, 0.04)',
+                position: 'relative'
+              }}
+            >
+              {/* Badge Time Column */}
+              <div style={{
+                background: 'rgba(92, 32, 89, 0.08)',
+                border: '1px solid rgba(114, 199, 142, 0.5)',
+                borderRadius: '12px',
+                padding: '0.45rem 0.85rem',
+                color: 'var(--burgundy)',
+                fontWeight: 700,
                 fontSize: '0.85rem',
-                fontWeight: 600,
-                color: 'var(--gold-dark)',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase'
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}>
                 {item.time}
-              </span>
+              </div>
 
-              {/* Title & Desc */}
-              <h3 style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '1.25rem',
-                color: 'var(--text-dark)',
-                margin: '0.3rem 0'
-              }}>
-                {item.title}
-              </h3>
-
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                {item.desc}
-              </p>
+              {/* Title & Description */}
+              <div style={{ flex: 1 }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '1.15rem',
+                  color: 'var(--burgundy)',
+                  margin: '0 0 0.25rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <CheckCircle2 size={16} style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                  {item.title}
+                </h3>
+                <p style={{
+                  fontSize: '0.88rem',
+                  color: 'var(--text-muted)',
+                  margin: 0,
+                  lineHeight: 1.5
+                }}>
+                  {item.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

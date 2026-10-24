@@ -9,7 +9,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
   const [accessCode, setAccessCode] = useState('');
   const [accessError, setAccessError] = useState('');
   const [isCheckingCode, setIsCheckingCode] = useState(false);
-  const invitationCode = (import.meta.env.VITE_INVITATION_CODE || 'DT2026').trim().toLowerCase();
+  const invitationCode = (import.meta.env.VITE_INVITATION_CODE || 'everafter21').trim().toLowerCase();
+  const validCodes = ['everafter21', 'everafter21\'', 'ever_after_21', 'ot2026', 'ot21', invitationCode];
 
   useEffect(() => {
     if (isDismissed) return undefined;
@@ -58,7 +59,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
       return;
     }
 
-    if (enteredCode.toLowerCase() !== invitationCode) {
+    if (!validCodes.includes(enteredCode.toLowerCase())) {
       setIsCheckingCode(true);
       setAccessError('');
 
@@ -150,8 +151,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
     >
       <div className={`invitation-arrival-copy ${isOpening ? 'invitation-arrival-copy-opening' : ''}`}>
         <span>Your invitation has arrived</span>
-        <strong>Deborah &amp; Tom invite you</strong>
-          <small>{isCheckingCode ? 'Checking access…' : 'Enter your access code, then tap the wax seal'}</small>
+        <strong>Opeyemi &amp; Temilayojesu invite you</strong>
+          <small>{isCheckingCode ? 'Checking access…' : 'Enter access code (e.g. EVERAFTER21), then tap the wax seal'}</small>
         <form
           className="invitation-code-form"
           onSubmit={(event) => {
@@ -193,7 +194,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         {/* Reference Sage Green Paper Envelope Image */}
         <img
           src="/assets/sage_envelope.jpg"
-          alt="Deborah & Tom Wedding Envelope"
+          alt="Opeyemi & Temilayojesu Wedding Envelope"
           style={{
             width: '100%',
             height: '100%',
@@ -256,23 +257,33 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
       </div>
 
       {isCardPresented && (
-        <div className="cover-invitation-card" role="dialog" aria-label="Deborah and Tom wedding invitation card">
+        <div className="cover-invitation-card" role="dialog" aria-label="Opeyemi and Temilayojesu wedding access card">
           <div className="cover-invitation-card-inner">
             <img
-              src="/assets/dt-logo-mark-transparent.png"
-              alt="Deborah and Tomilola wedding logo"
-              className="cover-invitation-logo"
+              src="/assets/ot_access_card_page_1.png"
+              alt="Opeyemi and Temilayojesu OT access card"
+              style={{
+                width: '100%',
+                maxHeight: '260px',
+                objectFit: 'contain',
+                borderRadius: '16px',
+                marginBottom: '1rem',
+                boxShadow: '0 8px 24px rgba(50, 12, 48, 0.2)'
+              }}
             />
-            <span className="cover-invitation-eyebrow">You are invited</span>
+            <span className="cover-invitation-eyebrow">Access Card Granted</span>
             <h2>
-              <span>Deborah</span>
+              <span>Opeyemi</span>
               <em>and</em>
-              <span>Tomilola</span>
+              <span>Temilayojesu</span>
             </h2>
-            <p>Kindly join us for their wedding celebration.</p>
-            <div className="cover-invitation-date">Saturday, 19th December 2026</div>
+            <p>Kindly join us for our wedding celebration.</p>
+            <div className="cover-invitation-date">Saturday, 21st November 2026 • 10:00 AM</div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: '0.2rem 0 1rem' }}>
+              Green Life Event Center, Oregun, Ikeja, Lagos
+            </p>
             <button type="button" onClick={handleEnterInvitation}>
-              Accept Invitation
+              Open Full Invitation
             </button>
           </div>
         </div>

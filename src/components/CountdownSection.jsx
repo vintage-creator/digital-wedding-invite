@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Calendar } from 'lucide-react';
+import { Clock, Calendar, MapPin } from 'lucide-react';
 
 export default function CountdownSection() {
-  const [activeTab, setActiveTab] = useState('traditional'); // 'traditional' | 'white'
-
-  // Target dates: Dec 17, 2026 for Traditional, Dec 19, 2026 for White Wedding
-  const traditionalDate = new Date('2026-12-17T10:00:00+01:00').getTime();
-  const whiteDate = new Date('2026-12-19T11:00:00+01:00').getTime();
+  // Target date: Saturday, 21st November 2026, 10:00 AM WAT
+  const weddingDate = new Date('2026-11-21T10:00:00+01:00').getTime();
 
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const targetTime = activeTab === 'traditional' ? traditionalDate : whiteDate;
       const now = new Date().getTime();
-      const difference = targetTime - now;
+      const difference = weddingDate - now;
 
       if (difference > 0) {
         setTimeLeft({
@@ -31,7 +27,7 @@ export default function CountdownSection() {
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
-  }, [activeTab]);
+  }, [weddingDate]);
 
   return (
     <section id="countdown" className="section-padding countdown-section" style={{ background: 'var(--section-blush)' }}>
@@ -46,35 +42,20 @@ export default function CountdownSection() {
           Until We Say "I Do"
         </h2>
         <p className="section-subtitle">
-          Join us as we count down every second to our magical wedding celebrations in Abuja.
+          Join us as we count down every second to our wedding celebration at Green Life Event Center, Lagos.
         </p>
 
         <div className="countdown-panel">
-          {/* Event Selection Tabs */}
-          <div className="countdown-tabs">
-            <button
-              onClick={() => setActiveTab('traditional')}
-              className={activeTab === 'traditional' ? 'countdown-tab-active' : ''}
-            >
-              Traditional Wedding (Dec 17)
-            </button>
-            
-            <button
-              onClick={() => setActiveTab('white')}
-              className={activeTab === 'white' ? 'countdown-tab-active' : ''}
-            >
-              White Wedding (Dec 19)
-            </button>
-          </div>
-
           {/* Selected Event Details Header */}
-          <div className="countdown-event-date">
-            <span className="badge-gold">
-              <Calendar size={14} style={{ flexShrink: 0 }} />
-              {activeTab === 'traditional'
-                ? 'Thursday, 17th December 2026 • The Nest Gardens Guzape'
-                : 'Saturday, 19th December 2026 • Christ Embassy Loveworld Auditorium, Jabi'}
+          <div className="countdown-event-date" style={{ marginBottom: '1.8rem' }}>
+            <span className="badge-gold" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '0.6rem 1.4rem' }}>
+              <Calendar size={16} style={{ flexShrink: 0 }} />
+              Saturday, 21st November 2026 • 10:00 AM WAT
             </span>
+            <div style={{ marginTop: '0.6rem', fontSize: '0.88rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <MapPin size={15} style={{ color: 'var(--gold-dark)' }} />
+              <span>Green Life Event Center, Oregun, Ikeja, Lagos</span>
+            </div>
           </div>
 
           {/* Countdown Digit Boxes Grid */}

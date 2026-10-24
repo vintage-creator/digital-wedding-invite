@@ -137,7 +137,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         width: '100vw',
         height: '100dvh',
         zIndex: 10000,
-        background: 'radial-gradient(circle at 50% 35%, #FAF4F9 0%, #E8D2E6 46%, #5C2059 100%)',
+        background: 'radial-gradient(circle at 50% 35%, #FBFCF7 0%, #DCEAD5 46%, #583057 100%)',
         transition: 'opacity 1s ease',
         opacity: isLeaving ? 0 : 1,
         pointerEvents: isLeaving ? 'none' : 'all',
@@ -191,17 +191,17 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           transition: 'transform 1.3s cubic-bezier(0.4, 0, 0.2, 1)'
         }}
       >
-        {/* Plum Paper Envelope Image */}
+        {/* Mint Paper Envelope Image */}
         <img
-          src="/assets/burgundy_envelope.jpg"
-          alt="Opeyemi & Temilayojesu Wedding Envelope"
+          src="/assets/sage_envelope.jpg"
+          alt="Mint green paper envelope for Opeyemi and Temilayojesu"
           style={{
             width: '100%',
             height: '100%',
             objectFit: 'cover',
             borderRadius: '16px',
-            boxShadow: '0 35px 90px rgba(50, 12, 48, 0.45)',
-            filter: 'hue-rotate(320deg) saturate(1.22) brightness(0.92)',
+            boxShadow: '0 35px 90px rgba(50, 12, 48, 0.3)',
+            filter: 'saturate(0.92) brightness(1.04) contrast(0.98)',
             display: 'block'
           }}
         />
@@ -239,7 +239,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             padding: 0,
             cursor: 'pointer',
             zIndex: 10,
-            filter: 'drop-shadow(0 0 25px rgba(114, 199, 142, 0.75)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.65))',
+            filter: 'drop-shadow(0 0 22px rgba(114, 199, 142, 0.7)) drop-shadow(0 14px 28px rgba(35, 10, 20, 0.6))',
             animation: isOpening
               ? 'sealRotateOpen 1.1s cubic-bezier(0.5, -0.3, 0.4, 1) forwards'
               : 'glowingSealPulse 2.8s ease-in-out infinite',
@@ -248,35 +248,50 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           title="Tap Seal to Open Invitation"
           aria-label="Open Invitation"
         >
+          <img
+            src="/assets/dt-script-wax-seal.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              display: 'block',
+              filter: 'hue-rotate(320deg) saturate(1.12) brightness(1.04)'
+            }}
+          />
           <span style={{
             position: 'absolute',
-            inset: '5%',
+            left: '50%',
+            top: '50%',
+            width: '76%',
+            aspectRatio: '1 / 1',
+            transform: 'translate(-50%, -50%)',
             borderRadius: '50%',
-            overflow: 'hidden',
-            border: '2px solid rgba(255, 255, 255, 0.55)',
-            background: '#5C2059',
-            boxShadow: 'inset 0 0 0 5px rgba(114, 199, 142, 0.24), inset 0 0 24px rgba(32, 7, 32, 0.6)'
+            border: '1px solid rgba(218, 244, 221, 0.72)',
+            background: 'radial-gradient(circle at 36% 28%, #93688F 0%, #6B3A68 43%, #471D46 100%)',
+            boxShadow: 'inset 0 2px 5px rgba(255, 255, 255, 0.2), inset 0 -9px 16px rgba(25, 5, 25, 0.5), 0 0 0 3px rgba(53, 18, 52, 0.55)',
+            display: 'grid',
+            placeItems: 'center',
+            overflow: 'hidden'
           }}>
-            <img
-              src="/assets/ot_access_card_page_1.png"
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                width: '270%',
-                maxWidth: 'none',
-                height: 'auto',
-                left: '-88.54%',
-                top: '-26.04%'
-              }}
-            />
             <span style={{
               position: 'absolute',
-              inset: '3%',
+              inset: '4%',
               borderRadius: '50%',
-              border: '1px solid rgba(255, 255, 255, 0.24)',
+              border: '1px solid rgba(218, 244, 221, 0.3)',
               pointerEvents: 'none'
             }} />
+            <span aria-hidden="true" style={{
+              color: '#E6F6E6',
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(1.7rem, 5.2vw, 3.6rem)',
+              fontWeight: 700,
+              letterSpacing: '0.04em',
+              textShadow: '0 2px 3px rgba(24, 5, 24, 0.72), 0 -1px 1px rgba(255, 255, 255, 0.45)'
+            }}>
+              OT
+            </span>
           </span>
         </button>
       </div>
@@ -333,13 +348,20 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           top: clamp(24px, 7vh, 74px);
           left: 50%;
           width: min(88vw, 620px);
+          box-sizing: border-box;
+          padding: 0.9rem clamp(1rem, 3vw, 1.6rem) 1rem;
           transform: translate(-50%, -18px);
           text-align: center;
-          color: #3b081b;
+          color: #351638;
+          background: rgba(250, 252, 247, 0.93);
+          border: 1px solid rgba(92, 32, 89, 0.22);
+          border-radius: 22px;
+          box-shadow: 0 14px 38px rgba(42, 17, 45, 0.2);
+          backdrop-filter: blur(10px);
           pointer-events: none;
           opacity: 0;
           animation: arrivalCopyIn 0.9s ease 0.65s forwards;
-          text-shadow: 0 1px 18px rgba(255, 248, 242, 0.9);
+          text-shadow: 0 1px 5px rgba(255, 255, 255, 0.75);
         }
 
         .invitation-arrival-copy span,
@@ -353,7 +375,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
         .invitation-arrival-copy span {
           font-size: clamp(0.66rem, 1.5vw, 0.82rem);
           font-weight: 600;
-          color: #4a583f;
+          color: #4b3450;
         }
 
         .invitation-arrival-copy strong {
@@ -361,12 +383,12 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           margin: 0.2rem 0 0.25rem;
           font: 400 clamp(2rem, 5vw, 3.3rem) var(--font-script);
           line-height: 1.1;
-          color: #5b0e2d;
+          color: #54214f;
         }
 
         .invitation-arrival-copy small {
           font-size: clamp(0.56rem, 1.2vw, 0.68rem);
-          color: #4a583f;
+          color: #4b3450;
         }
 
         .invitation-code-form {
@@ -381,26 +403,26 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           font: 600 0.68rem var(--font-sans);
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #3b081b;
+          color: #3f1b43;
         }
 
         .invitation-code-form input {
           width: 100%;
           min-height: 46px;
-          border: 1.5px solid rgba(197, 160, 89, 0.7);
+          border: 1.5px solid rgba(92, 32, 89, 0.35);
           border-radius: 999px;
           padding: 0.7rem 1.05rem;
           text-align: center;
           font: 600 1rem var(--font-sans);
-          color: #263622;
-          background: rgba(255, 253, 252, 0.88);
-          box-shadow: 0 10px 30px rgba(59, 8, 27, 0.12);
+          color: #301632;
+          background: rgba(255, 255, 252, 0.96);
+          box-shadow: 0 10px 30px rgba(42, 17, 45, 0.12);
           outline: none;
         }
 
         .invitation-code-form input:focus {
-          border-color: #5b0e2d;
-          box-shadow: 0 0 0 4px rgba(139, 158, 123, 0.32), 0 10px 30px rgba(59, 8, 27, 0.12);
+          border-color: #5c2059;
+          box-shadow: 0 0 0 4px rgba(114, 199, 142, 0.38), 0 10px 30px rgba(42, 17, 45, 0.12);
         }
 
         .invitation-code-form p {
@@ -408,7 +430,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           font: 600 0.75rem var(--font-sans);
           letter-spacing: 0;
           text-transform: none;
-          color: #5b0e2d;
+          color: #54214f;
         }
 
         .invitation-arrival-copy-opening {

@@ -92,7 +92,7 @@ export default function EventsSection() {
           Events & Venues
         </h2>
         <p className="section-subtitle">
-          Join us as we celebrate our union across two special days in Abuja, Nigeria. Hover over venue photos for details.
+          Celebrate with us in Abuja for the wedding, then join us in Ibadan for a Boxing Day reception party. Hover over venue photos for details.
         </p>
 
         {/* Venue Cards Grid */}
@@ -242,6 +242,31 @@ export default function EventsSection() {
             );
           })}
         </div>
+
+        <aside className="boxing-day-card glass-card" aria-labelledby="boxing-day-title">
+          <div className="boxing-day-copy">
+            <span className="boxing-day-kicker">A little more to celebrate</span>
+            <h3 id="boxing-day-title">Reception Party</h3>
+            <p className="boxing-day-date">
+              <Calendar size={17} aria-hidden="true" />
+              Saturday, 26th December 2026 · Boxing Day
+            </p>
+            <p className="boxing-day-venue">
+              <strong>Event Marquee: TAEP MULTI PURPOSE HALL</strong>
+              <span>SDP Junction, New Ife Road, Ibadan.</span>
+            </p>
+          </div>
+          <a
+            className="btn btn-outline-burgundy boxing-day-directions"
+            href="https://www.google.com/maps/search/?api=1&query=TAEP%20MULTI%20PURPOSE%20HALL%2C%20SDP%20Junction%2C%20New%20Ife%20Road%2C%20Ibadan"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Get directions to TAEP Multi Purpose Hall in Ibadan"
+          >
+            <Navigation size={15} aria-hidden="true" />
+            Get Directions
+          </a>
+        </aside>
 
       </div>
     </section>

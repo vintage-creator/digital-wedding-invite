@@ -207,6 +207,66 @@ main {
   margin: 0 auto 2.5rem;
 }
 
+.boxing-day-card {
+  max-width: 960px;
+  margin: 2.5rem auto 0;
+  padding: clamp(1.35rem, 3.2vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  text-align: left;
+  background: linear-gradient(120deg, rgba(255, 253, 249, 0.98), rgba(248, 238, 233, 0.96));
+  border-color: rgba(197, 160, 89, 0.52);
+  box-shadow: 0 16px 42px rgba(59, 8, 27, 0.09);
+}
+
+.boxing-day-copy { min-width: 0; }
+
+.boxing-day-kicker {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--gold-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.boxing-day-card h3 {
+  margin: 0;
+  color: var(--burgundy);
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  font-weight: 500;
+}
+
+.boxing-day-date {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.65rem 0 0;
+  color: var(--burgundy-dark);
+  font-weight: 600;
+}
+
+.boxing-day-date svg { color: var(--gold-dark); flex: 0 0 auto; }
+
+.boxing-day-venue {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.45rem 0 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.boxing-day-venue strong { color: var(--text-dark); }
+
+.boxing-day-directions {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 /* Glassmorphism Card */
 .glass-card {
   background: rgba(255, 253, 249, 0.88);
@@ -2110,6 +2170,15 @@ button, a, input, select, textarea {
   .photo-grid {
     grid-template-columns: minmax(0, 1fr) !important;
   }
+
+  .boxing-day-card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .boxing-day-date { align-items: flex-start; }
+  .boxing-day-directions { width: 100%; }
 
   .gallery-photo-card > div:first-child,
   .gallery-photo-card-0 > div:first-child,

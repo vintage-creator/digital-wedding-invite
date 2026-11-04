@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Heart, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Users, Loader2 } from 'lucide-react';
+import { Heart, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Loader2 } from 'lucide-react';
 import { createRsvp } from '../lib/supabase';
 
 export default function RsvpSection({ onTriggerToast }) {
@@ -8,7 +8,7 @@ export default function RsvpSection({ onTriggerToast }) {
     fullName: '',
     email: '',
     phone: '',
-    attendance: 'both', // 'traditional' | 'white' | 'both' | 'decline'
+    attendance: 'both', // 'both' | 'decline'
     guestCount: 1,
     message: ''
   });
@@ -20,7 +20,7 @@ export default function RsvpSection({ onTriggerToast }) {
     e.preventDefault();
     if (isSubmitting) return;
 
-    if (!formData.fullName) {
+    if (!formData.fullName.trim()) {
       if (onTriggerToast) {
         onTriggerToast({
           type: 'error',
@@ -34,43 +34,13 @@ export default function RsvpSection({ onTriggerToast }) {
       if (onTriggerToast) {
         onTriggerToast({
           type: 'error',
-          message: 'Please enter your phone or WhatsApp number.'
+          message: 'Please enter your phone number.'
         });
       }
       return;
     }
 
-    const attendanceLabels = {
-      both: 'Joyfully attending (Wedding & Reception — Nov 21)',
-      traditional: 'Attending Wedding Ceremony',
-      white: 'Attending Reception',
-      decline: 'Regretfully declines'
-    };
-    const whatsappMessage = [
-      'Hello Opeyemi & Temilayojesu (#ever_after_21), here is my wedding RSVP:',
-      '',
-      `Name: ${formData.fullName.trim()}`,
-      `Attendance: ${attendanceLabels[formData.attendance]}`,
-      `Number of guests: ${formData.guestCount}`,
-      formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
-      formData.email.trim() ? `Email: ${formData.email.trim()}` : null,
-      formData.message.trim() ? `Message / blessings: ${formData.message.trim()}` : null
-    ].filter(Boolean).join('\n');
-    const whatsappUrl = `https://wa.me/2349027330272?text=${encodeURIComponent(whatsappMessage)}`;
-    const whatsappWindow = window.open('about:blank', '_blank');
-
-    if (whatsappWindow) {
-      try {
-        whatsappWindow.opener = null;
-        whatsappWindow.document.title = 'Opening WhatsApp…';
-        whatsappWindow.document.body.style.fontFamily = 'system-ui, -apple-system, sans-serif';
-        whatsappWindow.document.body.style.padding = '2rem';
-        whatsappWindow.document.body.innerHTML = '<p>Saving RSVP, then opening WhatsApp…</p>';
-      } catch (err) {}
-    }
-
     setIsSubmitting(true);
-    let savedToDatabase = false;
 
     try {
       await createRsvp({
@@ -78,40 +48,39 @@ export default function RsvpSection({ onTriggerToast }) {
         phone: formData.phone.trim(),
         email: formData.email.trim(),
         attendance: formData.attendance,
-        guestCount: Number(formData.guestCount) || 1,
+        guestCount: 1,
         message: formData.message.trim(),
-        whatsappLinkOpened: true
+        whatsappLinkOpened: false
       });
-      savedToDatabase = true;
+
+      setSubmitted(true);
+
+      try {
+        confetti({
+          particleCount: 35,
+          spread: 50,
+          startVelocity: 25,
+          origin: { y: 0.75 },
+          colors: ['#5C2059', '#295D3D', '#72C78E', '#E5D9C3']
+        });
+      } catch (err) {}
+
+      if (onTriggerToast) {
+        onTriggerToast({
+          type: 'success',
+          message: `Thank you, ${formData.fullName}! Your RSVP has been confirmed.`
+        });
+      }
     } catch (err) {
-      console.log('RSVP database save failed; continuing with WhatsApp fallback:', err);
-    }
-
-    if (whatsappWindow && !whatsappWindow.closed) {
-      whatsappWindow.location.href = whatsappUrl;
-    } else {
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    }
-    setSubmitted(true);
-    setIsSubmitting(false);
-
-    try {
-      confetti({
-        particleCount: 35,
-        spread: 50,
-        startVelocity: 25,
-        origin: { y: 0.75 },
-        colors: ['#5B0E2D', '#4A583F', '#8EA682', '#E5D9C3']
-      });
-    } catch (err) {}
-
-    if (onTriggerToast) {
-      onTriggerToast({
-        type: savedToDatabase ? 'success' : 'info',
-        message: savedToDatabase
-          ? `${formData.fullName}'s RSVP has been saved. WhatsApp is open as an extra notification.`
-          : `WhatsApp is ready with ${formData.fullName}'s RSVP details. Database save did not complete.`
-      });
+      console.error('RSVP submission error:', err);
+      if (onTriggerToast) {
+        onTriggerToast({
+          type: 'error',
+          message: 'Unable to save your RSVP at the moment. Please try again or contact us directly.'
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -173,10 +142,20 @@ export default function RsvpSection({ onTriggerToast }) {
                 We can't wait to celebrate with you, {formData.fullName}!
               </h4>
               <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '460px', margin: '0 auto 1.5rem' }}>
-                Your RSVP has been saved. WhatsApp has also opened with your details as an extra notification for the couple.
+                Your RSVP has been successfully received and recorded for the celebration.
               </p>
               <button
-                onClick={() => setSubmitted(false)}
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({
+                    fullName: '',
+                    email: '',
+                    phone: '',
+                    attendance: 'both',
+                    guestCount: 1,
+                    message: ''
+                  });
+                }}
                 className="btn btn-outline-burgundy"
               >
                 Submit Another RSVP
@@ -221,7 +200,7 @@ export default function RsvpSection({ onTriggerToast }) {
                 <div className="form-group">
                   <label className="form-label" htmlFor="phone">
                     <Phone size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                    Phone Number / WhatsApp *
+                    Phone Number *
                   </label>
                   <input
                     id="phone"
@@ -272,26 +251,6 @@ export default function RsvpSection({ onTriggerToast }) {
                     </label>
                   ))}
                 </div>
-              </div>
-
-              {/* Number of Guests */}
-              <div className="form-group" style={{ marginTop: '0.5rem' }}>
-                <label className="form-label" htmlFor="guestCount">
-                  <Users size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                  Number of Attending Guests
-                </label>
-                <select
-                  id="guestCount"
-                  className="form-select"
-                  value={formData.guestCount}
-                  onChange={(e) => setFormData({ ...formData, guestCount: parseInt(e.target.value) })}
-                >
-                  <option value={1}>1 Guest</option>
-                  <option value={2}>2 Guests</option>
-                  <option value={3}>3 Guests</option>
-                  <option value={4}>4 Guests</option>
-                  <option value={5}>5+ Guests</option>
-                </select>
               </div>
 
               {/* Warm Wishes & Notes */}

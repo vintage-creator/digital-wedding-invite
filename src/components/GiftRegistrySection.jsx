@@ -10,19 +10,87 @@ const giftCardOption = {
 };
 
 const bankTransferDetails = {
-  bankName: import.meta.env.VITE_GIFT_BANK_NAME?.trim(),
-  accountName: import.meta.env.VITE_GIFT_ACCOUNT_NAME?.trim(),
-  accountNumber: import.meta.env.VITE_GIFT_ACCOUNT_NUMBER?.trim()
+  bankName: 'Pocket App',
+  accountName: 'Opeyemi Olasunkanmi',
+  accountNumber: '7161422537'
 };
 
-const hasBankTransferDetails = Object.values(bankTransferDetails).every(Boolean);
+const BankTransferCard = React.memo(function BankTransferCard() {
+  const [copiedBank, setCopiedBank] = useState(false);
+
+  const handleCopyAccount = async () => {
+    try {
+      await navigator.clipboard.writeText(bankTransferDetails.accountNumber);
+      setCopiedBank(true);
+
+      try {
+        confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#C5A059', '#E4C889'] });
+      } catch (error) {}
+
+      window.setTimeout(() => setCopiedBank(false), 3000);
+    } catch (error) {}
+  };
+
+  return (
+    <article
+      className="glass-card"
+      style={{
+        padding: '2rem 1.5rem',
+        border: '2px solid var(--gold)',
+        background: 'rgba(255, 253, 249, 0.92)',
+        borderRadius: '22px'
+      }}
+    >
+      <CreditCard size={32} style={{ color: 'var(--burgundy)', marginBottom: '0.8rem' }} />
+      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
+        Cash &amp; Honeymoon Transfer
+      </h3>
+      <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
+        Direct bank transfer details for cash gifts and blessings for the couple.
+      </p>
+
+      <div style={{
+        background: 'var(--nude-card)',
+        border: '1.5px solid var(--nude-border)',
+        borderRadius: '14px',
+        padding: '1.2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
+          <span style={{ color: 'var(--text-muted)' }}>Bank Name:</span>
+          <strong style={{ color: 'var(--text-dark)', textAlign: 'right' }}>{bankTransferDetails.bankName}</strong>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
+          <span style={{ color: 'var(--text-muted)' }}>Account Name:</span>
+          <strong style={{ color: 'var(--burgundy-dark)', textAlign: 'right' }}>{bankTransferDetails.accountName}</strong>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'center', fontSize: '0.92rem', paddingTop: '0.4rem', borderTop: '1px dashed var(--nude-border)' }}>
+          <span style={{ color: 'var(--text-muted)' }}>Account Number:</span>
+          <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: 'var(--gold-dark)' }}>
+            {bankTransferDetails.accountNumber}
+          </span>
+        </div>
+      </div>
+
+      <button
+        onClick={handleCopyAccount}
+        className="btn btn-outline-sage"
+        style={{ width: '100%', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+      >
+        {copiedBank ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+        {copiedBank ? 'Account Number Copied!' : 'Copy Account Number'}
+      </button>
+    </article>
+  );
+});
 
 export default function GiftRegistrySection({ onTriggerToast }) {
   const [giftCardPledges, setGiftCardPledges] = useState([]);
   const [selectedGift, setSelectedGift] = useState(null);
   const [giverName, setGiverName] = useState('');
   const [contactNo, setContactNo] = useState('');
-  const [copiedBank, setCopiedBank] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -53,19 +121,6 @@ export default function GiftRegistrySection({ onTriggerToast }) {
       isMounted = false;
     };
   }, []);
-
-  const handleCopyAccount = () => {
-    if (!hasBankTransferDetails) return;
-
-    navigator.clipboard.writeText(bankTransferDetails.accountNumber);
-    setCopiedBank(true);
-
-    try {
-      confetti({ particleCount: 25, spread: 40, origin: { y: 0.8 }, colors: ['#C5A059', '#E4C889'] });
-    } catch (e) {}
-
-    setTimeout(() => setCopiedBank(false), 3000);
-  };
 
   const handleGiftCardSubmit = async (event) => {
     event.preventDefault();
@@ -143,7 +198,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
           Gifts & Contributions
         </h2>
         <p className="section-subtitle">
-          Your presence, prayers, and love are the greatest gifts. For guests who would still love to bless Opeyemi &amp; Temilayojesu (#EVERAFTER21'), the couple has provided a transfer option and a simple gift-card option.
+          Your presence, prayers, and love are the greatest gifts. For guests who would still love to bless Opeyemi &amp; Temilayojesu (#ever_after_21), the couple has provided a transfer option and a simple gift-card option.
         </p>
 
         <div
@@ -157,73 +212,7 @@ export default function GiftRegistrySection({ onTriggerToast }) {
             textAlign: 'left'
           }}
         >
-          <article
-            className="glass-card"
-            style={{
-              padding: '2rem 1.5rem',
-              border: '2px solid var(--gold)',
-              background: 'rgba(255, 253, 249, 0.92)',
-              borderRadius: '22px'
-            }}
-          >
-            <CreditCard size={32} style={{ color: 'var(--burgundy)', marginBottom: '0.8rem' }} />
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--burgundy)', margin: '0.2rem 0' }}>
-              Cash & Honeymoon Transfer
-            </h3>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1.2rem' }}>
-              Direct bank transfer details for cash gifts and blessings for the couple.
-            </p>
-
-            {hasBankTransferDetails ? (
-              <>
-                <div style={{
-                  background: 'var(--nude-card)',
-                  border: '1.5px solid var(--nude-border)',
-                  borderRadius: '14px',
-                  padding: '1.2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Bank Name:</span>
-                    <strong style={{ color: 'var(--text-dark)', textAlign: 'right' }}>{bankTransferDetails.bankName}</strong>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.88rem' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Account Name:</span>
-                    <strong style={{ color: 'var(--burgundy-dark)', textAlign: 'right' }}>{bankTransferDetails.accountName}</strong>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'center', fontSize: '0.92rem', paddingTop: '0.4rem', borderTop: '1px dashed var(--nude-border)' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>Account Number:</span>
-                    <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '1.15rem', color: 'var(--gold-dark)' }}>
-                      {bankTransferDetails.accountNumber}
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleCopyAccount}
-                  className="btn btn-outline-sage"
-                  style={{ width: '100%', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                >
-                  {copiedBank ? <CheckCircle2 size={16} /> : <Copy size={16} />}
-                  {copiedBank ? 'Account Number Copied!' : 'Copy Account Number'}
-                </button>
-              </>
-            ) : (
-              <div style={{
-                background: 'var(--nude-card)',
-                border: '1.5px dashed var(--nude-border)',
-                borderRadius: '14px',
-                padding: '1.2rem',
-                color: 'var(--text-muted)',
-                fontSize: '0.88rem',
-                lineHeight: 1.6
-              }}>
-                Transfer details will be shared privately by Opeyemi &amp; Temilayojesu. You can use the gift-card option beside this card to let the couple know about your gift.
-              </div>
-            )}
-          </article>
+          <BankTransferCard />
 
           <article
             className="glass-card"

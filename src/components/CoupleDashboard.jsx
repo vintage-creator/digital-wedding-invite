@@ -87,7 +87,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
 
   const handleCopySummary = async () => {
     const summary = [
-      'Opeyemi & Temilayojesu Wedding Dashboard Summary (#EVERAFTER21\')',
+      'Opeyemi & Temilayojesu Wedding Dashboard Summary (#ever_after_21)',
       `Total RSVPs: ${stats.total_rsvps || 0}`,
       `Expected Guests: ${stats.expected_guests || 0}`,
       `Attending RSVPs: ${stats.attending_rsvps || 0}`,
@@ -175,7 +175,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
 
   const getPhotoShareText = (photo) => {
     const caption = photo.caption || 'A beautiful moment from Opeyemi & Temilayojesu’s wedding';
-    return `${caption}\n#EVERAFTER21'`;
+    return `${caption}\n#ever_after_21`;
   };
 
   const handleCopyPhotoLink = async (photo) => {
@@ -237,7 +237,7 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
         <>
           <section className="dashboard-overview-card">
             <div className="dashboard-overview-mark">
-              <img src="/assets/ot_access_card_page_1.png" alt="Opeyemi and Temilayojesu logo" />
+              <img src="/assets/ot-logo-mark.png" alt="Opeyemi and Temilayojesu monogram" />
             </div>
             <div>
               <span>Today at a glance</span>
@@ -469,10 +469,10 @@ export default function CoupleDashboard({ dashboardPasscode, onTriggerToast, onE
           )}
 
           <footer className="dashboard-footer">
-            <img src="/assets/ot_access_card_page_1.png" alt="Opeyemi & Temilayojesu emblem" style={{ borderRadius: '8px' }} />
+            <img src="/assets/ot-logo-mark.png" alt="Opeyemi and Temilayojesu monogram" />
             <div>
               <strong>Opeyemi &amp; Temilayojesu</strong>
-              <span>#EVERAFTER21' · Wedding planning dashboard</span>
+              <span>#ever_after_21 · Wedding planning dashboard</span>
             </div>
           </footer>
 

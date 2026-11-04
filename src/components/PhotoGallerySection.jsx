@@ -275,7 +275,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           Live Guest Photo Gallery
         </h2>
         <p className="section-subtitle">
-          A shared collection of favourite moments. Guests can upload live celebration photos here and use <strong>#EVERAFTER21'</strong> when sharing online.
+          A shared collection of favourite moments. Guests can upload live celebration photos here and use <strong>#ever_after_21</strong> when sharing online.
         </p>
 
         <button
@@ -321,7 +321,7 @@ export default function PhotoGallerySection({ onTriggerToast }) {
           </h3>
 
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '-0.35rem auto 1.25rem', maxWidth: '440px' }}>
-            Add your favourite moment for the couple's gallery. Official hashtag: <strong style={{ color: 'var(--burgundy)' }}>#EVERAFTER21'</strong>
+            Add your favourite moment for the couple's gallery. Official hashtag: <strong style={{ color: 'var(--burgundy)' }}>#ever_after_21</strong>
           </p>
 
           <form onSubmit={handleUploadSubmit}>

@@ -47,7 +47,7 @@ export default function RsvpSection({ onTriggerToast }) {
       decline: 'Regretfully declines'
     };
     const whatsappMessage = [
-      'Hello Opeyemi & Temilayojesu (#EVERAFTER21\'), here is my wedding RSVP:',
+      'Hello Opeyemi & Temilayojesu (#ever_after_21), here is my wedding RSVP:',
       '',
       `Name: ${formData.fullName.trim()}`,
       `Attendance: ${attendanceLabels[formData.attendance]}`,
@@ -127,8 +127,14 @@ export default function RsvpSection({ onTriggerToast }) {
           RSVP Invitation
         </h2>
         <p className="section-subtitle">
-          Your presence would mean the world to us. Please fill out the form below to confirm your attendance with <strong>#EVERAFTER21'</strong>.
+          Your presence would mean the world to us. Please fill out the form below to confirm your attendance with <strong>#ever_after_21</strong>.
         </p>
+
+        <aside className="rsvp-reminder-note" role="note">
+          <p>
+            We’re so excited to celebrate our big day with you in Lagos. Kindly ensure you get the <strong>ACCESS CARD</strong> even after RSVPing. Thank you for understanding with us.
+          </p>
+        </aside>
 
         {/* RSVP Helpline Notice */}
         <div style={{
@@ -272,7 +278,7 @@ export default function RsvpSection({ onTriggerToast }) {
               <div className="form-group" style={{ marginTop: '0.5rem' }}>
                 <label className="form-label" htmlFor="guestCount">
                   <Users size={14} style={{ display: 'inline', marginRight: '4px' }} />
-                  Number of Attending Guests (Access Card Admits One)
+                  Number of Attending Guests
                 </label>
                 <select
                   id="guestCount"
@@ -280,7 +286,7 @@ export default function RsvpSection({ onTriggerToast }) {
                   value={formData.guestCount}
                   onChange={(e) => setFormData({ ...formData, guestCount: parseInt(e.target.value) })}
                 >
-                  <option value={1}>1 Guest (1 Access Card)</option>
+                  <option value={1}>1 Guest</option>
                   <option value={2}>2 Guests</option>
                   <option value={3}>3 Guests</option>
                   <option value={4}>4 Guests</option>

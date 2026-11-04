@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Calendar, MapPin, Clock, Navigation } from 'lucide-react';
 
 export default function EventsSection() {
-  const [hoveredVenue, setHoveredVenue] = useState(null);
-
   const events = [
     {
       id: 'wedding',
       type: 'Solemnization of Holy Matrimony & Reception',
       date: 'Saturday, 21st November 2026',
       time: '10:00 AM WAT',
-      venue: 'Green Life Event Center, Oregun',
+      venue: 'Greenlife Event Center, Oregun',
       address: 'Plot 2 Kudirat Abiola Way, Oregun, Ikeja, Lagos, Nigeria',
       attire: 'Color of the Day: Mint Green and Plum',
-      mapUrl: 'https://maps.google.com/?q=Green+Life+Event+Center+Oregun+Ikeja+Lagos',
-      mapEmbedUrl: 'https://maps.google.com/maps?q=Green+Life+Event+Center+Oregun+Ikeja+Lagos&output=embed',
-      calendarTitle: 'Opeyemi & Temilayojesu — Wedding & Reception (#EVERAFTER21\')',
-      calendarDescription: 'Wedding Ceremony and Reception for Opeyemi & Temilayojesu at Green Life Event Center, Oregun, Ikeja, Lagos. Access Card Admits One.',
+      mapUrl: 'https://maps.google.com/?q=Greenlife+Event+Center+Oregun+Ikeja+Lagos',
+      mapEmbedUrl: 'https://maps.google.com/maps?q=Greenlife+Event+Center+Oregun+Ikeja+Lagos&output=embed',
+      calendarTitle: 'Opeyemi & Temilayojesu — Wedding & Reception (#ever_after_21)',
+      calendarDescription: 'Wedding Ceremony and Reception for Opeyemi & Temilayojesu at Greenlife Event Center, Oregun, Ikeja, Lagos. Access Card Admits One.',
       calendarStart: '20261121T100000',
       calendarEnd: '20261121T180000'
     }
@@ -81,134 +79,54 @@ export default function EventsSection() {
           Join us as we celebrate our union in Lagos, Nigeria. Access Card Admits One.
         </p>
 
-        {/* Event Cards Grid */}
-        <div style={{
-          maxWidth: '720px',
-          margin: '3rem auto 0',
-          width: '100%',
-          textAlign: 'left'
-        }}>
-          {events.map((evt) => {
-            const isHovered = hoveredVenue === evt.id;
-            return (
-              <div
-                key={evt.id}
-                onMouseEnter={() => setHoveredVenue(evt.id)}
-                onMouseLeave={() => setHoveredVenue(null)}
-                className="glass-card"
-                style={{
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  border: isHovered ? '1.5px solid var(--gold)' : '1.5px solid var(--nude-border)',
-                  background: 'var(--nude-card)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  boxShadow: isHovered
-                    ? '0 25px 55px rgba(50, 12, 48, 0.16), 0 0 20px rgba(114, 199, 142, 0.32)'
-                    : '0 15px 40px rgba(0,0,0,0.06)',
-                  transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
-                  transition: 'transform 0.4s ease, boxShadow 0.4s ease, border 0.4s ease'
-                }}
-              >
-                <div>
-                  <div style={{ height: '280px', background: 'var(--section-sage)' }}>
-                    <iframe
-                      title={`${evt.venue} map`}
-                      src={evt.mapEmbedUrl}
-                      width="100%"
-                      height="100%"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      allowFullScreen
-                      style={{ border: 0, display: 'block' }}
-                    />
+        <div className="venue-card-pair">
+          {events.map((evt) => (
+            <React.Fragment key={evt.id}>
+              <article className="venue-feature-card glass-card">
+                <img
+                  className="venue-feature-photo"
+                  src="/assets/greenlife-event-center.jpg"
+                  alt="Exterior of Greenlife Event Center in Oregun, Lagos"
+                />
+                <div className="venue-feature-copy">
+                  <span className="venue-event-type">{evt.type}</span>
+                  <h3>{evt.venue}</h3>
+                  <div className="venue-event-meta">
+                    <span><Calendar size={16} aria-hidden="true" /> {evt.date}</span>
+                    <span><Clock size={16} aria-hidden="true" /> {evt.time}</span>
                   </div>
-                  <div style={{
-                    padding: '1rem 1.4rem',
-                    background: 'linear-gradient(135deg, var(--plum, #5C2059), var(--burgundy, #320C30))',
-                    color: '#FFFFFF',
-                    borderTop: '2px solid var(--mint, #72C78E)'
-                  }}>
-                    <span style={{
-                      display: 'block',
-                      color: 'var(--mint, #72C78E)',
-                      fontSize: '0.7rem',
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      marginBottom: '0.35rem'
-                    }}>
-                      {evt.type}
-                    </span>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', margin: 0 }}>
-                      {evt.venue}
-                    </h3>
-                  </div>
+                  <p className="venue-attire">{evt.attire}</p>
+                </div>
+              </article>
 
-                  {/* Venue Info Details */}
-                  <div style={{ padding: '2rem 1.8rem' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
-                      
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--burgundy-dark)' }}>
-                        <Calendar size={18} style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                        <span style={{ fontWeight: 600, fontSize: '1rem' }}>{evt.date}</span>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-dark)' }}>
-                        <Clock size={18} style={{ color: 'var(--gold)', flexShrink: 0 }} />
-                        <span style={{ fontSize: '0.92rem' }}>{evt.time}</span>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', color: 'var(--text-muted)' }}>
-                        <MapPin size={18} style={{ color: 'var(--gold-dark)', flexShrink: 0, marginTop: '2px' }} />
-                        <span style={{ fontSize: '0.92rem' }}>{evt.address}</span>
-                      </div>
-
-                      <div style={{ marginTop: '0.4rem', borderTop: '1px dashed var(--nude-border)', paddingTop: '0.8rem' }}>
-                        <span style={{ fontSize: '0.78rem', color: 'var(--gold-dark)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                          Dress Code / Color of the Day:
-                        </span>
-                        <p style={{ fontSize: '0.95rem', color: 'var(--burgundy)', margin: '0.2rem 0 0', fontWeight: 600 }}>
-                          {evt.attire}
-                        </p>
-                      </div>
-
-                    </div>
+              <article className="venue-map-card glass-card">
+                <header className="venue-map-card-heading">
+                  <span>Find the Venue</span>
+                  <h3>Greenlife Event Center</h3>
+                </header>
+                <div className="venue-map-frame">
+                  <iframe
+                    title={`${evt.venue} map`}
+                    src={evt.mapEmbedUrl}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="venue-map-card-footer">
+                  <p><MapPin size={17} aria-hidden="true" /> {evt.address}</p>
+                  <div className="venue-map-actions">
+                    <a href={evt.mapUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline-burgundy">
+                      <Navigation size={15} /> Get Directions
+                    </a>
+                    <button type="button" onClick={() => saveToCalendar(evt)} className="btn btn-nude">
+                      <Calendar size={15} /> Save Calendar
+                    </button>
                   </div>
                 </div>
-
-                {/* Action Buttons */}
-                <div style={{
-                  padding: '1.2rem 1.8rem 1.8rem',
-                  display: 'flex',
-                  gap: '12px',
-                  borderTop: '1px solid var(--nude-border)',
-                  background: 'rgba(250, 246, 250, 0.65)'
-                }}>
-                  <a
-                    href={evt.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-burgundy"
-                    style={{ flex: 1, textDecoration: 'none', textAlign: 'center', fontSize: '0.84rem', padding: '0.65rem 0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                  >
-                    <Navigation size={15} />
-                    Get Directions
-                  </a>
-
-                  <button
-                    onClick={() => saveToCalendar(evt)}
-                    className="btn btn-nude"
-                    style={{ flex: 1, fontSize: '0.84rem', padding: '0.65rem 0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
-                  >
-                    <Calendar size={15} />
-                    Save Calendar
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              </article>
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </section>

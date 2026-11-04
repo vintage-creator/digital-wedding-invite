@@ -34,3 +34,6 @@ dist-ssr/
 .env.production.local
 .vercel
 .env*.local
+.env.production.check
+certificate_cleaned.*
+supabase/.temp/

@@ -3,88 +3,34 @@ import { Calendar, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="site-footer" style={{
-      background: 'linear-gradient(180deg, #320C30 0%, #200720 100%)',
-      color: '#FFFFFF',
-      padding: '4rem 1.5rem 2.5rem',
-      textAlign: 'center',
-      borderTop: '2px solid var(--gold)',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      <div className="max-w-content" style={{ margin: '0 auto', position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        
-        {/* Access Card OT Emblem */}
-        <div style={{
-          width: '74px',
-          height: '74px',
-          borderRadius: '50%',
-          border: '2px solid var(--gold-light)',
-          background: 'rgba(92, 32, 89, 0.65)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: '1rem',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)'
-        }}>
-          <span style={{
-            fontFamily: 'var(--font-serif)',
-            fontSize: '1.9rem',
-            fontWeight: 700,
-            color: '#FFFFFF',
-            letterSpacing: '1px'
-          }}>
-            OT
+    <footer className="site-footer">
+      <img
+        className="footer-botanical-frame"
+        src="/assets/footer-botanical-sprays.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <div className="site-footer-content">
+        <div className="footer-seal-badge" role="img" aria-label="Opeyemi and Temilayojesu O and T wax seal">
+          <img className="footer-seal-art" src="/assets/dt-script-wax-seal.png" alt="" aria-hidden="true" />
+          <span className="footer-seal-monogram" aria-hidden="true">
+            <span>O</span>
+            <span className="footer-seal-ampersand">&amp;</span>
+            <span>T</span>
           </span>
         </div>
 
-        {/* Script Names */}
-        <h2 style={{
-          fontFamily: 'var(--font-script)',
-          fontSize: 'clamp(2.8rem, 8vw, 4rem)',
-          color: '#FAF6FA',
-          margin: 0,
-          lineHeight: 1.1,
-          textAlign: 'center'
-        }}>
-          Opeyemi &amp; Temilayojesu
-        </h2>
+        <p className="footer-kicker">With love,</p>
+        <h2 className="footer-couple-names">Opeyemi <span>&amp;</span> Temilayojesu</h2>
+        <p className="footer-hashtag">#ever_after_21</p>
 
-        <p style={{
-          fontFamily: 'var(--font-serif)',
-          fontStyle: 'italic',
-          fontSize: '1.05rem',
-          color: '#9CE3B3',
-          letterSpacing: '0.14em',
-          marginTop: '0.5rem',
-          textAlign: 'center'
-        }}>
-          #EVERAFTER21'
-        </p>
-
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '1.5rem',
-          margin: '2rem 0',
-          fontSize: '0.9rem',
-          color: 'rgba(250, 246, 250, 0.88)',
-          textAlign: 'center'
-        }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <Calendar size={15} style={{ color: 'var(--gold-light)' }} />
-            Saturday, 21st November 2026 • 10:00 AM
-          </span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <MapPin size={15} style={{ color: 'var(--gold-light)' }} />
-            Green Life Event Center, Oregun, Lagos
-          </span>
+        <div className="footer-event-details">
+          <span><Calendar size={16} aria-hidden="true" /> Saturday, 21 November 2026 · 10:00 AM</span>
+          <span><MapPin size={16} aria-hidden="true" /> Greenlife Event Center, Oregun, Lagos</span>
         </div>
 
-        <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', marginTop: '2.5rem', borderTop: '1px solid rgba(114, 199, 142, 0.25)', paddingTop: '1.5rem', width: '100%', textAlign: 'center' }}>
-          Crafted with love for Opeyemi &amp; Temilayojesu’s Wedding Celebration. All rights reserved © 2026.
+        <p className="footer-credit">
+          Crafted with love for Opeyemi &amp; Temilayojesu’s wedding celebration · © 2026
         </p>
       </div>
     </footer>

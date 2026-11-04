@@ -11,7 +11,9 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
   const [isCheckingCode, setIsCheckingCode] = useState(false);
   const [isLogoUnavailable, setIsLogoUnavailable] = useState(false);
   const invitationCode = (import.meta.env.VITE_INVITATION_CODE || 'everafter21').trim().toLowerCase();
-  const validCodes = ['everafter21', 'everafter21\'', 'ever_after_21', 'ot2026', 'ot21', invitationCode];
+  // Reserve OT2026 for the couple dashboard, even if it is configured as the invite code.
+  const validCodes = ['everafter21', 'everafter21\'', 'ever_after_21', 'ot21', invitationCode]
+    .filter((code) => code !== 'ot2026');
 
   useEffect(() => {
     if (isDismissed) return undefined;
@@ -156,7 +158,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           <span>Opeyemi &amp; Temilayojesu</span>
           <em>invite you to celebrate</em>
         </strong>
-        <small>{isCheckingCode ? 'Checking access…' : 'Enter access code (e.g. EVERAFTER21), then tap the OT wax seal to open'}</small>
+        <small>{isCheckingCode ? 'Checking access…' : 'Enter access code (e.g. EVERAFTER21), then tap the O & T wax seal to open'}</small>
         <form
           className="invitation-code-form"
           onSubmit={(event) => {
@@ -227,7 +229,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
           }}
         />
 
-        {/* 3D Rotating Plum Wax Seal Button with OT Monogram */}
+        {/* 3D Rotating Plum Wax Seal Button with O&T Monogram */}
         <button
           id="sealBtn"
           onClick={handleSealClick}
@@ -249,8 +251,8 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
               : 'glowingSealPulse 2.8s ease-in-out infinite',
             transition: 'opacity 0.55s ease, transform 0.3s ease'
           }}
-          title="Enter the invitation code, then tap the OT seal to open"
-          aria-label="Open invitation with the OT wax seal"
+          title="Enter the invitation code, then tap the O and T seal to open"
+          aria-label="Open invitation with the O and T wax seal"
         >
           <img
             src="/assets/dt-script-wax-seal.png"
@@ -264,38 +266,12 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
               filter: 'hue-rotate(320deg) saturate(1.12) brightness(1.04)'
             }}
           />
-          <span style={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            width: '58%',
-            aspectRatio: '1 / 1',
-            transform: 'translate(-50%, -50%)',
-            borderRadius: '50%',
-            border: '1px solid rgba(232, 205, 157, 0.72)',
-            background: 'radial-gradient(circle at 36% 28%, #80577C 0%, #63345F 48%, #482346 100%)',
-            boxShadow: 'inset 0 2px 5px rgba(255, 255, 255, 0.2), inset 0 -9px 16px rgba(25, 5, 25, 0.42)',
-            display: 'grid',
-            placeItems: 'center',
-            overflow: 'hidden'
-          }}>
-            <span style={{
-              position: 'absolute',
-              inset: '4%',
-              borderRadius: '50%',
-              border: '1px solid rgba(232, 205, 157, 0.34)',
-              pointerEvents: 'none'
-            }} />
-            <span aria-hidden="true" style={{
-              color: '#F1D9AD',
-              fontFamily: 'var(--font-script)',
-              fontSize: 'clamp(2.4rem, 6vw, 4rem)',
-              fontWeight: 400,
-              letterSpacing: '-0.08em',
-              lineHeight: 1,
-              textShadow: '0 1px 0 rgba(255, 244, 219, 0.7), 0 2px 1px rgba(30, 8, 29, 0.78), 0 0 10px rgba(255, 225, 177, 0.2)'
-            }}>
-              OT
+          <span className="ot-wax-seal-center" aria-hidden="true">
+            <span className="ot-wax-seal-center-ring" />
+            <span className="ot-wax-seal-monogram">
+              <span>O</span>
+              <span className="ot-wax-seal-ampersand">&amp;</span>
+              <span>T</span>
             </span>
           </span>
         </button>
@@ -325,7 +301,7 @@ export default function EnvelopeCover({ onOpen, onDashboardOpen }) {
             <p>Kindly join us for our wedding celebration.</p>
             <div className="cover-invitation-date">Saturday, 21st November 2026 • 10:00 AM</div>
             <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: '0.2rem 0 1rem' }}>
-              Green Life Event Center, Oregun, Ikeja, Lagos
+              Greenlife Event Center, Oregun, Ikeja, Lagos
             </p>
             <button type="button" onClick={handleEnterInvitation}>
               Open Full Invitation

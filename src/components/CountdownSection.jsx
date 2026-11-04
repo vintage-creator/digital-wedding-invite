@@ -42,7 +42,7 @@ export default function CountdownSection() {
           Until We Say "I Do"
         </h2>
         <p className="section-subtitle">
-          Join us as we count down every second to our wedding celebration at Green Life Event Center, Lagos.
+          Join us as we count down every second to our wedding celebration at Greenlife Event Center, Lagos.
         </p>
 
         <div className="countdown-panel">
@@ -54,7 +54,7 @@ export default function CountdownSection() {
             </span>
             <div style={{ marginTop: '0.6rem', fontSize: '0.88rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
               <MapPin size={15} style={{ color: 'var(--gold-dark)' }} />
-              <span>Green Life Event Center, Oregun, Ikeja, Lagos</span>
+              <span>Greenlife Event Center, Oregun, Ikeja, Lagos</span>
             </div>
           </div>
 

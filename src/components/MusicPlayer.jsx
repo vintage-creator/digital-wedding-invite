@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Music2, Pause, Volume2, VolumeX } from 'lucide-react';
 
 const DEFAULT_VOLUME = 0.04;
-const MUSIC_TITLE = 'Unbreakable by Westlife';
 
 export default function MusicPlayer({ isPlaying, setIsPlaying }) {
 
@@ -100,27 +99,15 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }) {
         backdropFilter: 'blur(12px)',
         border: '1px solid rgba(114, 199, 142, 0.48)',
         borderRadius: '30px',
-        padding: '6px 14px 6px 8px',
+        padding: '6px 8px',
         boxShadow: '0 8px 24px rgba(50, 12, 48, 0.3)',
       }}>
-
-        <span style={{
-          color: '#F7EEF6',
-          fontSize: '0.75rem',
-          fontWeight: 500,
-          letterSpacing: '0.03em',
-          whiteSpace: 'nowrap'
-        }}>
-          Unbreakable <span style={{ color: '#72C78E' }}>· Westlife</span>
-        </span>
 
         {/* Play / Pause */}
         <button
           onClick={togglePlay}
           className={`music-icon-button ${isPlaying ? 'music-icon-button-playing' : ''}`}
-          title={audioUnavailable
-            ? `Add a licensed ${MUSIC_TITLE} audio file to enable music`
-            : isPlaying ? `Pause ${MUSIC_TITLE}` : `Play ${MUSIC_TITLE}`}
+          title={audioUnavailable ? 'Music unavailable' : isPlaying ? 'Pause music' : 'Play music'}
           aria-label={audioUnavailable ? 'Music file unavailable' : isPlaying ? 'Pause music' : 'Play music'}
           aria-pressed={isPlaying}
           disabled={audioUnavailable}

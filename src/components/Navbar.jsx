@@ -14,6 +14,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { name: 'Our Story', href: '#our-story', icon: <Heart size={16} /> },
     { name: 'Events', href: '#events', icon: <Calendar size={16} /> },
     { name: 'RSVP', href: '#rsvp', icon: <Heart size={16} /> },
     { name: 'Timeline', href: '#order', icon: <Clock size={16} /> },

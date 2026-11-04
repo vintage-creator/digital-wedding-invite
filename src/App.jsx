@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import EnvelopeCover from './components/EnvelopeCover';
 import HeroSection from './components/HeroSection';
 import InvitationCardSection from './components/InvitationCardSection';
+import OurStorySection from './components/OurStorySection';
 import CountdownSection from './components/CountdownSection';
 import EventsSection from './components/EventsSection';
 import OrderOfDaySection from './components/OrderOfDaySection';
@@ -164,6 +165,7 @@ export default function App() {
             <HeroSection />
             <CountdownSection />
             <InvitationCardSection />
+            <OurStorySection />
             <EventsSection />
             <RsvpSection onTriggerToast={triggerToast} />
             <OrderOfDaySection />

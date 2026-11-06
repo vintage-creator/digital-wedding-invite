@@ -73,7 +73,7 @@ export default function CountdownSection() {
               <Calendar size={14} style={{ flexShrink: 0 }} />
               {activeTab === 'traditional'
                 ? 'Thursday, 17th December 2026 • The Nest Gardens Guzape'
-                : 'Saturday, 19th December 2026 • Christ Embassy Loveworld Auditorium, Jabi'}
+                : 'Saturday, 19th December 2026 • Christ Embassy (Ceremony) · Bolton White (Reception)'}
             </span>
           </div>
 

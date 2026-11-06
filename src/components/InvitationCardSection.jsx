@@ -28,13 +28,13 @@ export default function InvitationCardSection() {
                 <small>The Nest Gardens, Guzape, Abuja</small>
               </div>
               <div>
-                <span>White Wedding &amp; Reception</span>
+                <span>White Wedding Holy Matrimony</span>
                 <strong>Saturday, 19th December 2026</strong>
                 <small>Christ Embassy Abuja Zonal Church, Loveworld Auditorium</small>
               </div>
               <div>
                 <span>Reception to follow</span>
-                <strong>1 Loveworld St, Jabi, Abuja</strong>
+                <strong>Bolton White Event Centre, Wuse Zone 7, Abuja</strong>
               </div>
             </div>
 

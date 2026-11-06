@@ -21,19 +21,34 @@ export default function EventsSection() {
       calendarEnd: '20261217T160000'
     },
     {
-      id: 'white',
-      type: 'White Wedding & Reception',
+      id: 'church',
+      type: 'Holy Matrimony (Church Ceremony)',
       date: 'Saturday, 19th December 2026',
       time: '11:00 AM WAT',
       venue: 'Christ Embassy Abuja Zonal Church, Loveworld Auditorium',
       address: '1 Loveworld St, Jabi, Abuja 900108, Federal Capital Territory, Nigeria',
       attire: 'Blush Pink · Burgundy · Nude & Gold Accent',
-      image: '/assets/bolton_white_deborah_tom.jpg',
+      image: '/assets/bolton_white.jpg',
       mapUrl: 'https://maps.google.com/?q=Christ+Embassy+Abuja+Zonal+Church+Loveworld+Auditorium+1+Loveworld+St+Jabi+Abuja',
-      calendarTitle: 'Deborah & Tom — White Wedding & Reception',
-      calendarDescription: 'White Wedding Ceremony and reception for Deborah & Tom at Christ Embassy Abuja Zonal Church, Loveworld Auditorium.',
+      calendarTitle: 'Deborah & Tom — Holy Matrimony Ceremony',
+      calendarDescription: 'Holy Matrimony Ceremony for Deborah & Tom at Christ Embassy Abuja Zonal Church, Loveworld Auditorium, Jabi.',
       calendarStart: '20261219T110000',
-      calendarEnd: '20261219T180000'
+      calendarEnd: '20261219T130000'
+    },
+    {
+      id: 'reception',
+      type: 'White Wedding Reception',
+      date: 'Saturday, 19th December 2026',
+      time: '1:30 PM WAT',
+      venue: 'Bolton White Event Centre',
+      address: '31 Kigoma Street, Wuse Zone 7, Abuja, Nigeria',
+      attire: 'Formal / Black Tie Optional (Olive & Nude accents)',
+      image: '/assets/bolton_white_deborah_tom.jpg',
+      mapUrl: 'https://maps.google.com/?q=31+Kigoma+Street+Wuse+Zone+7+Abuja+Bolton+White+Event+Centre',
+      calendarTitle: 'Deborah & Tom — Wedding Reception (Abuja)',
+      calendarDescription: 'White Wedding Reception for Deborah & Tom at Bolton White Event Centre, Wuse Zone 7, Abuja.',
+      calendarStart: '20261219T133000',
+      calendarEnd: '20261219T190000'
     }
   ];
 

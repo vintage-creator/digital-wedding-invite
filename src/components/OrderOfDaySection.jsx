@@ -14,8 +14,8 @@ export default function OrderOfDaySection() {
 
   const whiteSchedule = [
     { time: '11:00 AM', title: 'Holy Matrimony Ceremony', desc: 'Exchange of vows and rings at Christ Embassy Abuja Zonal Church, Loveworld Auditorium, Jabi.' },
-    { time: '12:30 PM', title: 'Cocktail & Mocktail Hour', desc: 'Canapés, acoustic music, and arrival photo booth.' },
-    { time: '01:30 PM', title: 'Grand Reception Entry', desc: 'Entrance of bridal party, Deborah & Tom’s first dance.' },
+    { time: '12:30 PM', title: 'Cocktail & Mocktail Hour', desc: 'Transition to Bolton White Event Centre for welcome cocktails, canapés, and photo sessions.' },
+    { time: '01:30 PM', title: 'Grand Reception Entry', desc: 'Entrance of bridal party and Deborah & Tom’s first dance at Bolton White Event Centre.' },
     { time: '03:00 PM', title: 'Gourmet Banquet & Speeches', desc: 'Three-course dinner, family toasts, and cake cutting.' },
     { time: '05:00 PM', title: 'After-Party & Celebration', desc: 'DJ music, dancing, bouquet toss, and midnight snacks.' }
   ];

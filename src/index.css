@@ -207,6 +207,71 @@ main {
   margin: 0 auto 2.5rem;
 }
 
+.event-ceremony-artwork {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.96) 0 21%, transparent 22%),
+    linear-gradient(135deg, #f6e9e2 0%, #fffaf4 48%, #ead5c8 100%);
+}
+
+.event-ceremony-artwork::before,
+.event-ceremony-artwork::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.event-ceremony-artwork::before {
+  top: 11%;
+  width: min(52%, 250px);
+  height: 82%;
+  border: 1px solid rgba(151, 113, 70, 0.5);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+  box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.22), 0 0 0 8px rgba(151, 113, 70, 0.18);
+}
+
+.event-ceremony-artwork::after {
+  top: 18%;
+  width: min(43%, 205px);
+  height: 70%;
+  border: 1px solid rgba(151, 113, 70, 0.2);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 34% 34% 0 0;
+}
+
+.event-ceremony-artwork img {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  width: clamp(112px, 32%, 176px);
+  height: 65%;
+  object-fit: contain;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 5px 12px rgba(86, 32, 42, 0.12));
+}
+
+.event-ceremony-artwork-kicker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  color: #6b2032;
+  text-align: center;
+  top: 8%;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 .boxing-day-card {
   max-width: 960px;
   margin: 2.5rem auto 0;

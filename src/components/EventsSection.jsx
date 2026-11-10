@@ -28,7 +28,7 @@ export default function EventsSection() {
       venue: 'Christ Embassy Abuja Zonal Church, Loveworld Auditorium',
       address: '1 Loveworld St, Jabi, Abuja 900108, Federal Capital Territory, Nigeria',
       attire: 'Blush Pink · Burgundy · Nude & Gold Accent',
-      image: '/assets/bolton_white.jpg',
+      image: null,
       mapUrl: 'https://maps.google.com/?q=Christ+Embassy+Abuja+Zonal+Church+Loveworld+Auditorium+1+Loveworld+St+Jabi+Abuja',
       calendarTitle: 'Deborah & Tom — Holy Matrimony Ceremony',
       calendarDescription: 'Holy Matrimony Ceremony for Deborah & Tom at Christ Embassy Abuja Zonal Church, Loveworld Auditorium, Jabi.',
@@ -143,25 +143,34 @@ export default function EventsSection() {
                 }}
               >
                 <div>
-                  {/* Venue Location Photograph Header with Hover Zoom */}
+                  {/* Venue image or couple-branded ceremony artwork */}
                   <div style={{ position: 'relative', height: '230px', overflow: 'hidden', cursor: 'pointer' }}>
-                    <img
-                      src={evt.image}
-                      alt={evt.venue}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-                        transition: 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)'
-                      }}
-                    />
+                    {evt.image ? (
+                      <img
+                        src={evt.image}
+                        alt={evt.venue}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                          transition: 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)'
+                        }}
+                      />
+                    ) : (
+                      <div className="event-ceremony-artwork" role="img" aria-label="Deborah and Tom wedding monogram">
+                        <span className="event-ceremony-artwork-kicker">A day of promise</span>
+                        <img src="/assets/dt-logo-mark-transparent.png" alt="" />
+                      </div>
+                    )}
                     <div style={{
                       position: 'absolute',
                       inset: 0,
-                      background: isHovered
-                        ? 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(59, 8, 27, 0.88) 100%)'
-                        : 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(59, 8, 27, 0.78) 100%)',
+                      background: evt.image
+                        ? isHovered
+                          ? 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(59, 8, 27, 0.88) 100%)'
+                          : 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(59, 8, 27, 0.78) 100%)'
+                        : 'linear-gradient(180deg, transparent 55%, rgba(59, 8, 27, 0.82) 100%)',
                       transition: 'background 0.4s ease'
                     }} />
 
